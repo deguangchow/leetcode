@@ -29,8 +29,33 @@ TEST(LeetCode, Test003) {
 
 #endif
 
+#if 1
 TEST(LeetCode, Test004) {
     Solution solution;
-    EXPECT_EQ(0, solution.lengthOfLongestSubstring(""));
+    {
+        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5,6,7 };
+        EXPECT_EQ(4, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5,6,7,8 };
+        EXPECT_EQ(4.5, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 1, 2, 3 }, nums2 = { 5,6,7,8 };
+        EXPECT_EQ(5, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 9, 9, 13 }, nums2 = { 5,6,7,8 };
+        EXPECT_EQ(8, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 1, 3, 5 }, nums2 = { 1,4,8 };
+        EXPECT_EQ(3.5, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 3,4 }, nums2 = { 1,2,5,7,8 };
+        EXPECT_EQ(3.5, solution.findMedianSortedArrays(nums1, nums2));
+    }
 }
+#endif
 

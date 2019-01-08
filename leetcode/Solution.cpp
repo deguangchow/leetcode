@@ -134,13 +134,58 @@ int Solution::lengthOfLongestSubstring(string s)
 
 double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 {
-    double ret = 0.0;
     auto size1 = nums1.size();
+    auto min1 = nums1[0];
+    auto max1 = nums1[size1 - 1];
+
     auto size2 = nums2.size();
+    auto min2 = nums2[0];
+    auto max2 = nums2[size2 - 1];
 
-    nums1[size1 / 2];
-    nums2[size2 / 2];
+    if (max1 <= min2) {
+        if (size1>size2) {
+            auto pos = (size1 - size2) / 2;
+            auto mod = (size1 - size2) % 2;
+            if (mod) {
+                return nums1[size2 + pos];
+            } else {
+                return (nums1[size2 + pos] + nums1[size2 + pos + 1]) / 2.0;
+            }
+        } else if (size1<size2) {
+            auto pos = (size2 - size1) / 2;
+            auto mod = (size2 - size1) % 2;
+            if (mod) {
+                return nums2[pos];
+            } else {
+                return (nums2[pos] + nums2[pos + 1]) / 2.0;
+            }
+        } else {
+            return (max1 + min2) / 2.0;
+        }
+    } else if (min1 >= max2) {
+        return findMedianSortedArrays(nums2, nums1);
+    } else {
+        auto pos_mid1 = size1 / 2;
+        auto mod1 = size1 % 2;
+        auto mid1 = nums1[pos_mid1];
 
-    return ret;
+        auto pos_mid2 = size2 / 2;
+        auto mod2 = size2 % 2;
+        auto mid2 = nums2[pos_mid2];
 
+        if (mid1 >= mid2) {
+            vector<int> nums1_left(pos_mid2 + 1);
+            nums1_left.insert(nums1_left.end(), nums1.begin(), nums1.begin() + pos_mid1 + 1);
+            vector<int> nums2_right(size2 - pos_mid2);
+            nums2_right.insert(nums2_right.end(), nums2.begin() + pos_mid2 + 1 , nums1.end());
+            return findMedianSortedArrays(nums1_left, nums2_right);
+        } else {
+            vector<int> nums1_right(size1 - pos_mid1);
+            nums1_right.insert(nums1_right.end(), nums1.begin() + pos_mid1 , nums1.end());
+            vector<int> nums2_left(pos_mid2 + 1);
+            nums2_left.insert(nums2_left.end(), nums2.begin(), nums2.begin() + pos_mid2);
+            return findMedianSortedArrays(nums1_right, nums2_left);
+        }
+    
+    }
 }
