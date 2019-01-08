@@ -7,3 +7,7 @@
 *.opendb
 *.log
 *.ipch
+
+Debug
+Release
+lib
