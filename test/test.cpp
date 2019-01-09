@@ -70,7 +70,7 @@ TEST(LeetCode, Test004) {
 #endif
 
 
-#if 1
+#if 0
 TEST(LeetCode, 019) {
     Solution solution;
 
@@ -93,6 +93,24 @@ TEST(LeetCode, 019) {
         l2->next->next = new ListNode(4);
 
         auto ret = solution.mergeTwoLists(l1, l2);
+    }
+
+#endif
+
+#if 1
+
+    TEST(LeetCode, 023) {
+        Solution solution;
+
+        ListNode*l1 = new ListNode(1);
+        l1->next = new ListNode(2);
+        l1->next->next = new ListNode(4);
+
+        ListNode*l2 = new ListNode(1);
+        l2->next = new ListNode(3);
+        l2->next->next = new ListNode(4);
+
+        auto ret = solution.mergeKLists(vector<ListNode*>{ l1,l2 });
     }
 
 #endif

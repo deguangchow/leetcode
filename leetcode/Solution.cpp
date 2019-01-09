@@ -312,3 +312,34 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
     return ret;
 }
 
+ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
+{
+#if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists
+    auto const& size = lists.size();
+    ListNode* ret = nullptr;
+    for (int i = 0, j = size; i < j; ++i, --j) {
+        ret = mergeTwoLists(ret, lists[i]);
+    }
+    return ret;
+#else//023.2：mergeTwoLists的衍生，一次比较n个数（未实现，但是复杂度应等同023.1）
+    ListNode* ret = nullptr;
+    ListNode* p = nullptr;
+    auto const& size = lists.size();
+    auto count_nil = 0;
+    while (true) {
+        bool flag_break = false;
+        for (auto i = 0; i < size; ++i) {
+            if (nullptr == lists[i]) {
+                ++count_nil;
+                continue;
+            }
+            p = lists[i];
+        }
+        if (flag_break) {
+            break;
+        }
+    }
+    return ret;
+#endif
+}
+
