@@ -343,3 +343,8 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 #endif
 }
 
+ListNode* Solution::swapPairs(ListNode* head)
+{
+
+}
+
