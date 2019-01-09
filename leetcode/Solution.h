@@ -98,6 +98,7 @@ public:
     ÊäÈë£º1->2->4, 1->3->4
     Êä³ö£º1->1->2->3->4->4
     */
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
 };
 #endif  //SOLUTION_H
 
