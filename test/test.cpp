@@ -29,9 +29,18 @@ TEST(LeetCode, Test003) {
 
 #endif
 
-#if 1
+#if 0
+
 TEST(LeetCode, Test004) {
     Solution solution;
+    {
+        vector<int> nums1 = {}, nums2 = { 1 };
+        EXPECT_EQ(1, solution.findMedianSortedArrays(nums1, nums2));
+    }
+    {
+        vector<int> nums1 = { 1,3 }, nums2 = { 2 };
+        EXPECT_EQ(2, solution.findMedianSortedArrays(nums1, nums2));
+    }
     {
         vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5,6,7 };
         EXPECT_EQ(4, solution.findMedianSortedArrays(nums1, nums2));
@@ -54,8 +63,9 @@ TEST(LeetCode, Test004) {
     }
     {
         vector<int> nums1 = { 3,4 }, nums2 = { 1,2,5,7,8 };
-        EXPECT_EQ(3.5, solution.findMedianSortedArrays(nums1, nums2));
+        EXPECT_EQ(4, solution.findMedianSortedArrays(nums1, nums2));
     }
 }
+
 #endif
 

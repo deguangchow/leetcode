@@ -44,7 +44,7 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
 #endif
 }
 
-Solution::ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
+ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
 {
     unsigned sum = 0;//每位之间的数字相加之和
     ListNode* ret = l1;
@@ -134,6 +134,7 @@ int Solution::lengthOfLongestSubstring(string s)
 
 double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 {
+#if 0//递归实现（未通过全部单元测试）
     auto size1 = nums1.size();
     auto min1 = nums1[0];
     auto max1 = nums1[size1 - 1];
@@ -174,18 +175,60 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
         auto mid2 = nums2[pos_mid2];
 
         if (mid1 >= mid2) {
-            vector<int> nums1_left(pos_mid2 + 1);
-            nums1_left.insert(nums1_left.end(), nums1.begin(), nums1.begin() + pos_mid1 + 1);
-            vector<int> nums2_right(size2 - pos_mid2);
-            nums2_right.insert(nums2_right.end(), nums2.begin() + pos_mid2 + 1 , nums1.end());
+            vector<int> nums1_left;
+            nums1_left.insert(nums1_left.end(), nums1.begin(), nums1.begin() + pos_mid1 + mod1);
+            vector<int> nums2_right;
+            nums2_right.insert(nums2_right.end(), nums2.begin() + pos_mid2 , nums2.end());
             return findMedianSortedArrays(nums1_left, nums2_right);
         } else {
-            vector<int> nums1_right(size1 - pos_mid1);
-            nums1_right.insert(nums1_right.end(), nums1.begin() + pos_mid1 , nums1.end());
-            vector<int> nums2_left(pos_mid2 + 1);
-            nums2_left.insert(nums2_left.end(), nums2.begin(), nums2.begin() + pos_mid2);
+            vector<int> nums1_right;
+            nums1_right.insert(nums1_right.end(), nums1.begin() + pos_mid1, nums1.end());
+            vector<int> nums2_left;
+            nums2_left.insert(nums2_left.end(), nums2.begin(), nums2.begin() + pos_mid2 + mod2);
             return findMedianSortedArrays(nums1_right, nums2_left);
         }
-    
     }
+#else//官方题解：递归思想，循环实现
+    int m = nums1.size();
+    int n = nums2.size();
+    if (m>n) {
+        nums1.swap(nums2);
+        m = n;
+        n = nums2.size();
+    }
+    int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
+    while (iMin<=iMax) {
+        int i = (iMin + iMax) / 2;
+        int j = halfLen - i;
+        if (i<iMax && nums2[j - 1]>nums1[i]) {
+            iMin = i + 1;//i is too small
+        } else if (i>iMin && nums1[i-1] > nums2[j]) {
+            iMax = i - 1;//i is too big
+        } else {//i is perfect
+            int maxLeft = 0;
+            if (i == 0) {
+                maxLeft = nums2[j - 1];
+            } else if (j == 0) {
+                maxLeft = nums1[i - 1];
+            } else {
+                maxLeft = std::max(nums1[i - 1], nums2[j - 1]);
+            }
+            if ((m + n) % 2 == 1) {
+                return maxLeft;
+            }
+
+            int minRight = 0;
+            if (i == m) {
+                minRight = nums2[j];
+            } else if (j == n) {
+                minRight = nums1[i];
+            } else {
+                minRight = std::min(nums2[j], nums1[i]);
+            }
+
+            return (maxLeft + minRight) / 2.0;
+        }
+    }
+    return 0.0;
+#endif
 }
