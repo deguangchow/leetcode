@@ -69,7 +69,17 @@ TEST(LeetCode, Test004) {
 
 #endif
 
+
 #if 1
+TEST(LeetCode, 019) {
+    Solution solution;
+
+    ListNode*l1 = new ListNode(1);
+    auto ret = solution.removeNthFromEnd(l1, 1);
+}
+#endif
+
+#if 0
 
     TEST(LeetCode, 021) {
         Solution solution;

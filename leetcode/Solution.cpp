@@ -11,6 +11,7 @@
 #include "Solution.h"
 
 
+//001
 vector<int> Solution::twoSum(vector<int>& nums, int target)
 {
 #if 0//暴力解法
@@ -44,6 +45,8 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
 #endif
 }
 
+
+//002
 ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
 {
     unsigned sum = 0;//每位之间的数字相加之和
@@ -84,6 +87,8 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
     return ret;
 }
 
+
+//003
 int Solution::lengthOfLongestSubstring(string s)
 {
 #if 0//滑动窗口（初版）
@@ -132,6 +137,8 @@ int Solution::lengthOfLongestSubstring(string s)
 #endif
 }
 
+
+//004
 double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 {
 #if 0//递归实现（未通过全部单元测试）
@@ -233,6 +240,34 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 #endif
 }
 
+
+//019
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
+{
+    ListNode* p_n = head;
+    ListNode* p_end = head;
+    for (auto i = 0; i < n; ++i) {
+        p_end = p_end->next;
+    }
+    if (nullptr == p_end) {
+        return head->next;
+    }
+
+    //多移动1个位置
+    p_end = p_end->next;
+
+    while (p_end) {
+        p_n = p_n->next;
+        p_end = p_end->next;
+    }
+    p_end = p_n->next;
+    p_n->next = p_end->next;
+
+    return head;
+}
+
+
+//021
 ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
 {
     ListNode* ret = nullptr;
@@ -276,3 +311,4 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
 
     return ret;
 }
+
