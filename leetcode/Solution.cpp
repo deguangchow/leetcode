@@ -312,6 +312,8 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
     return ret;
 }
 
+
+//023
 ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 {
 #if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists
@@ -343,6 +345,8 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 #endif
 }
 
+
+//024
 ListNode* Solution::swapPairs(ListNode* head)
 {
     ListNode* dummy = new ListNode(-1);//新增一个哑结点，哑结点的next指向head
@@ -358,6 +362,53 @@ ListNode* Solution::swapPairs(ListNode* head)
         p0->next = p2;
         p0 = p1;
         p1 = p1->next;
+    }
+
+    return dummy->next;//哑结点的next即返回的结果
+}
+
+
+//025
+ListNode* Solution::reverseKGroup(ListNode* head, const int k)
+{
+    ListNode* dummy = new ListNode(-1);//新增一个哑结点，哑结点的next指向head
+    dummy->next = head;
+    ListNode* p0 = dummy;
+
+    vector<ListNode*> vct_p(k);
+
+    vct_p[0] = head;
+    //for (auto i = 1; i < k; ++i) {
+    //    if (!vct_p[i - 1] || !vct_p[i - 1]->next) {
+    //        break;
+    //    }
+    //    vct_p[i] = vct_p[i-1]->next;
+    //}
+
+    while (vct_p[0]) {
+        for (auto i = 1; i < k; ++i) {
+            if (!vct_p[i - 1]->next) {
+                break;
+            }
+            vct_p[i] = vct_p[i - 1]->next;
+        }
+
+        for (auto i = 1; i < k; ++i) {
+            auto &p1 = vct_p[i];
+            p1 = vct_p[0]->next;
+            if (!p1) {
+                break;
+            }
+            vct_p[0]->next = p1->next;
+            p1->next = vct_p[0];
+            p0->next = p1;
+
+            p0 = vct_p[0];
+            vct_p[0] = vct_p[0]->next;
+        }
+
+        p0 = vct_p[0];
+        vct_p[0] = vct_p[0]->next;
     }
 
     return dummy->next;//哑结点的next即返回的结果
