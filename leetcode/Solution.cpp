@@ -373,42 +373,41 @@ ListNode* Solution::reverseKGroup(ListNode* head, const int k)
 {
     ListNode* dummy = new ListNode(-1);//新增一个哑结点，哑结点的next指向head
     dummy->next = head;
+
     ListNode* p0 = dummy;
-
-    vector<ListNode*> vct_p(k);
-
-    vct_p[0] = head;
-    //for (auto i = 1; i < k; ++i) {
-    //    if (!vct_p[i - 1] || !vct_p[i - 1]->next) {
-    //        break;
-    //    }
-    //    vct_p[i] = vct_p[i-1]->next;
-    //}
-
-    while (vct_p[0]) {
-        for (auto i = 1; i < k; ++i) {
-            if (!vct_p[i - 1]->next) {
+    ListNode* p1 = head;
+    ListNode* p2 = nullptr;
+    while (p1) {
+        ListNode*p = p1;
+        for (auto i = 0; i < k - 1; ++i) {
+            p = p->next;
+            if (!p) {
                 break;
             }
-            vct_p[i] = vct_p[i - 1]->next;
         }
-
-        for (auto i = 1; i < k; ++i) {
-            auto &p1 = vct_p[i];
-            p1 = vct_p[0]->next;
-            if (!p1) {
-                break;
+        if (!p) {
+            break;
+        }
+        for (auto i = 0; i < k - 1; ++i) {
+            if (i % 2 == 0) {
+                p2 = p1->next;
+                p1->next = p2->next;
+                p2->next = p1;
+                p0->next = p2;
+            } else {
+                p1 = p2->next;
+                p2->next = p1->next;
+                p1->next = p2;
+                p0->next = p1;
             }
-            vct_p[0]->next = p1->next;
-            p1->next = vct_p[0];
-            p0->next = p1;
-
-            p0 = vct_p[0];
-            vct_p[0] = vct_p[0]->next;
         }
-
-        p0 = vct_p[0];
-        vct_p[0] = vct_p[0]->next;
+        if (k % 2 == 0) {
+            p0 = p1;
+            p1 = p1->next;
+        } else {
+            p0 = p2;
+            p2 = p2->next;
+        }
     }
 
     return dummy->next;//哑结点的next即返回的结果
