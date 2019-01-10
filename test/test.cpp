@@ -97,7 +97,7 @@ TEST(LeetCode, 019) {
 
 #endif
 
-#if 1
+#if 0
 
     TEST(LeetCode, 023) {
         Solution solution;
@@ -111,6 +111,50 @@ TEST(LeetCode, 019) {
         l2->next->next = new ListNode(4);
 
         auto ret = solution.mergeKLists(vector<ListNode*>{ l1,l2 });
+    }
+
+#endif
+
+#if 1
+
+    TEST(LeetCode, 024) {
+        Solution solution;
+
+        {
+            ListNode*l1 = nullptr;
+            auto ret = solution.swapPairs(l1);
+            EXPECT_EQ(l1, ret);
+        }
+        {
+            ListNode*l1 = new ListNode(1);
+            auto ret = solution.swapPairs(l1);
+            EXPECT_EQ(l1, ret);
+        }
+        {
+            ListNode*l1 = new ListNode(1);
+            l1->next = new ListNode(2);
+            auto expect = l1->next;
+            auto ret = solution.swapPairs(l1);
+            EXPECT_EQ(expect, ret);
+        }
+        {
+            ListNode*l1 = new ListNode(1);
+            l1->next = new ListNode(2);
+            l1->next->next = new ListNode(3);
+            auto expect = l1->next;
+            auto ret = solution.swapPairs(l1);
+            EXPECT_EQ(expect, ret);
+        }
+        {
+            ListNode*l1 = new ListNode(1);
+            l1->next = new ListNode(2);
+            l1->next->next = new ListNode(3);
+            l1->next->next->next = new ListNode(4);
+            auto expect = l1->next;
+            auto ret = solution.swapPairs(l1);
+            EXPECT_EQ(expect, ret);
+        }
+
     }
 
 #endif

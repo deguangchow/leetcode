@@ -345,6 +345,21 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 
 ListNode* Solution::swapPairs(ListNode* head)
 {
+    ListNode* dummy = new ListNode(-1);//新增一个哑结点，哑结点的next指向head
+    dummy->next = head;
 
+    ListNode* p0 = dummy;
+    ListNode* p1 = head;
+    ListNode* p2 = nullptr;
+    while (p1 && p1->next) {
+        p2 = p1->next;
+        p1->next = p2->next;
+        p2->next = p1;
+        p0->next = p2;
+        p0 = p1;
+        p1 = p1->next;
+    }
+
+    return dummy->next;//哑结点的next即返回的结果
 }
 
