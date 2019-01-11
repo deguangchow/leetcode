@@ -51,7 +51,7 @@ ListNode* str2list(const std::string& s) {
 }
 
 //2个单链表的节点内容比较
-#define  LIST_VAL_COMPARE(l1, l2) {\
+#define  EXPECT_LIST_VAL_EQ(l1, l2) {\
     while (l1 && l2) {\
         EXPECT_EQ(l1->val, l2->val);\
         l1 = l1->next;\
@@ -66,35 +66,35 @@ TEST(ListNodeString, str2list) {
     {
         ListNode*l = nullptr;
         ListNode*ret = str2list("");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(0);
         ListNode*ret = str2list("0");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(-1);
         ListNode*ret = str2list("-1");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(1);
         ListNode*ret = str2list("1");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(1);
         l->next = new ListNode(2);
         ListNode*ret = str2list("1,2");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(1);
         l->next = new ListNode(2);
         l->next->next = new ListNode(3);
         ListNode*ret = str2list("1,2,3");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
     {
         ListNode*l = new ListNode(1);
@@ -102,7 +102,7 @@ TEST(ListNodeString, str2list) {
         l->next->next = new ListNode(3);
         l->next->next->next = new ListNode(4);
         ListNode*ret = str2list("1,2,3,4");
-        LIST_VAL_COMPARE(l, ret);
+        EXPECT_LIST_VAL_EQ(l, ret);
     }
 }
 
@@ -198,8 +198,36 @@ TEST(LeetCode, 004) {
 
 TEST(LeetCode, 019) {
     Solution solution;
-    ListNode*l1 = new ListNode(1);
-    auto ret = solution.removeNthFromEnd(l1, 1);
+    {
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.removeNthFromEnd(l1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.removeNthFromEnd(l1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3");
+        ListNode*exp = str2list("1,2");
+        ListNode*ret = solution.removeNthFromEnd(l1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3");
+        ListNode*exp = str2list("1,3");
+        ListNode*ret = solution.removeNthFromEnd(l1, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3");
+        ListNode*exp = str2list("2,3");
+        ListNode*ret = solution.removeNthFromEnd(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
 }
 
 
@@ -208,8 +236,8 @@ TEST(LeetCode, 021) {
     ListNode*l1 = str2list("1,2,4");
     ListNode*l2 = str2list("1,3,4");
     ListNode*exp = str2list("1,1,2,3,4,4");
-    auto ret = solution.mergeTwoLists(l1, l2);
-    LIST_VAL_COMPARE(exp, ret);
+    ListNode*ret = solution.mergeTwoLists(l1, l2);
+    EXPECT_LIST_VAL_EQ(exp, ret);
 }
 
 
@@ -218,46 +246,42 @@ TEST(LeetCode, 023) {
     ListNode*l1 = str2list("1,2,4");
     ListNode*l2 = str2list("1,3,4");
     ListNode*exp = str2list("1,1,2,3,4,4");
-    auto ret = solution.mergeKLists(vector<ListNode*>{ l1, l2 });
-    LIST_VAL_COMPARE(exp, ret);
+    ListNode*ret = solution.mergeKLists(vector<ListNode*>{ l1, l2 });
+    EXPECT_LIST_VAL_EQ(exp, ret);
 }
 
 
 TEST(LeetCode, 024) {
     Solution solution;
     {
-        ListNode*l1 = nullptr;
-        auto ret = solution.swapPairs(l1);
-        EXPECT_EQ(l1, ret);
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.swapPairs(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        auto ret = solution.swapPairs(l1);
-        EXPECT_EQ(l1, ret);
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.swapPairs(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        auto expect = l1->next;
-        auto ret = solution.swapPairs(l1);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("2,1");
+        ListNode*ret = solution.swapPairs(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        auto expect = l1->next;
-        auto ret = solution.swapPairs(l1);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3");
+        ListNode*exp = str2list("2,1,3");
+        ListNode*ret = solution.swapPairs(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        auto expect = l1->next;
-        auto ret = solution.swapPairs(l1);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4");
+        ListNode*exp = str2list("2,1,4,3");
+        ListNode*ret = solution.swapPairs(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
 
@@ -265,122 +289,82 @@ TEST(LeetCode, 024) {
 TEST(LeetCode, 025) {
     Solution solution;
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        auto expect = l1->next;
-        auto ret = solution.reverseKGroup(l1, 2);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("2,1,4,3,5");
+        ListNode*ret = solution.reverseKGroup(l1, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = nullptr;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(l1, ret);
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(l1, ret);
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        auto expect = l1;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("1,2");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        auto expect = l1->next->next;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3");
+        ListNode*exp = str2list("3,2,1");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        auto expect = l1->next->next;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4");
+        ListNode*exp = str2list("3,2,1,4");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        auto expect = l1->next->next;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("3,2,1,4,5");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        l1->next->next->next->next->next = new ListNode(6);
-        auto expect = l1->next->next;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5,6");
+        ListNode*exp = str2list("3,2,1,6,5,4");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        l1->next->next->next->next->next = new ListNode(6);
-        l1->next->next->next->next->next->next = new ListNode(7);
-        auto expect = l1->next->next;
-        auto ret = solution.reverseKGroup(l1, 3);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5,6,7");
+        ListNode*exp = str2list("3,2,1,6,5,4,7");
+        ListNode*ret = solution.reverseKGroup(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        auto expect = l1->next->next->next;
-        auto ret = solution.reverseKGroup(l1, 4);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4");
+        ListNode*exp = str2list("4,3,2,1");
+        ListNode*ret = solution.reverseKGroup(l1, 4);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        auto expect = l1->next->next->next;
-        auto ret = solution.reverseKGroup(l1, 4);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("4,3,2,1,5");
+        ListNode*ret = solution.reverseKGroup(l1, 4);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        auto expect = l1->next->next->next->next;
-        auto ret = solution.reverseKGroup(l1, 5);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("5,4,3,2,1");
+        ListNode*ret = solution.reverseKGroup(l1, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
     {
-        ListNode*l1 = new ListNode(1);
-        l1->next = new ListNode(2);
-        l1->next->next = new ListNode(3);
-        l1->next->next->next = new ListNode(4);
-        l1->next->next->next->next = new ListNode(5);
-        l1->next->next->next->next->next = new ListNode(6);
-        auto expect = l1->next->next->next->next;
-        auto ret = solution.reverseKGroup(l1, 5);
-        EXPECT_EQ(expect, ret);
+        ListNode*l1 = str2list("1,2,3,4,5,6");
+        ListNode*exp = str2list("5,4,3,2,1,6");
+        ListNode*ret = solution.reverseKGroup(l1, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
     }
-
 }
 
