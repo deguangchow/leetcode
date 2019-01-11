@@ -184,19 +184,7 @@ public:
     向右旋转 3 步: 0->1->2->NULL
     向右旋转 4 步: 2->0->1->NULL
     */
-    ListNode* rotateRight(ListNode* head, int k) {
-        //平行指针
-        ListNode* p0 = head;
-        ListNode* p1 = head;
-        ListNode* p2 = head;
-        while (k--) {
-            if (p2) {
-                p2 = p2->next;
-            } else {
-                p2 = p0;
-            }
-        }
-    }
+    ListNode* rotateRight(ListNode* head, int k);
 };
 #endif  //SOLUTION_H
 
