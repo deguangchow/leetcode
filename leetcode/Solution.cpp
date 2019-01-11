@@ -419,3 +419,19 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k)
     return dummy->next;//哑结点的next即返回的结果
 }
 
+ListNode* Solution::rotateRight(ListNode* head, int k)
+{
+    //平行指针
+    ListNode* p0 = head;
+    ListNode* p1 = head;
+    ListNode* p2 = head;
+    while (k--) {
+        if (p2) {
+            p2 = p2->next;
+        }
+        else {
+            p2 = p0;
+        }
+    }
+}
+
