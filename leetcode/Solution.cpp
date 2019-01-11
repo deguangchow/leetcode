@@ -319,7 +319,7 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 #if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists
     auto const& size = lists.size();
     ListNode* ret = nullptr;
-    for (int i = 0, j = size; i < j; ++i, --j) {
+    for (auto i = 0; i < size; ++i) {
         ret = mergeTwoLists(ret, lists[i]);
     }
     return ret;
@@ -369,45 +369,51 @@ ListNode* Solution::swapPairs(ListNode* head)
 
 
 //025
-ListNode* Solution::reverseKGroup(ListNode* head, const int k)
+ListNode* Solution::reverseKGroup(ListNode* head, int k)
 {
     ListNode* dummy = new ListNode(-1);//新增一个哑结点，哑结点的next指向head
     dummy->next = head;
 
     ListNode* p0 = dummy;
+    ListNode* p0_new = nullptr;
     ListNode* p1 = head;
     ListNode* p2 = nullptr;
-    while (p1) {
-        ListNode*p = p1;
-        for (auto i = 0; i < k - 1; ++i) {
+    ListNode* p = nullptr;//节点校验指针
+    while (p0) {
+        p = p0;
+        for (int i = 0; i < k; ++i) {
             p = p->next;
             if (!p) {
                 break;
             }
         }
-        if (!p) {
+        if (!p) {//剩余节点不够k个，不够一组则不做翻转
             break;
         }
-        for (auto i = 0; i < k - 1; ++i) {
+        p1 = p0->next;
+        p2 = p1->next;
+        for (int i = 0; i < k - 1; ++i) {
             if (i % 2 == 0) {
-                p2 = p1->next;
                 p1->next = p2->next;
-                p2->next = p1;
+                p2->next = p0->next;
                 p0->next = p2;
+                p0_new = p1;
+                p1 = p1->next;
+                while (p2->next != p1) {
+                    p2 = p2->next;
+                }
             } else {
-                p1 = p2->next;
                 p2->next = p1->next;
-                p1->next = p2;
+                p1->next = p0->next;
                 p0->next = p1;
+                p0_new = p2;
+                p2 = p2->next;
+                while (p1->next != p2) {
+                    p1 = p1->next;
+                }
             }
         }
-        if (k % 2 == 0) {
-            p0 = p1;
-            p1 = p1->next;
-        } else {
-            p0 = p2;
-            p2 = p2->next;
-        }
+        p0 = p0_new;
     }
 
     return dummy->next;//哑结点的next即返回的结果

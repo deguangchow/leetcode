@@ -161,7 +161,7 @@ public:
     你的算法只能使用常数的额外空间。
     你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
     */
-    ListNode* reverseKGroup(ListNode* head, const int k);
+    ListNode* reverseKGroup(ListNode* head, int k);
 };
 #endif  //SOLUTION_H
 
