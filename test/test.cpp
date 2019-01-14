@@ -420,3 +420,55 @@ TEST(LeetCode, 061) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
+
+TEST(LeetCode, 082) {
+    Solution solution;
+    {
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,2,4,5");
+        ListNode*exp = str2list("1,4,5");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,2,2,5");
+        ListNode*exp = str2list("5");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,1,2,2");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,5,5,5");
+        ListNode*exp = str2list("1,2");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,1,1,1");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.deleteDuplicates(l1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+}

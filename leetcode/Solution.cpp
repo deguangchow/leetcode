@@ -445,3 +445,36 @@ ListNode* Solution::rotateRight(ListNode* head, int k)
     return ret;
 }
 
+//082
+ListNode* Solution::deleteDuplicates(ListNode* head)
+{
+    if (nullptr == head || nullptr == head->next) {
+        return head;
+    }
+    ListNode* dummy = new ListNode(-1);
+    dummy->next = head;
+    ListNode*p0 = dummy;
+    ListNode*p1 = head;
+    ListNode*p2 = head->next;
+    while (p1 && p2) {
+        if (p1->val == p2->val) {
+            p2 = p2->next;
+        } else {
+            if (p1->next == p2) {
+                p0 = p1;
+                p1 = p1->next;
+                p2 = p2->next;
+            }
+            else {
+                p0->next = p2;
+                p1 = p2;
+                p2 = p2->next;
+            }
+        }
+    }
+    if (p1->next != p2) {
+        p0->next = nullptr == p2 ? nullptr : p2->next;
+    }
+    return dummy->next;
+}
+
