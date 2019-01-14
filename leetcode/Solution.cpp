@@ -421,17 +421,27 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k)
 
 ListNode* Solution::rotateRight(ListNode* head, int k)
 {
-    //平行指针
-    ListNode* p0 = head;
+    if (nullptr == head || nullptr == head->next) {
+        return head;
+    }
+
     ListNode* p1 = head;
     ListNode* p2 = head;
-    while (k--) {
-        if (p2) {
-            p2 = p2->next;
-        }
-        else {
-            p2 = p0;
-        }
+    int count = 1;
+    while (p2->next) {
+        ++count;
+        p2 = p2->next;
     }
+    p2->next = head;//建环
+
+    int n = count - (k%count);
+    for (int i = 0; i < n - 1; ++i) {
+        p1 = p1->next;
+    }
+
+    ListNode* ret = p1->next;
+    p1->next = nullptr;//解环
+
+    return ret;
 }
 
