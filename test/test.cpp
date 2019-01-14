@@ -368,3 +368,55 @@ TEST(LeetCode, 025) {
     }
 }
 
+
+TEST(LeetCode, 061) {
+    Solution solution;
+    {
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.rotateRight(l1, 0);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,2,3,4,5");
+        ListNode*ret = solution.rotateRight(l1, 0);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("5,1,2,3,4");
+        ListNode*ret = solution.rotateRight(l1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("4,5,1,2,3");
+        ListNode*ret = solution.rotateRight(l1, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("3,4,5,1,2");
+        ListNode*ret = solution.rotateRight(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("2,3,4,5,1");
+        ListNode*ret = solution.rotateRight(l1, 4);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,2,3,4,5");
+        ListNode*ret = solution.rotateRight(l1, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("5,1,2,3,4");
+        ListNode*ret = solution.rotateRight(l1, 6);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+}
