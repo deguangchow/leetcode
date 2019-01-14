@@ -524,3 +524,55 @@ TEST(LeetCode, 083) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
+
+TEST(LeetCode, 086) {
+    Solution solution;
+    {
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("1,2");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,2,3,4,5");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("3,1,2,2,5");
+        ListNode*exp = str2list("1,2,2,3,5");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,3,2,2");
+        ListNode*exp = str2list("1,1,2,2,3");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,5,3,5");
+        ListNode*exp = str2list("1,2,5,3,5");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("3,1,1,1,1");
+        ListNode*exp = str2list("1,1,1,1,3");
+        ListNode*ret = solution.partition(l1, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+}
