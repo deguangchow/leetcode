@@ -567,3 +567,24 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
     return dummy->next;
 }
 
+TreeNode* Solution::sortedListToBST(ListNode* head)
+{
+    if (nullptr == head) {
+        return nullptr;
+    }
+    TreeNode* ret = new TreeNode(head->val);
+    ListNode* p1 = head->next;
+    TreeNode* p2 = ret;
+    while (p1) {
+        if (ret->val >= p1->val) {
+            if (ret->left && ret->left->val >= p1->val) {
+
+            }
+            else {
+                ret->left = new TreeNode(p1->val);
+                p1 = p1->next;
+            }
+        }
+    }
+}
+
