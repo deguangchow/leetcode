@@ -224,27 +224,7 @@ public:
     ÊäÈë: head = 1->4->3->2->5->2, x = 3
     Êä³ö: 1->2->2->4->3->5
     */
-    ListNode* partition(ListNode* head, int x) {
-        if (nullptr == head || nullptr == head->next) {
-            return head;
-        }
-        ListNode* dummy = new ListNode(-1);
-        dummy->next = head;
-        ListNode* p0 = dummy;
-        ListNode* p1 = head;
-        ListNode* p2 = p1->next;
-        while (p1 && p2) {
-            if (p1->val < x) {
-                p0->next = p1->next;
-                p1->next = dummy->next;
-                dummy->next = p1;
-            } else {
-                p0 = p1;
-                p1 = p1->next;
-            }
-        }
-        return dummy->next;
-    }
+    ListNode* partition(ListNode* head, int x);
 };
 #endif  //SOLUTION_H
 

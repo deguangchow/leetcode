@@ -503,3 +503,32 @@ ListNode* Solution::deleteDuplicatesOne(ListNode* head)
     return head;
 }
 
+//086
+ListNode* Solution::partition(ListNode* head, int x)
+{
+    if (nullptr == head || nullptr == head->next) {
+        return head;
+    }
+    ListNode* dummy = new ListNode(-1);
+    dummy->next = head;
+    ListNode* p0 = dummy;
+    ListNode* p1 = head;
+    ListNode* p2 = nullptr;
+    while (p1) {
+        if (nullptr == p2 && p1->val == x) {
+            p2 = p1;
+        }
+        if (p2 && p1->val < x) {
+            p0->next = p1->next;
+            p1->next = dummy->next;
+            dummy->next = p1;
+            p1 = p0->next;
+        }
+        else {
+            p0 = p1;
+            p1 = p1->next;
+        }
+    }
+    return dummy->next;
+}
+
