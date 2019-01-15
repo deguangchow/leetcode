@@ -526,6 +526,7 @@ TEST(LeetCode, 083) {
 }
 
 TEST(LeetCode, 086) {
+#if 0
     Solution solution;
     {
         ListNode*l1 = str2list("");
@@ -575,4 +576,83 @@ TEST(LeetCode, 086) {
         ListNode*ret = solution.partition(l1, 3);
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
+#endif
 }
+
+
+TEST(LeetCode, 092) {
+    Solution solution;
+    {
+        ListNode*l1 = str2list("");
+        ListNode*exp = str2list("");
+        ListNode*ret = solution.reverseBetween(l1, 1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1");
+        ListNode*exp = str2list("1");
+        ListNode*ret = solution.reverseBetween(l1, 1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("1,2");
+        ListNode*ret = solution.reverseBetween(l1, 1, 1);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2");
+        ListNode*exp = str2list("2,1");
+        ListNode*ret = solution.reverseBetween(l1, 1, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("2,1,3,4,5");
+        ListNode*ret = solution.reverseBetween(l1, 1, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("5,4,3,2,1");
+        ListNode*ret = solution.reverseBetween(l1, 1, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,1,2,2");
+        ListNode*exp = str2list("2,1,1,1,2");
+        ListNode*ret = solution.reverseBetween(l1, 1, 4);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,1,1,2");
+        ListNode*exp = str2list("2,1,1,1,1");
+        ListNode*ret = solution.reverseBetween(l1, 1, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,1,1,2,2");
+        ListNode*exp = str2list("1,1,1,2,2");
+        ListNode*ret = solution.reverseBetween(l1, 2, 2);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,3,2,4,5");
+        ListNode*ret = solution.reverseBetween(l1, 2, 3);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,5,4,3,2");
+        ListNode*ret = solution.reverseBetween(l1, 2, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+    {
+        ListNode*l1 = str2list("1,2,3,4,5");
+        ListNode*exp = str2list("1,2,5,4,3");
+        ListNode*ret = solution.reverseBetween(l1, 3, 5);
+        EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+}
+

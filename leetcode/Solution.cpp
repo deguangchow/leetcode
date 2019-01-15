@@ -532,3 +532,38 @@ ListNode* Solution::partition(ListNode* head, int x)
     return dummy->next;
 }
 
+//092
+ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
+{
+    if (nullptr == head || nullptr == head->next) {
+        return head;
+    }
+    ListNode* dummy = new ListNode(-1);
+    dummy->next = head;
+    ListNode* p0 = dummy;
+    ListNode* p1 = head;        //第m个节点
+    ListNode* p2 = head->next;  //第n个节点
+
+    //1、确定位置m
+    for (auto i = 0; i < m - 1; ++i) {
+        p0 = p0->next;
+    }
+    p1 = p0->next;
+
+    //2、确定位置n
+    p2 = p1;
+    int len = (n - m);
+    for (auto i = 0; i < len; ++i) {
+        p2 = p2->next;
+    }
+    
+    //3、反转从m到n的节点
+    for (auto i = 0; i < len; ++i) {
+        p0->next = p1->next;
+        p1->next = p2->next;
+        p2->next = p1;
+        p1 = p0->next;
+    }
+    return dummy->next;
+}
+
