@@ -567,6 +567,19 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
     return dummy->next;
 }
 
+//100
+bool Solution::isSameTree(TreeNode* p, TreeNode* q)
+{
+    if (!p && !q) {
+        return true;
+    }
+    if (!p || !q || p->val != q->val) {
+        return false;
+    }
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);//递归比较两棵树的左、右子树
+}
+
+//109
 TreeNode* Solution::sortedListToBST(ListNode* head)
 {
     if (nullptr == head) {
