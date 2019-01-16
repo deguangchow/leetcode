@@ -579,6 +579,23 @@ bool Solution::isSameTree(TreeNode* p, TreeNode* q)
     return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);//递归比较两棵树的左、右子树
 }
 
+
+//101
+bool Solution::isMirror(TreeNode* t1, TreeNode *t2)
+{
+    if (!t1 && !t2) {
+        return true;
+    }
+    if (!t1 || !t2 || t1->val != t2->val) {
+        return false;
+    }
+    return isMirror(t1->left, t2->right) && isMirror(t1->right, t2->left);
+}
+bool Solution::isSymmetric(TreeNode* root)
+{
+    return isMirror(root, root);
+}
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head)
 {
