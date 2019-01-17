@@ -254,23 +254,23 @@ public:
     如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
 
     示例 1:
-    输入:         1         1
+    输入:        1         1
                 / \       / \
-                2   3     2   3
+               2   3     2   3
     [1,2,3],   [1,2,3]
     输出: true
 
     示例 2:
-    输入:         1          1
+    输入:        1          1
                 /           \
-                2             2
+               2             2
     [1,2],     [1,null,2]
     输出: false
 
     示例 3:
-    输入:         1         1
+    输入:        1         1
                 / \       / \
-                2   1     1   2
+               2   1     1   2
     [1,2,1],   [1,1,2]
     输出: false
     */
@@ -280,22 +280,82 @@ public:
     101. 对称二叉树
     给定一个二叉树，检查它是否是镜像对称的。
     例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
-    1
-    / \
-    2   2
-    / \ / \
+        1
+       / \
+      2   2
+     / \ / \
     3  4 4  3
     但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
-    1
+     1
     / \
     2   2
-    \   \
-    3    3
+     \   \
+      3    3
     说明:
     如果你可以运用递归和迭代两种方法解决这个问题，会很加分。
     */
     bool isMirror(TreeNode* t1, TreeNode *t2);
     bool isSymmetric(TreeNode* root);
+
+
+    /*102
+    102. 二叉树的层次遍历
+    给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
+
+    例如:
+    给定二叉树: [3,9,20,null,null,15,7],
+     3
+    / \
+    9  20
+      /  \
+     15   7
+    返回其层次遍历结果：
+    [
+    [3],
+    [9,20],
+    [15,7]
+    ]
+    */
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> vv;
+
+        if (root == nullptr)
+            return vv;
+
+        TreeNode *node = root;
+        queue<TreeNode *> nodeq;
+
+        nodeq.push(node);
+
+        int count = 1;
+        int nextcount = 0;
+
+        while (!nodeq.empty()) {
+            vector<int> v;
+            for (int i = 0; i < count; i++) {
+                node = nodeq.front();
+                if (node->left != nullptr) {
+                    nodeq.push(node->left);
+                    nextcount++;
+                }
+
+                if (node->right != nullptr) {
+                    nodeq.push(node->right);
+                    nextcount++;
+                }
+
+                nodeq.pop();
+                v.push_back(node->val);
+            }
+
+            count = nextcount;
+            nextcount = 0;
+            vv.push_back(v);
+        }
+
+        return vv;
+    }
+
 
     /*109
     109. 有序链表转换二叉搜索树

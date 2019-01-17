@@ -18,7 +18,9 @@
 #include <string>
 #include <set>
 #include <algorithm>
+#include <queue>
 using std::vector;
 using std::map;
 using std::string;
 using std::set;
+using std::queue;

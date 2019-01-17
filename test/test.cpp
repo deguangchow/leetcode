@@ -14,7 +14,6 @@
 
 //单链表转字符串
 std::string list2str(ListNode* l) {
-    char buf[64] = { 0 };
     std::string s;
     while (l) {
         s += std::to_string(l->val);
@@ -48,6 +47,25 @@ ListNode* str2list(const std::string& s) {
         p->next = new ListNode(atoi(s.substr(begin, count).c_str()));
     }
     return ret->next;
+}
+
+//二叉树转字符串
+std::string tree2str(TreeNode* t) {
+    std::string s;
+    while (t) {
+        s += std::to_string(t->val);
+        t = t->left;
+        if (t) {
+            s += ',';
+        }
+    }
+    return s;
+}
+
+//字符串转二叉树
+TreeNode* str2tree(const std::string& s) {
+    TreeNode* t = nullptr;
+    return t;
 }
 
 //2个单链表的节点内容比较
