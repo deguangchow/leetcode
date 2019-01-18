@@ -317,43 +317,39 @@ public:
     ]
     */
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> vv;
-
-        if (root == nullptr)
-            return vv;
-
-        TreeNode *node = root;
-        queue<TreeNode *> nodeq;
-
-        nodeq.push(node);
-
-        int count = 1;
-        int nextcount = 0;
-
-        while (!nodeq.empty()) {
-            vector<int> v;
-            for (int i = 0; i < count; i++) {
-                node = nodeq.front();
-                if (node->left != nullptr) {
-                    nodeq.push(node->left);
-                    nextcount++;
-                }
-
-                if (node->right != nullptr) {
-                    nodeq.push(node->right);
-                    nextcount++;
-                }
-
-                nodeq.pop();
-                v.push_back(node->val);
-            }
-
-            count = nextcount;
-            nextcount = 0;
-            vv.push_back(v);
+        if (!root) {
+            return{};
         }
 
-        return vv;
+        vector<vector<int>> ret;
+        TreeNode *p = root;
+        queue<TreeNode*> nodes;
+        nodes.push(p);
+        int count = 1;
+        int count_next = 0;
+
+        while (!nodes.empty()) {
+            vector<int> nodes_level;
+            for (int i = 0; i < count; ++i) {
+                p = nodes.front();
+                if (p->left) {
+                    nodes.push(p->left);
+                    ++count_next;
+                }
+                if (p->right) {
+                    nodes.push(p->right);
+                    ++count_next;
+                }
+                nodes.pop();
+                nodes_level.push_back(p->val);
+            }
+
+            count = count_next;
+            count_next = 0;
+            ret.push_back(nodes_level);
+        }
+
+        return ret;
     }
 
 
