@@ -355,6 +355,7 @@ public:
        /   /
      -10  5
     */
+    TreeNode* sortedListToBST(ListNode* head, ListNode* tail);
     TreeNode* sortedListToBST(ListNode* head);
 };
 #endif  //SOLUTION_H

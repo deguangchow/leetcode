@@ -677,24 +677,29 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
 }
 
 //109
-TreeNode* Solution::sortedListToBST(ListNode* head)
-{
-    if (nullptr == head) {
+TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
+    if (head == tail) {
         return nullptr;
     }
-    TreeNode* ret = new TreeNode(head->val);
-    ListNode* p1 = head->next;
-    TreeNode* p2 = ret;
-    while (p1) {
-        if (ret->val >= p1->val) {
-            if (ret->left && ret->left->val >= p1->val) {
 
-            }
-            else {
-                ret->left = new TreeNode(p1->val);
-                p1 = p1->next;
-            }
-        }
+    //快慢指针，查找链表的中间点位置
+    ListNode* fast = head;
+    ListNode* slow = head;
+    while (fast != tail && fast->next != tail) {
+        fast = fast->next->next;
+        slow = slow->next;
     }
+
+    TreeNode* root = new TreeNode(slow->val);
+    root->left = sortedListToBST(head, slow);
+    root->right = sortedListToBST(slow->next, tail);
+    return root;
+}
+TreeNode* Solution::sortedListToBST(ListNode* head)
+{
+    if (!head) {
+        return nullptr;
+    }
+    return sortedListToBST(head, nullptr);
 }
 
