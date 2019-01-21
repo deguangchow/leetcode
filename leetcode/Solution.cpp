@@ -636,6 +636,46 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root)
 }
 
 
+vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
+{
+    if (!root) {
+        return{};
+    }
+
+    vector<vector<int>> ret;
+    unsigned count = 1;
+    unsigned count_next = 0;
+    queue<TreeNode*> nodes;
+    nodes.push(root);
+    bool left2right = true;//从左到右的标识
+
+    while (!nodes.empty()) {
+        vector<int> nodes_level;
+        for (unsigned i = 0; i < count; ++i) {
+            TreeNode* p = nodes.front();
+            if (p->left) {
+                nodes.push(p->left);
+                ++count_next;
+            }
+            if (p->right) {
+                nodes.push(p->right);
+                ++count_next;
+            }
+            nodes.pop();
+            if (left2right) {
+                nodes_level.push_back(p->val);
+            } else {
+                nodes_level.insert(nodes_level.begin(), p->val);
+            }
+        }
+        count = count_next;
+        count_next = 0;
+        left2right = !left2right;
+        ret.push_back(nodes_level);
+    }
+    return move(ret);
+}
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head)
 {
