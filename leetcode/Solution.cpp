@@ -676,6 +676,38 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
     return move(ret);
 }
 
+int Solution::maxDepth(TreeNode* root)
+{
+    if (!root) {
+        return 0;
+    }
+    unsigned depth = 0;
+    unsigned count = 1;
+    unsigned count_next = 0;
+    queue<TreeNode*> nodes;
+    nodes.push(root);
+    while (!nodes.empty()) {
+        for (unsigned i = 0; i < count; ++i) {
+            TreeNode* p = nodes.front();
+            if (p->left || p->right) {
+                if (p->left) {
+                    nodes.push(p->left);
+                    ++count_next;
+                }
+                if (p->right) {
+                    ++count_next;
+                    nodes.push(p->right);
+                }
+            }
+            nodes.pop();
+        }
+        ++depth;
+        count = count_next;
+        count_next = 0;
+    }
+    return depth;
+}
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
     if (head == tail) {
