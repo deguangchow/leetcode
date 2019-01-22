@@ -343,14 +343,11 @@ public:
     /*104
     104. 二叉树的最大深度
     给定一个二叉树，找出其最大深度。
-
     二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
-
     说明: 叶子节点是指没有子节点的节点。
 
     示例：
     给定二叉树 [3,9,20,null,null,15,7]，
-
         3
        / \
       9  20
@@ -359,6 +356,27 @@ public:
     返回它的最大深度 3 。
     */
     int maxDepth(TreeNode* root);
+
+
+    /*105
+    105. 从前序与中序遍历序列构造二叉树
+    根据一棵树的前序遍历与中序遍历构造二叉树。
+    注意:
+    你可以假设树中没有重复的元素。
+
+    例如，给出
+    前序遍历 preorder = [3,9,20,15,7]
+    中序遍历 inorder = [9,3,15,20,7]
+    返回如下的二叉树：
+        3
+       / \
+      9  20
+        /  \
+       15   7
+    */
+    TreeNode* build(vector<int>::const_iterator pre1, vector<int>::const_iterator pre2,
+        vector<int>::const_iterator in1, vector<int>::const_iterator in2);
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder);
 
 
     /*109

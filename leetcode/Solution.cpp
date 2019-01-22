@@ -636,6 +636,7 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root)
 }
 
 
+//103
 vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
 {
     if (!root) {
@@ -676,6 +677,8 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
     return move(ret);
 }
 
+
+//104
 int Solution::maxDepth(TreeNode* root)
 {
     if (!root) {
@@ -707,6 +710,62 @@ int Solution::maxDepth(TreeNode* root)
     }
     return depth;
 }
+
+
+//105
+#if 0//递归法
+TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_iterator pre2, vector<int>::const_iterator in1, vector<int>::const_iterator in2)
+{
+    if (pre1 > pre2 || in1 > in2) {
+        return nullptr;
+    }
+    TreeNode* root = new TreeNode(*pre1);
+    auto const& pos = std::find(in1, in2, root->val);
+    root->left = build(pre1 + 1, pre2, in1, pos - 1);
+    root->right = build(pre1 + (pos - in1) + 1, pre2, pos + 1, in2);
+    return root;
+}
+TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
+{
+    if (preorder.empty() || inorder.empty()) {
+        return nullptr;
+    }
+    return build(preorder.begin(), preorder.end() - 1, inorder.begin(), inorder.end() - 1);
+}
+#else//迭代法：使用辅助栈
+TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
+{
+    if (preorder.size() == 0) {
+        return nullptr;
+    }
+
+    stack<TreeNode*> st;
+    int in_dex = 0, pre_dex = 0;
+    TreeNode* root = new TreeNode(preorder[pre_dex++]);
+    TreeNode* cur = root;
+    st.push(root);
+
+    while (!st.empty()) {
+        while (st.top()->val != inorder[in_dex]) {
+            st.top()->left = new TreeNode(preorder[pre_dex++]);
+            st.push(st.top()->left);
+        }
+        while (!st.empty() && st.top()->val == inorder[in_dex]) {
+            cur = st.top();
+            st.pop();
+            in_dex++;
+        }
+        if (pre_dex < preorder.size()) {
+            cur->right = new TreeNode(preorder[pre_dex++]);
+            cur = cur->right;
+            st.push(cur);
+        }
+    }
+
+    return root;
+}
+#endif
+
 
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {

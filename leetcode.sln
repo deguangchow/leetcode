@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "leetcode", "leetcode\leetcode.vcxproj", "{46849A7F-CEB6-4014-8BBA-DCC1C5AB9573}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{DB9D5855-33A8-439D-B886-3E41FC2C244F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46849A7F-CEB6-4014-8BBA-DCC1C5AB9573} = {46849A7F-CEB6-4014-8BBA-DCC1C5AB9573}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,8 +19,10 @@
 #include <set>
 #include <algorithm>
 #include <queue>
+#include <stack>
 using std::vector;
 using std::map;
 using std::string;
 using std::set;
 using std::queue;
+using std::stack;
