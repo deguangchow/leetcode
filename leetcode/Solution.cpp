@@ -910,3 +910,15 @@ bool Solution::isBalanced(TreeNode* root)
     return isBalanced(root->left) && isBalanced(root->right);
 }
 
+
+//111
+int Solution::minDepth(TreeNode* root)
+{
+    if (!root) {
+        return 0;
+    }
+    int left = minDepth(root->left);
+    int right = minDepth(root->right);
+    return (left && right) ? 1 + std::min(left, right) : 1 + left + right;
+}
+

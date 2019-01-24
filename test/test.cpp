@@ -768,3 +768,31 @@ TEST(LeetCode, 110) {
         EXPECT_FALSE(solution.isBalanced(t));
     }
 }
+
+TEST(LeetCode, 111) {
+    Solution solution;
+    {
+        TreeNode* t = nullptr;
+        EXPECT_EQ(0, solution.minDepth(t));
+    }
+    {
+        TreeNode* t = new TreeNode(1);
+        EXPECT_EQ(1, solution.minDepth(t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2 }, vector<int>{ 1, 2 });
+        EXPECT_EQ(2, solution.minDepth(t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        EXPECT_EQ(2, solution.minDepth(t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 4, 3, 2 }, vector<int>{ 4, 3, 4, 2, 3, 1, 2 });
+        EXPECT_EQ(2, solution.minDepth(t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 5, 4, 3, 2, 1 });
+        EXPECT_EQ(5, solution.minDepth(t));
+    }
+}
