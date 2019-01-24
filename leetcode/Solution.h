@@ -398,6 +398,27 @@ public:
     TreeNode* buildTree_in_post(vector<int>& inorder, vector<int>& postorder);
 
 
+    /*107
+    107. 二叉树的层次遍历 II
+    给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+
+    例如：
+    给定二叉树 [3,9,20,null,null,15,7],
+        3
+       / \
+      9  20
+        /  \
+       15   7
+    返回其自底向上的层次遍历为：
+    [
+      [15,7],
+      [9,20],
+      [3]
+    ]
+    */
+    vector<vector<int>> levelOrderBottom(TreeNode* root);
+
+
     /*109
     109. 有序链表转换二叉搜索树
     给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。

@@ -804,6 +804,45 @@ TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postord
 }
 
 
+//107
+vector<vector<int>> Solution::levelOrderBottom(TreeNode* root)
+{
+    if (!root) {
+        return{};
+    }
+
+    vector<vector<int>> ret;
+    TreeNode *p = root;
+    queue<TreeNode*> nodes;
+    nodes.push(p);
+    int count = 1;
+    int count_next = 0;
+
+    while (!nodes.empty()) {
+        vector<int> nodes_level;
+        for (int i = 0; i < count; ++i) {
+            p = nodes.front();
+            if (p->left) {
+                nodes.push(p->left);
+                ++count_next;
+            }
+            if (p->right) {
+                nodes.push(p->right);
+                ++count_next;
+            }
+            nodes.pop();
+            nodes_level.push_back(p->val);
+        }
+
+        count = count_next;
+        count_next = 0;
+        ret.insert(ret.begin(), nodes_level);
+    }
+
+    return ret;
+}
+
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
     if (head == tail) {
