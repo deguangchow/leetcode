@@ -756,3 +756,15 @@ TEST(LeetCode, 107) {
         EXPECT_TRUE(solution.isSameTree(ret, exp));
     }
 }
+
+TEST(LeetCode, 110) {
+    Solution solution;
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        EXPECT_TRUE(solution.isBalanced(t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 4, 3, 2 }, vector<int>{ 4, 3, 4, 2, 3, 1, 2 });
+        EXPECT_FALSE(solution.isBalanced(t));
+    }
+}

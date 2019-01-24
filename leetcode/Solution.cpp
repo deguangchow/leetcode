@@ -896,3 +896,17 @@ TreeNode* Solution::sortedListToBST(ListNode* head)
     return sortedListToBST(head, nullptr);
 }
 
+
+//110
+bool Solution::isBalanced(TreeNode* root)
+{
+    //递归法：双递归
+    if (!root || !root->left && !root->right) {
+        return true;
+    }
+    if (abs(maxDepth(root->left) - maxDepth(root->right)) > 1) {
+        return false;//比较子树是否平衡
+    }
+    return isBalanced(root->left) && isBalanced(root->right);
+}
+
