@@ -742,3 +742,17 @@ TEST(LeetCode, 106) {
         EXPECT_TRUE(solution.isSameTree(ret, exp));
     }
 }
+
+
+TEST(LeetCode, 107) {
+    Solution solution;
+    {
+        TreeNode* exp = new TreeNode(0);
+        exp->left = new TreeNode(-3);
+        exp->right = new TreeNode(9);
+        exp->left->left = new TreeNode(-10);
+        exp->right->left = new TreeNode(5);
+        TreeNode* ret = solution.sortedArrayToBST(vector<int>{-10, -3, 0, 5, 9});
+        EXPECT_TRUE(solution.isSameTree(ret, exp));
+    }
+}

@@ -843,6 +843,28 @@ vector<vector<int>> Solution::levelOrderBottom(TreeNode* root)
 }
 
 
+//108
+TreeNode* Solution::sortedArrayToBST(vector<int>& nums, int const& begin, int const& end)
+{
+    if (begin > end) {
+        return nullptr;
+    }
+    unsigned mid = (begin + end) / 2;
+    TreeNode* t = new TreeNode(nums[mid]);
+    t->left = sortedArrayToBST(nums, begin, mid - 1);
+    t->right = sortedArrayToBST(nums, mid + 1, end);
+    return t;
+}
+TreeNode* Solution::sortedArrayToBST(vector<int>& nums)
+{
+    unsigned const& size = nums.size();
+    if (0 == size) {
+        return nullptr;
+    }
+    return sortedArrayToBST(nums, 0, size - 1);
+}
+
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
     if (head == tail) {
