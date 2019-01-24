@@ -713,7 +713,6 @@ int Solution::maxDepth(TreeNode* root)
 
 
 //105
-#if 0//递归法
 TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_iterator pre2, vector<int>::const_iterator in1, vector<int>::const_iterator in2)
 {
     if (pre1 > pre2 || in1 > in2) {
@@ -727,44 +726,45 @@ TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_i
 }
 TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
 {
+#if 0//递归法
     if (preorder.empty() || inorder.empty()) {
         return nullptr;
     }
     return build(preorder.begin(), preorder.end() - 1, inorder.begin(), inorder.end() - 1);
-}
 #else//迭代法：使用辅助栈
-TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
-{
-    if (preorder.size() == 0) {
+    unsigned const& size = preorder.size();
+    if (size == 0) {
         return nullptr;
     }
-
-    stack<TreeNode*> st;
-    int in_dex = 0, pre_dex = 0;
-    TreeNode* root = new TreeNode(preorder[pre_dex++]);
+    unsigned pre_index = 0, in_index = 0;
+    TreeNode* root = new TreeNode(preorder[pre_index++]);
     TreeNode* cur = root;
+    stack<TreeNode*> st;
     st.push(root);
 
     while (!st.empty()) {
-        while (st.top()->val != inorder[in_dex]) {
-            st.top()->left = new TreeNode(preorder[pre_dex++]);
+        //创建左子树：压栈
+        while (st.top()->val != inorder[in_index]) {
+            st.top()->left = new TreeNode(preorder[pre_index++]);
             st.push(st.top()->left);
         }
-        while (!st.empty() && st.top()->val == inorder[in_dex]) {
+        //定位当前右子树所在的跟节点：出栈
+        while (!st.empty() && st.top()->val == inorder[in_index]) {
             cur = st.top();
             st.pop();
-            in_dex++;
+            ++in_index;
         }
-        if (pre_dex < preorder.size()) {
-            cur->right = new TreeNode(preorder[pre_dex++]);
+        //创建右子树：压栈
+        if (pre_index < size) {
+            cur->right = new TreeNode(preorder[pre_index++]);
             cur = cur->right;
             st.push(cur);
         }
     }
 
     return root;
-}
 #endif
+}
 
 
 //109

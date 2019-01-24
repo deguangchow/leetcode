@@ -64,8 +64,26 @@ std::string tree2str(TreeNode* t) {
 
 //字符串转二叉树
 TreeNode* str2tree(const std::string& s) {
-    TreeNode* t = nullptr;
-    return t;
+
+    TreeNode* ret = nullptr;
+    unsigned count_level = 1, count = 1;
+    bool end = false;
+    queue<int> nodes;
+
+    while (!nodes.empty()) {
+        count = (unsigned)pow(2, count_level);
+        for (unsigned i = 0; i < count; ++i) {
+            if (s[i] == '\0') {
+                end = true;
+                break;
+            }
+        }
+        if (end) {
+            break;
+        }
+    }
+
+    return ret;
 }
 
 //2个单链表的节点内容比较
@@ -674,3 +692,24 @@ TEST(LeetCode, 092) {
     }
 }
 
+TEST(LeetCode, 105) {
+    Solution solution;
+    {
+        TreeNode* exp = new TreeNode(3);
+        exp->left = new TreeNode(9);
+        exp->right = new TreeNode(20);
+        exp->right->left = new TreeNode(15);
+        exp->right->right = new TreeNode(7);
+        TreeNode* ret = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        solution.isSameTree(ret, exp);
+    }
+    {
+        TreeNode* exp = new TreeNode(2);
+        exp->left = new TreeNode(3);
+        exp->right = new TreeNode(5);
+        exp->left->left = new TreeNode(9);
+        exp->left->right = new TreeNode(8);
+        TreeNode* ret = solution.buildTree(vector<int>{ 2, 3, 9, 8, 5 }, vector<int>{ 9, 3, 8, 2, 5 });
+        solution.isSameTree(ret, exp);
+    }
+}
