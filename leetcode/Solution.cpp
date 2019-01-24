@@ -767,6 +767,43 @@ TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
 }
 
 
+//106
+TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postorder)
+{
+    unsigned const& size = postorder.size();
+    if (size == 0) {
+        return nullptr;
+    }
+    unsigned post_index = size, in_index = size - 1;
+    TreeNode* root = new TreeNode(postorder[--post_index]);
+    TreeNode* cur = root;
+    stack<TreeNode*> st;
+    st.push(root);
+
+    while (!st.empty()) {
+        //创建右子树：压栈
+        while (st.top()->val != inorder[in_index]) {
+            st.top()->right = new TreeNode(postorder[--post_index]);
+            st.push(st.top()->right);
+        }
+        //定位当前左子树所在的跟节点：出栈
+        while (!st.empty() && st.top()->val == inorder[in_index]) {
+            cur = st.top();
+            st.pop();
+            --in_index;
+        }
+        //创建左子树：压栈
+        if (post_index > 0) {
+            cur->left = new TreeNode(postorder[--post_index]);
+            cur = cur->left;
+            st.push(cur);
+        }
+    }
+
+    return root;
+}
+
+
 //109
 TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
     if (head == tail) {
