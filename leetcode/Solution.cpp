@@ -681,6 +681,7 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
 //104
 int Solution::maxDepth(TreeNode* root)
 {
+#if 0//迭代法：辅助队列
     if (!root) {
         return 0;
     }
@@ -709,6 +710,9 @@ int Solution::maxDepth(TreeNode* root)
         count_next = 0;
     }
     return depth;
+#else//递归法
+    return !root ? 0 : 1 + std::max(maxDepth(root->left), maxDepth(root->right));
+#endif
 }
 
 
