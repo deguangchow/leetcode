@@ -248,6 +248,25 @@ public:
     ListNode* reverseBetween(ListNode* head, int m, int n);
 
 
+    /*94
+    94. 二叉树的中序遍历
+    给定一个二叉树，返回它的中序 遍历。
+
+    示例:
+    输入: [1,null,2,3]
+       1
+        \
+         2
+        /
+       3
+    输出: [1,3,2]
+
+    进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+    */
+    void inOder(TreeNode* root, vector<int>& ans);
+    vector<int> inorderTraversal(TreeNode* root);
+
+
     /*100
     100. 相同的树
     给定两个二叉树，编写一个函数来检验它们是否相同。

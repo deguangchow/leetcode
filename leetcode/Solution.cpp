@@ -567,6 +567,39 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
     return dummy->next;
 }
 
+//94
+void Solution::inOder(TreeNode* root, vector<int>& ans)
+{
+    if (!root) {
+        return;
+    }
+    inOder(root->left, ans);
+    ans.push_back(root->val);
+    inOder(root->right, ans);
+}
+vector<int> Solution::inorderTraversal(TreeNode* root)
+{
+    vector<int> ans;
+#if 0//µÝ¹é·¨
+    inOder(root, ans);
+#else//µü´ú·¨£º¸¨ÖúÕ»
+    stack<TreeNode*> st;
+    while (!st.empty() || root) {
+        if (root) {
+            st.push(root);
+            root = root->left;
+        }
+        else {
+            root = st.top();
+            st.pop();
+            ans.push_back(root->val);
+            root = root->right;
+        }
+    }
+#endif        
+    return ans;
+}
+
 //100
 bool Solution::isSameTree(TreeNode* p, TreeNode* q)
 {
