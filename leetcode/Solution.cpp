@@ -25,7 +25,7 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
     }
     return{ -1,-1 };
 #else//map
-    unsigned const& len = nums.size();
+    int const& len = nums.size();
     map<int, int> mapNumIndex;
     for (int i = 0; i < len; ++i) {
         int const& num = nums[i];
@@ -319,7 +319,7 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 #if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists
     auto const& size = lists.size();
     ListNode* ret = nullptr;
-    for (auto i = 0; i < size; ++i) {
+    for (unsigned i = 0; i < size; ++i) {
         ret = mergeTwoLists(ret, lists[i]);
     }
     return ret;
@@ -598,6 +598,50 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
     }
 #endif        
     return ans;
+}
+
+//99
+void Solution::inOderRecoverTree(TreeNode* root, vector<int>& ans, int& index)
+{
+    if (!root) {
+        return;
+    }
+    inOder(root->left, ans);
+    TreeNode* t1 = nullptr;
+    TreeNode* t2 = nullptr;
+    if (t1->val > t2->val) {
+
+    }
+    ans.push_back(root->val);
+    ++index;
+    inOder(root->right, ans);
+}
+void Solution::recoverTree(TreeNode* root)
+{
+    //降序的节点：最多存在2对
+    std::pair<TreeNode*, TreeNode*> pair1 = { nullptr, nullptr };
+    std::pair<TreeNode*, TreeNode*> pair2 = { nullptr, nullptr };
+
+    TreeNode* t1 = nullptr;
+    TreeNode* t2 = nullptr;
+
+    if (t1->val > t2->val) {
+        pair1.first = t1;
+        pair1.second = t2;
+    }
+
+    if (!pair1.first && !pair2.first) {
+        return;
+    } else if (!pair2.first) {
+        t1 = pair1.first;
+        t2 = pair1.second;
+    } else {
+        t1 = pair1.first;
+        t2 = pair2.second;
+    }
+    int tmp = t1->val;
+    t1->val = t2->val;
+    t2->val = tmp;
 }
 
 //100
