@@ -897,3 +897,55 @@ TEST(LeetCode, 113) {
         EXPECT_VECTORS_VAL_EQ(exp, ret);
     }
 }
+
+TEST(LeetCode, 114) {
+    Solution solution;
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5, 6 }, vector<int>{ 3, 2, 4, 1, 5, 6 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5, 6 }, vector<int>{ 1, 2, 3, 4, 5, 6 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = nullptr;
+        TreeNode* exp = solution.buildTree(vector<int>{}, vector<int>{});
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = new TreeNode(1);
+        TreeNode* exp = solution.buildTree(vector<int>{ 1}, vector<int>{1 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2 }, vector<int>{ 1, 2 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 1, 2}, vector<int>{ 1, 2 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 3, 9, 20, 15, 7 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 40, 30, 20 }, vector<int>{ 4, 3, 40, 2, 30, 1, 20 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 1, 2, 3, 4, 40, 30, 20 }, vector<int>{1, 2, 3, 4, 40, 30, 20});
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 5, 4, 3, 2, 1 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 1, 2, 3, 4, 5 });
+        solution.flatten(t);
+        EXPECT_TRUE(solution.isSameTree(exp, t));
+    }
+}

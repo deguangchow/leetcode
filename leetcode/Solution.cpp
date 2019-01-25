@@ -958,3 +958,55 @@ vector<vector<int>> Solution::pathSum(TreeNode* root, int sum)
     return res;
 }
 
+
+//114
+void Solution::postOrder(TreeNode* root)
+{
+    if (!root) {
+        return;
+    }
+    postOrder(root->left);
+    postOrder(root->right);
+    TreeNode* r = root->right;
+    root->right = root->left;
+    root->left = nullptr;
+    while (root->right) {
+        root = root->right;
+    }
+    root->right = r;
+}
+void Solution::flatten(TreeNode* root)
+{
+#if 0//迭代法：辅助栈
+    if (!root) {
+        return;
+    }
+    stack<TreeNode*> st;
+    st.push(root);
+    TreeNode* cur = root;
+
+    while (!st.empty()) {
+        while (!st.empty() && st.top()->left) {
+            st.push(st.top()->left);
+        }
+        cur = st.top();
+        while (!st.empty() && !st.top()->right) {
+            st.pop();
+        }
+        if (!st.empty()) {
+            cur->left = st.top()->right;
+            st.top()->right = nullptr;
+            st.push(cur->left);
+        }
+    }
+    cur = root;
+    while (cur) {
+        cur->right = cur->left;
+        cur->left = nullptr;
+        cur = cur->right;
+    }
+#else//递归法：后续遍历
+    postOrder(root);
+#endif
+}
+
