@@ -935,3 +935,26 @@ bool Solution::hasPathSum(TreeNode* root, int sum)
     return hasPathSum(root->left, sum - root->val) || hasPathSum(root->right, sum - root->val);
 }
 
+
+//113
+void Solution::dfsPathSum(vector<vector<int>>& res, vector<int>& path, TreeNode* root, int sum)
+{
+    if (!root) {
+        return;
+    }
+    path.push_back(root->val);
+    if (!root->left && !root->right && root->val == sum) {
+        res.push_back(path);
+    }
+    dfsPathSum(res, path, root->left, sum - root->val);
+    dfsPathSum(res, path, root->right, sum - root->val);
+    path.pop_back();
+}
+vector<vector<int>> Solution::pathSum(TreeNode* root, int sum)
+{
+    vector<vector<int>> res;
+    vector<int> path;
+    dfsPathSum(res, path, root, sum);
+    return res;
+}
+

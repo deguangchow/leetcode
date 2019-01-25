@@ -98,6 +98,29 @@ TreeNode* str2tree(const std::string& s) {
 }
 
 
+//2个vector的节点内容比较
+#define EXPECT_VECTOR_VAL_EQ(v1, v2) {\
+    vector<int>::const_iterator& pos1 = v1.begin();\
+    vector<int>::const_iterator& pos2 = v2.begin();\
+    for (; pos1 != v1.end() && pos2 != v2.end(); ++pos1, ++pos2) {\
+        EXPECT_EQ(*pos1, *pos2);\
+    }\
+    EXPECT_TRUE(pos1 == v1.end());\
+    EXPECT_TRUE(pos2 == v2.end());\
+}
+#define EXPECT_VECTORS_VAL_EQ(v1, v2) {\
+    vector<vector<int>>::const_iterator& pos1 = v1.begin();\
+    vector<vector<int>>::const_iterator& pos2 = v2.begin();\
+    for (; pos1 != v1.end() && pos2 != v2.end(); ++pos1, ++pos2) {\
+        vector<int> const& v1_val = *pos1;\
+        vector<int> const& v2_val = *pos2;\
+        EXPECT_VECTOR_VAL_EQ(v1_val, v2_val);\
+    }\
+    EXPECT_TRUE(pos1 == v1.end());\
+    EXPECT_TRUE(pos2 == v2.end());\
+}
+
+
 TEST(ListNodeString, str2list) {
     {
         ListNode*l = nullptr;
@@ -748,10 +771,10 @@ TEST(LeetCode, 107) {
     Solution solution;
     {
         TreeNode* exp = new TreeNode(0);
-        exp->left = new TreeNode(-3);
-        exp->right = new TreeNode(9);
-        exp->left->left = new TreeNode(-10);
-        exp->right->left = new TreeNode(5);
+        exp->left = new TreeNode(-10);
+        exp->right = new TreeNode(5);
+        exp->left->right = new TreeNode(-3);
+        exp->right->right = new TreeNode(9);
         TreeNode* ret = solution.sortedArrayToBST(vector<int>{-10, -3, 0, 5, 9});
         EXPECT_TRUE(solution.isSameTree(ret, exp));
     }
@@ -826,5 +849,51 @@ TEST(LeetCode, 112) {
     {
         TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 5, 4, 3, 2, 1 });
         EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+}
+
+TEST(LeetCode, 113) {
+    Solution solution;
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
+        auto const& exp = vector<vector<int>>{ vector<int>{5, 4, 11, 2}, vector<int>{ 5, 8, 4, 5 } };
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = nullptr;
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = new TreeNode(1);
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2 }, vector<int>{ 1, 2 });
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 4, 3, 2 }, vector<int>{ 4, 3, 4, 2, 3, 1, 2 });
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 5, 4, 3, 2, 1 });
+        auto const& exp = vector<vector<int>>{};
+        auto const& ret = solution.pathSum(t, 22);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
     }
 }
