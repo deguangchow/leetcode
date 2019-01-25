@@ -796,3 +796,35 @@ TEST(LeetCode, 111) {
         EXPECT_EQ(5, solution.minDepth(t));
     }
 }
+
+TEST(LeetCode, 112) {
+    Solution solution;
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 4 });
+        EXPECT_TRUE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = nullptr;
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = new TreeNode(1);
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2 }, vector<int>{ 1, 2 });
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 3, 9, 20, 15, 7 }, vector<int>{ 9, 3, 15, 20, 7 });
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 4, 3, 2 }, vector<int>{ 4, 3, 4, 2, 3, 1, 2 });
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+    {
+        TreeNode* t = solution.buildTree(vector<int>{ 1, 2, 3, 4, 5 }, vector<int>{ 5, 4, 3, 2, 1 });
+        EXPECT_FALSE(solution.hasPathSum(t, 22));
+    }
+}
