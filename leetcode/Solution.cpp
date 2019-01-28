@@ -600,6 +600,34 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
     return ans;
 }
 
+
+//98
+void Solution::inOderIsValidBST(TreeNode* root)
+{
+    if (!root || !is_valid_BST) {
+        return;
+    }
+    inOderIsValidBST(root->left);
+    if (last && last->val >= root->val) {
+        is_valid_BST = false;
+    }
+    last = root;
+    inOderIsValidBST(root->right);
+}
+bool Solution::isValidBST(TreeNode* root)
+{
+    //初始化
+    last = nullptr;
+    is_valid_BST = true;
+
+    //中序遍历
+    inOderIsValidBST(root);
+
+    //返回结果
+    return is_valid_BST;
+}
+
+
 //99
 void Solution::inOderRecoverTree(TreeNode* root)
 {

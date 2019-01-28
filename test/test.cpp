@@ -715,6 +715,78 @@ TEST(LeetCode, 092) {
     }
 }
 
+TEST(LeetCode, 98) {
+    Solution solution;
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 1, 1 }, vector<int>{ 1, 1 });
+        EXPECT_FALSE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 3, 1, 2 }, vector<int>{ 1, 2, 3 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 2, 1, 4, 3 }, vector<int>{ 1, 2, 3, 4 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 2, 3, 8, 9 }, vector<int>{ 2, 3, 5, 8, 9 });
+        EXPECT_TRUE(solution.isValidBST(exp));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 1, 3, 2 }, vector<int>{ 3, 2, 1 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 3, 1, 4, 2 }, vector<int>{ 1, 3, 2, 4 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 5, 3, 2, 8, 9 }, vector<int>{ 3, 2, 5, 8, 9 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 2, 5, 3, 8, 9 }, vector<int>{ 5, 3, 2, 8, 9 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 5, 8, 3, 2, 9 }, vector<int>{ 8, 3, 5, 2, 9 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 5, 2, 8, 3, 9 }, vector<int>{ 2, 8, 5, 3, 9 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 9, 2, 3, 8, 5 }, vector<int>{ 2, 3, 9, 8, 5 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+    {
+        TreeNode* ret = solution.buildTree(vector<int>{ 5, 9, 3, 8, 2 }, vector<int>{ 9, 3, 5, 8, 2 });
+        EXPECT_FALSE(solution.isValidBST(ret));
+    }
+}
+
 TEST(LeetCode, 99) {
     Solution solution;
     {
@@ -724,7 +796,7 @@ TEST(LeetCode, 99) {
         EXPECT_TRUE(solution.isSameTree(ret, exp));
     }
     {
-        TreeNode* exp = solution.buildTree(vector<int>{ 2, 1, 4, 3 }, vector<int>{ 1, 2, 3, 4 }); 
+        TreeNode* exp = solution.buildTree(vector<int>{ 2, 1, 4, 3 }, vector<int>{ 1, 2, 3, 4 });
         TreeNode* ret = solution.buildTree(vector<int>{ 3, 1, 4, 2 }, vector<int>{ 1, 3, 2, 4 });
         solution.recoverTree(ret);
         EXPECT_TRUE(solution.isSameTree(ret, exp));
