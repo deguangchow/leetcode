@@ -600,6 +600,32 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
     return ans;
 }
 
+//95
+vector<TreeNode*>* Solution::createBST(int begin, int end)
+{
+    vector<TreeNode*>* ans = new vector<TreeNode*>();
+    if (begin > end) {
+        ans->push_back(nullptr);
+    } else {
+        for (int i = begin; i <= end; ++i) {
+            vector<TreeNode*>* left = createBST(begin, i - 1);
+            vector<TreeNode*>* right = createBST(i + 1, end);
+            for (int l = 0; l < left->size(); ++l) {
+                for (int r = 0; r < right->size(); ++r) {//构建二叉查找树
+                    TreeNode* node = new TreeNode(i);//不同的根结点
+                    node->left = (*left)[l];
+                    node->right = (*right)[r];
+                    ans->push_back(node);
+                }
+            }
+        }
+    }
+    return ans;
+}
+vector<TreeNode*> Solution::generateTrees(int n)
+{
+    return *createBST(1, n);
+}
 
 //98
 void Solution::inOderIsValidBST(TreeNode* root)
