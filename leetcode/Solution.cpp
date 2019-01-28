@@ -601,47 +601,36 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
 }
 
 //99
-void Solution::inOderRecoverTree(TreeNode* root, vector<int>& ans, int& index)
+void Solution::inOderRecoverTree(TreeNode* root)
 {
-    if (!root) {
+    if (!root || p1 && p3) {
         return;
     }
-    inOder(root->left, ans);
-    TreeNode* t1 = nullptr;
-    TreeNode* t2 = nullptr;
-    if (t1->val > t2->val) {
-
+    inOderRecoverTree(root->left);
+    if (last && last->val > root->val) {
+        if (!p1) {
+            p1 = last;
+            p2 = root;
+        } else {
+            p3 = last;
+            p4 = root;
+        }
     }
-    ans.push_back(root->val);
-    ++index;
-    inOder(root->right, ans);
+    last = root;
+    inOderRecoverTree(root->right);
 }
 void Solution::recoverTree(TreeNode* root)
 {
-    //降序的节点：最多存在2对
-    std::pair<TreeNode*, TreeNode*> pair1 = { nullptr, nullptr };
-    std::pair<TreeNode*, TreeNode*> pair2 = { nullptr, nullptr };
+    //初始化
+    p1 = p2 = p3 = p4 = last = nullptr;
 
-    TreeNode* t1 = nullptr;
-    TreeNode* t2 = nullptr;
+    //中序遍历
+    inOderRecoverTree(root);
 
-    if (t1->val > t2->val) {
-        pair1.first = t1;
-        pair1.second = t2;
-    }
-
-    if (!pair1.first && !pair2.first) {
-        return;
-    } else if (!pair2.first) {
-        t1 = pair1.first;
-        t2 = pair1.second;
-    } else {
-        t1 = pair1.first;
-        t2 = pair2.second;
-    }
-    int tmp = t1->val;
-    t1->val = t2->val;
-    t2->val = tmp;
+    //交换节点值
+    TreeNode* t1 = p1;
+    TreeNode* t2 = !p3 ? p2 : p4;
+    swap(t1->val, t2->val);
 }
 
 //100

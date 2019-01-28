@@ -304,7 +304,8 @@ public:
     使用 O(n) 空间复杂度的解法很容易实现。
     你能想出一个只使用常数空间的解决方案吗？
     */
-    void inOderRecoverTree(TreeNode* root, vector<int>& ans, int& index);
+    TreeNode *p1, *p2, *p3, *p4, *last;
+    void inOderRecoverTree(TreeNode* root);
     void recoverTree(TreeNode* root);
 
 
