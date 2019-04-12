@@ -12,7 +12,7 @@
 #include "Solution.h"
 
 
-//µ¥Á´±í×ª×Ö·û´®
+//å•é“¾è¡¨è½¬å­—ç¬¦ä¸²
 std::string list2str(ListNode* l) {
     std::string s;
     while (l) {
@@ -25,7 +25,7 @@ std::string list2str(ListNode* l) {
     return s;
 }
 
-//×Ö·û´®×ªµ¥Á´±í
+//å­—ç¬¦ä¸²è½¬å•é“¾è¡¨
 ListNode* str2list(const std::string& s) {
     ListNode* ret = new ListNode(-1);
     ListNode* p = ret;
@@ -49,7 +49,7 @@ ListNode* str2list(const std::string& s) {
     return ret->next;
 }
 
-//¶þ²æÊ÷×ª×Ö·û´®
+//äºŒå‰æ ‘è½¬å­—ç¬¦ä¸²
 std::string tree2str(TreeNode* t) {
     std::string s;
     while (t) {
@@ -62,9 +62,8 @@ std::string tree2str(TreeNode* t) {
     return s;
 }
 
-//×Ö·û´®×ª¶þ²æÊ÷
+//å­—ç¬¦ä¸²è½¬äºŒå‰æ ‘
 TreeNode* str2tree(const std::string& s) {
-
     TreeNode* ret = nullptr;
     unsigned count_level = 1, count = 1;
     bool end = false;
@@ -86,7 +85,7 @@ TreeNode* str2tree(const std::string& s) {
     return ret;
 }
 
-//2¸öµ¥Á´±íµÄ½ÚµãÄÚÈÝ±È½Ï
+//2ä¸ªå•é“¾è¡¨çš„èŠ‚ç‚¹å†…å®¹æ¯”è¾ƒ
 #define  EXPECT_LIST_VAL_EQ(l1, l2) {\
     while (l1 && l2) {\
         EXPECT_EQ(l1->val, l2->val);\
@@ -98,7 +97,7 @@ TreeNode* str2tree(const std::string& s) {
 }
 
 
-//2¸övectorµÄ½ÚµãÄÚÈÝ±È½Ï
+//2ä¸ªvectorçš„èŠ‚ç‚¹å†…å®¹æ¯”è¾ƒ
 #define EXPECT_VECTOR_VAL_EQ(v1, v2) {\
     vector<int>::const_iterator& pos1 = v1.begin();\
     vector<int>::const_iterator& pos2 = v2.begin();\
@@ -225,31 +224,31 @@ TEST(LeetCode, 004) {
         EXPECT_EQ(1, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 1,3 }, nums2 = { 2 };
+        vector<int> nums1 = { 1, 3 }, nums2 = { 2 };
         EXPECT_EQ(2, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5,6,7 };
+        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5, 6, 7 };
         EXPECT_EQ(4, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5,6,7,8 };
+        vector<int> nums1 = { 1, 2, 3, 4 }, nums2 = { 5, 6, 7, 8 };
         EXPECT_EQ(4.5, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 1, 2, 3 }, nums2 = { 5,6,7,8 };
+        vector<int> nums1 = { 1, 2, 3 }, nums2 = { 5, 6, 7, 8 };
         EXPECT_EQ(5, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 9, 9, 13 }, nums2 = { 5,6,7,8 };
+        vector<int> nums1 = { 9, 9, 13 }, nums2 = { 5, 6, 7, 8 };
         EXPECT_EQ(8, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 1, 3, 5 }, nums2 = { 1,4,8 };
+        vector<int> nums1 = { 1, 3, 5 }, nums2 = { 1, 4, 8 };
         EXPECT_EQ(3.5, solution.findMedianSortedArrays(nums1, nums2));
     }
     {
-        vector<int> nums1 = { 3,4 }, nums2 = { 1,2,5,7,8 };
+        vector<int> nums1 = { 3, 4 }, nums2 = { 1, 2, 5, 7, 8 };
         EXPECT_EQ(4, solution.findMedianSortedArrays(nums1, nums2));
     }
 }
@@ -837,7 +836,6 @@ TEST(LeetCode, 99) {
         solution.recoverTree(ret);
         EXPECT_TRUE(solution.isSameTree(ret, exp));
     }
-
 }
 
 TEST(LeetCode, 105) {
@@ -938,7 +936,8 @@ TEST(LeetCode, 111) {
 TEST(LeetCode, 112) {
     Solution solution;
     {
-        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 4 });
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4 },
+            vector<int>{ 7, 11, 2, 4, 5, 13, 8, 4 });
         EXPECT_TRUE(solution.hasPathSum(t, 22));
     }
     {
@@ -970,7 +969,8 @@ TEST(LeetCode, 112) {
 TEST(LeetCode, 113) {
     Solution solution;
     {
-        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 },
+            vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
         auto const& exp = vector<vector<int>>{ vector<int>{5, 4, 11, 2}, vector<int>{ 5, 8, 4, 5 } };
         auto const& ret = solution.pathSum(t, 22);
         EXPECT_VECTORS_VAL_EQ(exp, ret);
@@ -1022,8 +1022,10 @@ TEST(LeetCode, 114) {
         EXPECT_TRUE(solution.isSameTree(exp, t));
     }
     {
-        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
-        TreeNode* exp = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 }, vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 });
+        TreeNode* t = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 },
+            vector<int>{ 7, 11, 2, 4, 5, 13, 8, 5, 4, 1 });
+        TreeNode* exp = solution.buildTree(vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 },
+            vector<int>{ 5, 4, 11, 7, 2, 8, 13, 4, 5, 1 });
         solution.flatten(t);
         EXPECT_TRUE(solution.isSameTree(exp, t));
     }
@@ -1064,3 +1066,5 @@ TEST(LeetCode, 114) {
         EXPECT_TRUE(solution.isSameTree(exp, t));
     }
 }
+
+

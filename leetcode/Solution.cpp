@@ -1,7 +1,7 @@
 ///    Copyright (C) 2018 DG.C, DGCHOW, deguangchow
 ///        deguangchow@qq.com
 ///
-///    \brief    Leetcode Solution£º½áÌâ·½°¸
+///    \brief    Leetcode Solutionï¼šç»“é¢˜æ–¹æ¡ˆ
 ///
 ///    \author   deguangchow
 ///    \version  1.0
@@ -12,9 +12,8 @@
 
 
 //001
-vector<int> Solution::twoSum(vector<int>& nums, int target)
-{
-#if 0//±©Á¦½â·¨
+vector<int> Solution::twoSum(vector<int>& nums, int target) {
+#if 0//æš´åŠ›è§£æ³•
     unsigned len = nums.size();
     for (int i = 0; i < len - 1; ++i) {
         for (int j = i + 1; j < len; ++j) {
@@ -23,7 +22,7 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
             }
         }
     }
-    return{ -1,-1 };
+    return{ -1, -1 };
 #else//map
     int const& len = nums.size();
     map<int, int> mapNumIndex;
@@ -41,15 +40,14 @@ vector<int> Solution::twoSum(vector<int>& nums, int target)
         }
         return{ i, pos->second };
     }
-    return{ -1,-1 };
+    return{ -1, -1 };
 #endif
 }
 
 
 //002
-ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
-{
-    unsigned sum = 0;//Ã¿Î»Ö®¼äµÄÊı×ÖÏà¼ÓÖ®ºÍ
+ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
+    unsigned sum = 0;//æ¯ä½ä¹‹é—´çš„æ•°å­—ç›¸åŠ ä¹‹å’Œ
     ListNode* ret = l1;
     ListNode* p = nullptr;
     while (l1 && l2) {
@@ -89,9 +87,8 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2)
 
 
 //003
-int Solution::lengthOfLongestSubstring(string s)
-{
-#if 0//»¬¶¯´°¿Ú£¨³õ°æ£©
+int Solution::lengthOfLongestSubstring(string s) {
+#if 0//æ»‘åŠ¨çª—å£ï¼ˆåˆç‰ˆï¼‰
     unsigned size = s.length();
     int max = 0;
     int len = 0;
@@ -120,7 +117,7 @@ int Solution::lengthOfLongestSubstring(string s)
     }
 
     return max;
-#else//»¬¶¯´°¿Ú£¨ÓÅ»¯°æ£©
+#else//æ»‘åŠ¨çª—å£ï¼ˆä¼˜åŒ–ç‰ˆï¼‰
     int n = s.length();
     int ans = 0;
     map<char, int> mapCharIndex;
@@ -139,9 +136,8 @@ int Solution::lengthOfLongestSubstring(string s)
 
 
 //004
-double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
-{
-#if 0//µİ¹éÊµÏÖ£¨Î´Í¨¹ıÈ«²¿µ¥Ôª²âÊÔ£©
+double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+#if 0//é€’å½’å®ç°ï¼ˆæœªé€šè¿‡å…¨éƒ¨å•å…ƒæµ‹è¯•ï¼‰
     auto size1 = nums1.size();
     auto min1 = nums1[0];
     auto max1 = nums1[size1 - 1];
@@ -151,7 +147,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
     auto max2 = nums2[size2 - 1];
 
     if (max1 <= min2) {
-        if (size1>size2) {
+        if (size1 > size2) {
             auto pos = (size1 - size2) / 2;
             auto mod = (size1 - size2) % 2;
             if (mod) {
@@ -159,7 +155,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
             } else {
                 return (nums1[size2 + pos] + nums1[size2 + pos + 1]) / 2.0;
             }
-        } else if (size1<size2) {
+        } else if (size1 < size2) {
             auto pos = (size2 - size1) / 2;
             auto mod = (size2 - size1) % 2;
             if (mod) {
@@ -195,21 +191,21 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
             return findMedianSortedArrays(nums1_right, nums2_left);
         }
     }
-#else//¹Ù·½Ìâ½â£ºµİ¹éË¼Ïë£¬Ñ­»·ÊµÏÖ
+#else//å®˜æ–¹é¢˜è§£ï¼šé€’å½’æ€æƒ³ï¼Œå¾ªç¯å®ç°
     int m = nums1.size();
     int n = nums2.size();
-    if (m>n) {
+    if (m > n) {
         nums1.swap(nums2);
         m = n;
         n = nums2.size();
     }
     int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
-    while (iMin<=iMax) {
+    while (iMin <= iMax) {
         int i = (iMin + iMax) / 2;
         int j = halfLen - i;
         if (i<iMax && nums2[j - 1]>nums1[i]) {
             iMin = i + 1;//i is too small
-        } else if (i>iMin && nums1[i-1] > nums2[j]) {
+        } else if (i > iMin && nums1[i-1] > nums2[j]) {
             iMax = i - 1;//i is too big
         } else {//i is perfect
             int maxLeft = 0;
@@ -242,8 +238,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 
 
 //019
-ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
-{
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
     ListNode* p_n = head;
     ListNode* p_end = head;
     for (auto i = 0; i < n; ++i) {
@@ -253,7 +248,7 @@ ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
         return head->next;
     }
 
-    //¶àÒÆ¶¯1¸öÎ»ÖÃ
+    //å¤šç§»åŠ¨1ä¸ªä½ç½®
     p_end = p_end->next;
 
     while (p_end) {
@@ -268,8 +263,7 @@ ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
 
 
 //021
-ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
-{
+ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2) {
     ListNode* ret = nullptr;
     ListNode* p = nullptr;
     while (l1 && l2) {
@@ -314,16 +308,15 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2)
 
 
 //023
-ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
-{
-#if 1//023.1£º¸´ÓÃ021½âÌâË¼Â·£¬¶à´Îµ÷ÓÃ½Ó¿ÚmergeTwoLists
+ListNode* Solution::mergeKLists(vector<ListNode*>& lists) {
+#if 1//023.1ï¼šå¤ç”¨021è§£é¢˜æ€è·¯ï¼Œå¤šæ¬¡è°ƒç”¨æ¥å£mergeTwoLists
     auto const& size = lists.size();
     ListNode* ret = nullptr;
     for (unsigned i = 0; i < size; ++i) {
         ret = mergeTwoLists(ret, lists[i]);
     }
     return ret;
-#else//023.2£ºmergeTwoListsµÄÑÜÉú£¬Ò»´Î±È½Ïn¸öÊı£¨Î´ÊµÏÖ£¬µ«ÊÇ¸´ÔÓ¶ÈÓ¦µÈÍ¬023.1£©
+#else//023.2ï¼šmergeTwoListsçš„è¡ç”Ÿï¼Œä¸€æ¬¡æ¯”è¾ƒnä¸ªæ•°ï¼ˆæœªå®ç°ï¼Œä½†æ˜¯å¤æ‚åº¦åº”ç­‰åŒ023.1ï¼‰
     ListNode* ret = nullptr;
     ListNode* p = nullptr;
     auto const& size = lists.size();
@@ -347,9 +340,8 @@ ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
 
 
 //024
-ListNode* Solution::swapPairs(ListNode* head)
-{
-    ListNode* dummy = new ListNode(-1);//ĞÂÔöÒ»¸öÑÆ½áµã£¬ÑÆ½áµãµÄnextÖ¸Ïòhead
+ListNode* Solution::swapPairs(ListNode* head) {
+    ListNode* dummy = new ListNode(-1);//æ–°å¢ä¸€ä¸ªå“‘ç»“ç‚¹ï¼Œå“‘ç»“ç‚¹çš„nextæŒ‡å‘head
     dummy->next = head;
 
     ListNode* p0 = dummy;
@@ -364,21 +356,20 @@ ListNode* Solution::swapPairs(ListNode* head)
         p1 = p1->next;
     }
 
-    return dummy->next;//ÑÆ½áµãµÄnext¼´·µ»ØµÄ½á¹û
+    return dummy->next;//å“‘ç»“ç‚¹çš„nextå³è¿”å›çš„ç»“æœ
 }
 
 
 //025
-ListNode* Solution::reverseKGroup(ListNode* head, int k)
-{
-    ListNode* dummy = new ListNode(-1);//ĞÂÔöÒ»¸öÑÆ½áµã£¬ÑÆ½áµãµÄnextÖ¸Ïòhead
+ListNode* Solution::reverseKGroup(ListNode* head, int k) {
+    ListNode* dummy = new ListNode(-1);//æ–°å¢ä¸€ä¸ªå“‘ç»“ç‚¹ï¼Œå“‘ç»“ç‚¹çš„nextæŒ‡å‘head
     dummy->next = head;
 
     ListNode* p0 = dummy;
     ListNode* p0_new = nullptr;
     ListNode* p1 = head;
     ListNode* p2 = nullptr;
-    ListNode* p = nullptr;//½ÚµãĞ£ÑéÖ¸Õë
+    ListNode* p = nullptr;//èŠ‚ç‚¹æ ¡éªŒæŒ‡é’ˆ
     while (p0) {
         p = p0;
         for (int i = 0; i < k; ++i) {
@@ -387,7 +378,7 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k)
                 break;
             }
         }
-        if (!p) {//Ê£Óà½Úµã²»¹»k¸ö£¬²»¹»Ò»×éÔò²»×ö·­×ª
+        if (!p) {//å‰©ä½™èŠ‚ç‚¹ä¸å¤Ÿkä¸ªï¼Œä¸å¤Ÿä¸€ç»„åˆ™ä¸åšç¿»è½¬
             break;
         }
         p1 = p0->next;
@@ -416,11 +407,10 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k)
         p0 = p0_new;
     }
 
-    return dummy->next;//ÑÆ½áµãµÄnext¼´·µ»ØµÄ½á¹û
+    return dummy->next;//å“‘ç»“ç‚¹çš„nextå³è¿”å›çš„ç»“æœ
 }
 
-ListNode* Solution::rotateRight(ListNode* head, int k)
-{
+ListNode* Solution::rotateRight(ListNode* head, int k) {
     if (nullptr == head || nullptr == head->next) {
         return head;
     }
@@ -432,7 +422,7 @@ ListNode* Solution::rotateRight(ListNode* head, int k)
         ++count;
         p2 = p2->next;
     }
-    p2->next = head;//½¨»·
+    p2->next = head;//å»ºç¯
 
     int n = count - (k%count);
     for (int i = 0; i < n - 1; ++i) {
@@ -440,14 +430,13 @@ ListNode* Solution::rotateRight(ListNode* head, int k)
     }
 
     ListNode* ret = p1->next;
-    p1->next = nullptr;//½â»·
+    p1->next = nullptr;//è§£ç¯
 
     return ret;
 }
 
 //082
-ListNode* Solution::deleteDuplicates(ListNode* head)
-{
+ListNode* Solution::deleteDuplicates(ListNode* head) {
     if (nullptr == head || nullptr == head->next) {
         return head;
     }
@@ -456,7 +445,7 @@ ListNode* Solution::deleteDuplicates(ListNode* head)
     ListNode*p0 = dummy;
     ListNode*p1 = head;
     ListNode*p2 = head->next;
-    while (p1 && p2) {
+    while (p2) {
         if (p1->val == p2->val) {
             p2 = p2->next;
         } else {
@@ -464,8 +453,7 @@ ListNode* Solution::deleteDuplicates(ListNode* head)
                 p0 = p1;
                 p1 = p1->next;
                 p2 = p2->next;
-            }
-            else {
+            } else {
                 p0->next = p2;
                 p1 = p2;
                 p2 = p2->next;
@@ -479,14 +467,13 @@ ListNode* Solution::deleteDuplicates(ListNode* head)
 }
 
 //083
-ListNode* Solution::deleteDuplicatesOne(ListNode* head)
-{
+ListNode* Solution::deleteDuplicatesOne(ListNode* head) {
     if (nullptr == head || nullptr == head->next) {
         return head;
     }
     ListNode* p1 = head;
     ListNode* p2 = p1->next;
-    while (p1 && p2) {
+    while (p2) {
         if (p1->val == p2->val) {
             p2 = p2->next;
         } else {
@@ -504,8 +491,7 @@ ListNode* Solution::deleteDuplicatesOne(ListNode* head)
 }
 
 //086
-ListNode* Solution::partition(ListNode* head, int x)
-{
+ListNode* Solution::partition(ListNode* head, int x) {
     if (nullptr == head || nullptr == head->next) {
         return head;
     }
@@ -523,8 +509,7 @@ ListNode* Solution::partition(ListNode* head, int x)
             p1->next = dummy->next;
             dummy->next = p1;
             p1 = p0->next;
-        }
-        else {
+        } else {
             p0 = p1;
             p1 = p1->next;
         }
@@ -533,31 +518,30 @@ ListNode* Solution::partition(ListNode* head, int x)
 }
 
 //092
-ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
-{
+ListNode* Solution::reverseBetween(ListNode* head, int m, int n) {
     if (nullptr == head || nullptr == head->next) {
         return head;
     }
     ListNode* dummy = new ListNode(-1);
     dummy->next = head;
     ListNode* p0 = dummy;
-    ListNode* p1 = head;        //µÚm¸ö½Úµã
-    ListNode* p2 = head->next;  //µÚn¸ö½Úµã
+    ListNode* p1 = head;        //ç¬¬mä¸ªèŠ‚ç‚¹
+    ListNode* p2 = head->next;  //ç¬¬nä¸ªèŠ‚ç‚¹
 
-    //1¡¢È·¶¨Î»ÖÃm
+    //1ã€ç¡®å®šä½ç½®m
     for (auto i = 0; i < m - 1; ++i) {
         p0 = p0->next;
     }
     p1 = p0->next;
 
-    //2¡¢È·¶¨Î»ÖÃn
+    //2ã€ç¡®å®šä½ç½®n
     p2 = p1;
     int len = (n - m);
     for (auto i = 0; i < len; ++i) {
         p2 = p2->next;
     }
-    
-    //3¡¢·´×ª´Ómµ½nµÄ½Úµã
+
+    //3ã€åè½¬ä»måˆ°nçš„èŠ‚ç‚¹
     for (auto i = 0; i < len; ++i) {
         p0->next = p1->next;
         p1->next = p2->next;
@@ -568,8 +552,7 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n)
 }
 
 //94
-void Solution::inOder(TreeNode* root, vector<int>& ans)
-{
+void Solution::inOder(TreeNode* root, vector<int>& ans) {
     if (!root) {
         return;
     }
@@ -577,32 +560,29 @@ void Solution::inOder(TreeNode* root, vector<int>& ans)
     ans.push_back(root->val);
     inOder(root->right, ans);
 }
-vector<int> Solution::inorderTraversal(TreeNode* root)
-{
+vector<int> Solution::inorderTraversal(TreeNode* root) {
     vector<int> ans;
-#if 0//µİ¹é·¨
+#if 0//é€’å½’æ³•
     inOder(root, ans);
-#else//µü´ú·¨£º¸¨ÖúÕ»
+#else//è¿­ä»£æ³•ï¼šè¾…åŠ©æ ˆ
     stack<TreeNode*> st;
     while (!st.empty() || root) {
         if (root) {
             st.push(root);
             root = root->left;
-        }
-        else {
+        } else {
             root = st.top();
             st.pop();
             ans.push_back(root->val);
             root = root->right;
         }
     }
-#endif        
+#endif
     return ans;
 }
 
 //95
-vector<TreeNode*>* Solution::createBST(int begin, int end)
-{
+vector<TreeNode*>* Solution::createBST(int begin, int end) {
     vector<TreeNode*>* ans = new vector<TreeNode*>();
     if (begin > end) {
         ans->push_back(nullptr);
@@ -611,8 +591,8 @@ vector<TreeNode*>* Solution::createBST(int begin, int end)
             vector<TreeNode*>* left = createBST(begin, i - 1);
             vector<TreeNode*>* right = createBST(i + 1, end);
             for (int l = 0; l < left->size(); ++l) {
-                for (int r = 0; r < right->size(); ++r) {//¹¹½¨¶ş²æ²éÕÒÊ÷
-                    TreeNode* node = new TreeNode(i);//²»Í¬µÄ¸ù½áµã
+                for (int r = 0; r < right->size(); ++r) {//æ„å»ºäºŒå‰æŸ¥æ‰¾æ ‘
+                    TreeNode* node = new TreeNode(i);//ä¸åŒçš„æ ¹ç»“ç‚¹
                     node->left = (*left)[l];
                     node->right = (*right)[r];
                     ans->push_back(node);
@@ -622,14 +602,12 @@ vector<TreeNode*>* Solution::createBST(int begin, int end)
     }
     return ans;
 }
-vector<TreeNode*> Solution::generateTrees(int n)
-{
+vector<TreeNode*> Solution::generateTrees(int n) {
     return *createBST(1, n);
 }
 
 //96
-int Solution::numTrees(int n)
-{
+int Solution::numTrees(int n) {
     vector<int> dp(n + 1, 0);
     dp[0] = 1;
     for (int i = 1; i <= n; ++i) {
@@ -642,8 +620,7 @@ int Solution::numTrees(int n)
 }
 
 //98
-void Solution::inOderIsValidBST(TreeNode* root)
-{
+void Solution::inOderIsValidBST(TreeNode* root) {
     if (!root || !is_valid_BST) {
         return;
     }
@@ -654,23 +631,21 @@ void Solution::inOderIsValidBST(TreeNode* root)
     last = root;
     inOderIsValidBST(root->right);
 }
-bool Solution::isValidBST(TreeNode* root)
-{
-    //³õÊ¼»¯
+bool Solution::isValidBST(TreeNode* root) {
+    //åˆå§‹åŒ–
     last = nullptr;
     is_valid_BST = true;
 
-    //ÖĞĞò±éÀú
+    //ä¸­åºéå†
     inOderIsValidBST(root);
 
-    //·µ»Ø½á¹û
+    //è¿”å›ç»“æœ
     return is_valid_BST;
 }
 
 
 //99
-void Solution::inOderRecoverTree(TreeNode* root)
-{
+void Solution::inOderRecoverTree(TreeNode* root) {
     if (!root || p1 && p3) {
         return;
     }
@@ -687,36 +662,33 @@ void Solution::inOderRecoverTree(TreeNode* root)
     last = root;
     inOderRecoverTree(root->right);
 }
-void Solution::recoverTree(TreeNode* root)
-{
-    //³õÊ¼»¯
+void Solution::recoverTree(TreeNode* root) {
+    //åˆå§‹åŒ–
     p1 = p2 = p3 = p4 = last = nullptr;
 
-    //ÖĞĞò±éÀú
+    //ä¸­åºéå†
     inOderRecoverTree(root);
 
-    //½»»»½ÚµãÖµ
+    //äº¤æ¢èŠ‚ç‚¹å€¼
     TreeNode* t1 = p1;
     TreeNode* t2 = !p3 ? p2 : p4;
     swap(t1->val, t2->val);
 }
 
 //100
-bool Solution::isSameTree(TreeNode* p, TreeNode* q)
-{
+bool Solution::isSameTree(TreeNode* p, TreeNode* q) {
     if (!p && !q) {
         return true;
     }
     if (!p || !q || p->val != q->val) {
         return false;
     }
-    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);//µİ¹é±È½ÏÁ½¿ÃÊ÷µÄ×ó¡¢ÓÒ×ÓÊ÷
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);//é€’å½’æ¯”è¾ƒä¸¤æ£µæ ‘çš„å·¦ã€å³å­æ ‘
 }
 
 
 //101
-bool Solution::isMirror(TreeNode* t1, TreeNode *t2)
-{
+bool Solution::isMirror(TreeNode* t1, TreeNode *t2) {
     if (!t1 && !t2) {
         return true;
     }
@@ -725,15 +697,13 @@ bool Solution::isMirror(TreeNode* t1, TreeNode *t2)
     }
     return isMirror(t1->left, t2->right) && isMirror(t1->right, t2->left);
 }
-bool Solution::isSymmetric(TreeNode* root)
-{
+bool Solution::isSymmetric(TreeNode* root) {
     return isMirror(root, root);
 }
 
 
 //102
-vector<vector<int>> Solution::levelOrder(TreeNode* root)
-{
+vector<vector<int>> Solution::levelOrder(TreeNode* root) {
     if (!root) {
         return{};
     }
@@ -771,8 +741,7 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root)
 
 
 //103
-vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
-{
+vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root) {
     if (!root) {
         return{};
     }
@@ -782,7 +751,7 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
     unsigned count_next = 0;
     queue<TreeNode*> nodes;
     nodes.push(root);
-    bool left2right = true;//´Ó×óµ½ÓÒµÄ±êÊ¶
+    bool left2right = true;//ä»å·¦åˆ°å³çš„æ ‡è¯†
 
     while (!nodes.empty()) {
         vector<int> nodes_level;
@@ -813,9 +782,8 @@ vector<vector<int>> Solution::zigzagLevelOrder(TreeNode* root)
 
 
 //104
-int Solution::maxDepth(TreeNode* root)
-{
-#if 0//µü´ú·¨£º¸¨Öú¶ÓÁĞ
+int Solution::maxDepth(TreeNode* root) {
+#if 0//è¿­ä»£æ³•ï¼šè¾…åŠ©é˜Ÿåˆ—
     if (!root) {
         return 0;
     }
@@ -844,15 +812,15 @@ int Solution::maxDepth(TreeNode* root)
         count_next = 0;
     }
     return depth;
-#else//µİ¹é·¨
+#else//é€’å½’æ³•
     return !root ? 0 : 1 + std::max(maxDepth(root->left), maxDepth(root->right));
 #endif
 }
 
 
 //105
-TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_iterator pre2, vector<int>::const_iterator in1, vector<int>::const_iterator in2)
-{
+TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_iterator pre2,
+    vector<int>::const_iterator in1, vector<int>::const_iterator in2) {
     if (pre1 > pre2 || in1 > in2) {
         return nullptr;
     }
@@ -862,14 +830,13 @@ TreeNode* Solution::build(vector<int>::const_iterator pre1, vector<int>::const_i
     root->right = build(pre1 + (pos - in1) + 1, pre2, pos + 1, in2);
     return root;
 }
-TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
-{
-#if 0//µİ¹é·¨
+TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder) {
+#if 0//é€’å½’æ³•
     if (preorder.empty() || inorder.empty()) {
         return nullptr;
     }
     return build(preorder.begin(), preorder.end() - 1, inorder.begin(), inorder.end() - 1);
-#else//µü´ú·¨£ºÊ¹ÓÃ¸¨ÖúÕ»
+#else//è¿­ä»£æ³•ï¼šä½¿ç”¨è¾…åŠ©æ ˆ
     unsigned const& size = preorder.size();
     if (size == 0) {
         return nullptr;
@@ -881,18 +848,18 @@ TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
     st.push(root);
 
     while (!st.empty()) {
-        //´´½¨×ó×ÓÊ÷£ºÑ¹Õ»
+        //åˆ›å»ºå·¦å­æ ‘ï¼šå‹æ ˆ
         while (st.top()->val != inorder[in_index]) {
             st.top()->left = new TreeNode(preorder[pre_index++]);
             st.push(st.top()->left);
         }
-        //¶¨Î»µ±Ç°ÓÒ×ÓÊ÷ËùÔÚµÄ¸ú½Úµã£º³öÕ»
+        //å®šä½å½“å‰å³å­æ ‘æ‰€åœ¨çš„è·ŸèŠ‚ç‚¹ï¼šå‡ºæ ˆ
         while (!st.empty() && st.top()->val == inorder[in_index]) {
             cur = st.top();
             st.pop();
             ++in_index;
         }
-        //´´½¨ÓÒ×ÓÊ÷£ºÑ¹Õ»
+        //åˆ›å»ºå³å­æ ‘ï¼šå‹æ ˆ
         if (pre_index < size) {
             cur->right = new TreeNode(preorder[pre_index++]);
             cur = cur->right;
@@ -906,8 +873,7 @@ TreeNode* Solution::buildTree(vector<int>& preorder, vector<int>& inorder)
 
 
 //106
-TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postorder)
-{
+TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postorder) {
     unsigned const& size = postorder.size();
     if (size == 0) {
         return nullptr;
@@ -919,18 +885,18 @@ TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postord
     st.push(root);
 
     while (!st.empty()) {
-        //´´½¨ÓÒ×ÓÊ÷£ºÑ¹Õ»
+        //åˆ›å»ºå³å­æ ‘ï¼šå‹æ ˆ
         while (st.top()->val != inorder[in_index]) {
             st.top()->right = new TreeNode(postorder[--post_index]);
             st.push(st.top()->right);
         }
-        //¶¨Î»µ±Ç°×ó×ÓÊ÷ËùÔÚµÄ¸ú½Úµã£º³öÕ»
+        //å®šä½å½“å‰å·¦å­æ ‘æ‰€åœ¨çš„è·ŸèŠ‚ç‚¹ï¼šå‡ºæ ˆ
         while (!st.empty() && st.top()->val == inorder[in_index]) {
             cur = st.top();
             st.pop();
             --in_index;
         }
-        //´´½¨×ó×ÓÊ÷£ºÑ¹Õ»
+        //åˆ›å»ºå·¦å­æ ‘ï¼šå‹æ ˆ
         if (post_index > 0) {
             cur->left = new TreeNode(postorder[--post_index]);
             cur = cur->left;
@@ -943,8 +909,7 @@ TreeNode* Solution::buildTree_in_post(vector<int>& inorder, vector<int>& postord
 
 
 //107
-vector<vector<int>> Solution::levelOrderBottom(TreeNode* root)
-{
+vector<vector<int>> Solution::levelOrderBottom(TreeNode* root) {
     if (!root) {
         return{};
     }
@@ -982,8 +947,7 @@ vector<vector<int>> Solution::levelOrderBottom(TreeNode* root)
 
 
 //108
-TreeNode* Solution::sortedArrayToBST(vector<int>& nums, int const& begin, int const& end)
-{
+TreeNode* Solution::sortedArrayToBST(vector<int>& nums, int const& begin, int const& end) {
     if (begin > end) {
         return nullptr;
     }
@@ -993,8 +957,7 @@ TreeNode* Solution::sortedArrayToBST(vector<int>& nums, int const& begin, int co
     t->right = sortedArrayToBST(nums, mid + 1, end);
     return t;
 }
-TreeNode* Solution::sortedArrayToBST(vector<int>& nums)
-{
+TreeNode* Solution::sortedArrayToBST(vector<int>& nums) {
     unsigned const& size = nums.size();
     if (0 == size) {
         return nullptr;
@@ -1009,7 +972,7 @@ TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
         return nullptr;
     }
 
-    //¿ìÂıÖ¸Õë£¬²éÕÒÁ´±íµÄÖĞ¼äµãÎ»ÖÃ
+    //å¿«æ…¢æŒ‡é’ˆï¼ŒæŸ¥æ‰¾é“¾è¡¨çš„ä¸­é—´ç‚¹ä½ç½®
     ListNode* fast = head;
     ListNode* slow = head;
     while (fast != tail && fast->next != tail) {
@@ -1022,8 +985,7 @@ TreeNode* Solution::sortedListToBST(ListNode* head, ListNode* tail) {
     root->right = sortedListToBST(slow->next, tail);
     return root;
 }
-TreeNode* Solution::sortedListToBST(ListNode* head)
-{
+TreeNode* Solution::sortedListToBST(ListNode* head) {
     if (!head) {
         return nullptr;
     }
@@ -1032,22 +994,20 @@ TreeNode* Solution::sortedListToBST(ListNode* head)
 
 
 //110
-bool Solution::isBalanced(TreeNode* root)
-{
-    //µİ¹é·¨£ºË«µİ¹é
+bool Solution::isBalanced(TreeNode* root) {
+    //é€’å½’æ³•ï¼šåŒé€’å½’
     if (!root || !root->left && !root->right) {
         return true;
     }
     if (abs(maxDepth(root->left) - maxDepth(root->right)) > 1) {
-        return false;//±È½Ï×ÓÊ÷ÊÇ·ñÆ½ºâ
+        return false;//æ¯”è¾ƒå­æ ‘æ˜¯å¦å¹³è¡¡
     }
     return isBalanced(root->left) && isBalanced(root->right);
 }
 
 
 //111
-int Solution::minDepth(TreeNode* root)
-{
+int Solution::minDepth(TreeNode* root) {
     if (!root) {
         return 0;
     }
@@ -1058,8 +1018,7 @@ int Solution::minDepth(TreeNode* root)
 
 
 //112
-bool Solution::hasPathSum(TreeNode* root, int sum)
-{
+bool Solution::hasPathSum(TreeNode* root, int sum) {
     if (!root) {
         return false;
     }
@@ -1071,8 +1030,7 @@ bool Solution::hasPathSum(TreeNode* root, int sum)
 
 
 //113
-void Solution::dfsPathSum(vector<vector<int>>& res, vector<int>& path, TreeNode* root, int sum)
-{
+void Solution::dfsPathSum(vector<vector<int>>& res, vector<int>& path, TreeNode* root, int sum) {
     if (!root) {
         return;
     }
@@ -1084,8 +1042,7 @@ void Solution::dfsPathSum(vector<vector<int>>& res, vector<int>& path, TreeNode*
     dfsPathSum(res, path, root->right, sum - root->val);
     path.pop_back();
 }
-vector<vector<int>> Solution::pathSum(TreeNode* root, int sum)
-{
+vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
     vector<vector<int>> res;
     vector<int> path;
     dfsPathSum(res, path, root, sum);
@@ -1094,8 +1051,7 @@ vector<vector<int>> Solution::pathSum(TreeNode* root, int sum)
 
 
 //114
-void Solution::postOrder(TreeNode* root)
-{
+void Solution::postOrder(TreeNode* root) {
     if (!root) {
         return;
     }
@@ -1109,9 +1065,8 @@ void Solution::postOrder(TreeNode* root)
     }
     root->right = r;
 }
-void Solution::flatten(TreeNode* root)
-{
-#if 0//µü´ú·¨£º¸¨ÖúÕ»
+void Solution::flatten(TreeNode* root) {
+#if 0//è¿­ä»£æ³•ï¼šè¾…åŠ©æ ˆ
     if (!root) {
         return;
     }
@@ -1139,7 +1094,7 @@ void Solution::flatten(TreeNode* root)
         cur->left = nullptr;
         cur = cur->right;
     }
-#else//µİ¹é·¨£ººóĞø±éÀú
+#else//é€’å½’æ³•ï¼šåç»­éå†
     postOrder(root);
 #endif
 }
@@ -1151,7 +1106,7 @@ void do_connect(Node *root) {
         return;
     }
 
-    //Èç¹ûÊÇÒ¶×Ó½áµã
+    //å¦‚æœæ˜¯å¶å­ç»“ç‚¹
     if (nullptr == root->right && nullptr == root->left) {
         return;
     }

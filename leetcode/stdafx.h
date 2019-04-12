@@ -1,7 +1,12 @@
-// stdafx.h : ±ê×¼ÏµÍ³°üº¬ÎÄ¼şµÄ°üº¬ÎÄ¼ş£¬
-// »òÊÇ¾­³£Ê¹ÓÃµ«²»³£¸ü¸ÄµÄ
-// ÌØ¶¨ÓÚÏîÄ¿µÄ°üº¬ÎÄ¼ş
-//
+///    Copyright (C) 2018 DG.C, DGCHOW, deguangchow
+///        deguangchow@qq.com
+///
+///    \brief    stdafx.h
+///
+///    \author   deguangchow
+///    \version  1.0
+///    \2019/04/12
+
 
 #pragma once
 
@@ -12,7 +17,7 @@
 
 
 
-// TODO:  ÔÚ´Ë´¦ÒıÓÃ³ÌĞòĞèÒªµÄÆäËûÍ·ÎÄ¼ş
+//åœ¨æ­¤å¤„å¼•ç”¨ç¨‹åºéœ€è¦çš„å…¶ä»–å¤´æ–‡ä»¶
 #include <vector>
 #include <map>
 #include <string>
