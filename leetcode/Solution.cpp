@@ -1144,3 +1144,30 @@ void Solution::flatten(TreeNode* root)
 #endif
 }
 
+
+//116
+void do_connect(Node *root) {
+    if (nullptr == root) {
+        return;
+    }
+
+    //如果是叶子结点
+    if (nullptr == root->right && nullptr == root->left) {
+        return;
+    }
+
+    root->left->next = root->right;
+    if (nullptr != root->next) {
+        root->right->next = root->next->left;
+    } else {
+        root->right->next = nullptr;
+    }
+
+    do_connect(root->left);
+    do_connect(root->right);
+}
+Node* Solution::connect(Node* root) {
+    do_connect(root);
+    return root;
+}
+
