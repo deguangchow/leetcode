@@ -1126,3 +1126,53 @@ Node* Solution::connect(Node* root) {
     return root;
 }
 
+
+//117
+void do_connect2(Node *root) {
+    if (nullptr == root) {
+        return;
+    }
+
+    //如果是叶子结点
+    if (nullptr == root->right && nullptr == root->left) {
+        return;
+    }
+
+    //设置左节点的next
+    if (root->left && root->right) {
+        root->left->next = root->right;
+    }
+    if (root->left) {
+        if (nullptr != root->next) {
+            if (nullptr != root->next->left) {
+                root->left->next = root->next->left;
+            } else {
+                root->left->next = root->next->right;
+            }
+        } else {
+            root->left->next = nullptr;
+        }
+    }
+
+    //设置右节点的next
+    if (root->right) {
+        if (nullptr != root->next) {
+            if (nullptr != root->next->left) {
+                root->right->next = root->next->left;
+            } else {
+                root->right->next = root->next->right;
+            }
+        } else {
+            root->right->next = nullptr;
+        }
+    }
+
+    do_connect2(root->left);
+    do_connect2(root->right);
+}
+Node* Solution::connect2(Node* root) {
+    do_connect2(root);
+    return root;
+}
+
+

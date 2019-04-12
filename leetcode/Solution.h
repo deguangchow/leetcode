@@ -741,6 +741,12 @@ public:
     使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
     */
     Node* connect(Node* root);
+
+
+    /*117
+    117. 填充每个节点的下一个右侧节点指针 II
+    */
+    Node* connect2(Node* root);
 };
 #endif  //SOLUTION_H
 
