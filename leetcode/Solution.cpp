@@ -1187,4 +1187,40 @@ Node* Solution::connect2(Node* root) {
     return root;
 }
 
+//124
+//先考虑子问题：求解以每一个节点为上端点的情况下，最大的路径和。即路径只能左右拐弯，而不能上下拐弯。此时子问题和最大和子数组很相似。
+//然后本体就很好做了。
+int maxsum(TreeNode* root, int& ans) {
+    if (!root) {
+        return 0;
+    }
+
+    int max_left    = maxsum(root->left, ans);
+    int max_right   = maxsum(root->right, ans);
+    int max_son     = std::max(max_left, max_right);
+    int res         = 0;
+    int tmp         = root->val;
+
+    if (max_son > 0) {
+        res = max_son + root->val;
+        if (max_left > 0) {
+            tmp += max_left;
+        }
+        if (max_right > 0) {
+            tmp += max_right;
+        }
+    } else {
+        res = root->val;
+    }
+
+    if (tmp > ans) {
+        ans = tmp;
+    }
+    return res;
+}
+int Solution::maxPathSum(TreeNode* root) {
+    int ans = INT_MIN;
+    maxsum(root, ans);
+    return ans;
+}
 
