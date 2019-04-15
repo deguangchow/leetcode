@@ -1141,34 +1141,46 @@ void do_connect2(Node *root) {
     //设置左节点的next
     if (root->left && root->right) {
         root->left->next = root->right;
-    }
-    if (root->left) {
-        if (nullptr != root->next) {
-            if (nullptr != root->next->left) {
-                root->left->next = root->next->left;
+    } else if (root->left) {
+        Node* next_tmp = root->next;
+        while (next_tmp) {
+            if (nullptr != next_tmp->left) {
+                root->left->next = next_tmp->left;
+                break;
+            } else if (nullptr != next_tmp->right) {
+                root->left->next = next_tmp->right;
+                break;
             } else {
-                root->left->next = root->next->right;
+                next_tmp = next_tmp->next;
             }
-        } else {
+        }
+        if (nullptr == next_tmp) {
             root->left->next = nullptr;
         }
     }
 
     //设置右节点的next
     if (root->right) {
-        if (nullptr != root->next) {
-            if (nullptr != root->next->left) {
-                root->right->next = root->next->left;
+        Node* next_tmp = root->next;
+        while (next_tmp) {
+            if (nullptr != next_tmp->left) {
+                root->right->next = next_tmp->left;
+                break;
+            } else  if (nullptr != next_tmp->right) {
+                root->right->next = next_tmp->right;
+                break;
             } else {
-                root->right->next = root->next->right;
+                next_tmp = next_tmp->next;
             }
-        } else {
+        }
+        if (nullptr == next_tmp) {
             root->right->next = nullptr;
         }
     }
 
-    do_connect2(root->left);
+    //先右后左
     do_connect2(root->right);
+    do_connect2(root->left);
 }
 Node* Solution::connect2(Node* root) {
     do_connect2(root);
