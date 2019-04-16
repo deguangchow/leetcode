@@ -1224,3 +1224,19 @@ int Solution::maxPathSum(TreeNode* root) {
     return ans;
 }
 
+
+//129
+int do_sumNumbers(TreeNode* root, int base) {
+    if (!root) {
+        return 0;
+    }
+    base = base * 10 + root->val;
+    if (!root->left && !root->right) {
+        return base;
+    }
+    return do_sumNumbers(root->left, base) + do_sumNumbers(root->right, base);
+}
+int Solution::sumNumbers(TreeNode* root) {
+    return do_sumNumbers(root, 0);
+}
+
