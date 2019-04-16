@@ -1240,3 +1240,94 @@ int Solution::sumNumbers(TreeNode* root) {
     return do_sumNumbers(root, 0);
 }
 
+
+//144
+void do_preorderTraversal(TreeNode*root, vector<int>& vct) {
+    if (!root) {
+        return;
+    }
+    vct.push_back(root->val);
+    do_preorderTraversal(root->left, vct);
+    do_preorderTraversal(root->right, vct);
+}
+vector<int> Solution::preorderTraversal(TreeNode* root) {
+    vector<int> res;
+#if 0
+    //递归法
+    do_preorderTraversal(root, res);
+#else
+    //迭代法：辅助栈
+    stack<TreeNode*> st;
+    TreeNode* cur = root;
+    while (cur || !st.empty()) {
+        if (cur) {
+            res.push_back(cur->val);
+            st.push(cur);
+            cur = cur->left;
+        } else {
+            cur = st.top();
+            st.pop();
+            cur = cur->right;
+        }
+    }
+#endif
+    return res;
+}
+
+
+//145
+void do_postorderTraversal(TreeNode*root, vector<int>& vct) {
+    if (!root) {
+        return;
+    }
+    do_postorderTraversal(root->left, vct);
+    do_postorderTraversal(root->right, vct);
+    vct.push_back(root->val);
+}
+vector<int> Solution::postorderTraversal(TreeNode* root) {
+    vector<int> res;
+#if 0
+    //递归法
+    do_postorderTraversal(root, res);
+#else
+#if 0
+    //迭代法1：辅助栈，bool类型为节点已遍历过的标识。
+    stack<pair<TreeNode*, bool>> st;
+    TreeNode* cur = root;
+    while (cur || !st.empty()) {
+        if (cur) {
+            st.push(pair<TreeNode*, bool>(cur, false));
+            cur = cur->left;
+        } else {
+            cur = st.top().first;
+            if (st.top().second) {
+                st.pop();
+                res.push_back(cur->val);
+                cur = nullptr;
+            } else {
+                st.top().second = true;
+                cur = cur->right;
+            }
+        }
+    }
+#else
+    //迭代法2：辅助栈，“根右左”顺序遍历，然后反转集合（反转后：左右根）
+    stack<TreeNode*> st;
+    TreeNode* cur = root;
+    while (cur || !st.empty()) {
+        if (cur) {
+            res.push_back(cur->val);
+            st.push(cur);
+            cur = cur->right;
+        } else {
+            cur = st.top();
+            st.pop();
+            cur = cur->left;
+        }
+    }
+    reverse(res.begin(), res.end());
+#endif
+#endif
+    return res;
+}
+
