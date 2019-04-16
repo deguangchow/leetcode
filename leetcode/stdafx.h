@@ -11,6 +11,7 @@
 #pragma once
 
 #include "targetver.h"
+#include "Define.h"
 
 #include <stdio.h>
 #include <tchar.h>

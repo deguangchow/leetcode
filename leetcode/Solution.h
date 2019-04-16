@@ -11,28 +11,7 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
 
-//链表节点
-struct ListNode {
-    int val;
-    ListNode *next;
-    explicit ListNode(int x) : val(x), next(nullptr) {}
-};
 
-//二叉树节点
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    explicit TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
-//完美二叉树节点：116
-struct Node {
-    int val;
-    Node *left;
-    Node *right;
-    Node *next;
-};
 
 class Solution {
 public:
