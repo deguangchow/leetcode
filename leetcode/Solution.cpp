@@ -1381,3 +1381,14 @@ int Solution::countNodes(TreeNode* root) {
 }
 
 
+//226
+TreeNode* Solution::invertTree(TreeNode* root) {
+    if (!root) {
+        return nullptr;
+    }
+    TreeNode* p = root->left;
+    root->left = invertTree(root->right);
+    root->right = invertTree(p);
+    return root;
+}
+
