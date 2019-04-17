@@ -1360,3 +1360,24 @@ vector<int> Solution::rightSideView(TreeNode* root) {
     return res;
 }
 
+
+//222
+int do_countNodes(TreeNode* root) {
+    if (!root) {
+        return 0;
+    }
+    return (nullptr != root->left) + (nullptr != root->right) +
+        do_countNodes(root->left) + do_countNodes(root->right);
+}
+int Solution::countNodes(TreeNode* root) {
+#if 1
+    if (!root) {
+        return 0;
+    }
+    return 1 + do_countNodes(root);
+#else
+    return 1 + countNodes(root->left) + countNodes(root->right);
+#endif
+}
+
+
