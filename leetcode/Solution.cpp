@@ -1370,10 +1370,10 @@ int do_countNodes(TreeNode* root) {
         do_countNodes(root->left) + do_countNodes(root->right);
 }
 int Solution::countNodes(TreeNode* root) {
-#if 1
     if (!root) {
         return 0;
     }
+#if 1
     return 1 + do_countNodes(root);
 #else
     return 1 + countNodes(root->left) + countNodes(root->right);
