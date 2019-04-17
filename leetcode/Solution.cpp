@@ -1392,3 +1392,23 @@ TreeNode* Solution::invertTree(TreeNode* root) {
     return root;
 }
 
+
+//230
+void do_kthSmallest(TreeNode* root, int& k, int& ans) {
+    if (!root || k < 0) {
+        return;
+    }
+    do_kthSmallest(root->left, k, ans);
+    if (0 == --k) {
+        ans = root->val;
+        return;
+    }
+    do_kthSmallest(root->right, k, ans);
+}
+int Solution::kthSmallest(TreeNode* root, int k) {
+    //中序遍历，左根右，返回第k个节点的值
+    int res = 0;
+    do_kthSmallest(root, k, res);
+    return res;
+}
+
