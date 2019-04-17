@@ -1331,3 +1331,32 @@ vector<int> Solution::postorderTraversal(TreeNode* root) {
     return res;
 }
 
+
+//119
+vector<int> Solution::rightSideView(TreeNode* root) {
+    //BFS，参考二叉树层次遍历
+    if (!root) {
+        return{};
+    }
+
+    queue<TreeNode*> que;
+    vector<int> res;
+    que.push(root);
+    int size = que.size();
+    while (!que.empty()) {
+        TreeNode* tmp = que.front();
+        que.pop();
+        if (tmp->left) {
+            que.push(tmp->left);
+        }
+        if (tmp->right) {
+            que.push(tmp->right);
+        }
+        if (0 == --size) {
+            size = que.size();
+            res.push_back(tmp->val);
+        }
+    }
+    return res;
+}
+
