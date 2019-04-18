@@ -1415,6 +1415,7 @@ int Solution::kthSmallest(TreeNode* root, int k) {
 
 //235
 TreeNode* Solution::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    //二叉搜索树的后续遍历
     if (p->val < root->val && q->val < root->val) {
         return lowestCommonAncestor(root->left, p, q);
     }
@@ -1422,5 +1423,27 @@ TreeNode* Solution::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* 
         return lowestCommonAncestor(root->right, p, q);
     }
     return root;
+}
+
+
+//236
+TreeNode* Solution::lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q) {
+    //二叉树的后序遍历
+    if (!root) {
+        return nullptr;
+    }
+    if (root == p || root == q) {
+        return root;
+    }
+    TreeNode* left = lowestCommonAncestor2(root->left, p, q);
+    TreeNode* right = lowestCommonAncestor2(root->right, p, q);
+    if (left && right) {
+        return root;
+    } else if (left) {
+        return left;
+    } else {
+        return right;
+    }
+    return nullptr;
 }
 
