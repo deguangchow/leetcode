@@ -1447,3 +1447,25 @@ TreeNode* Solution::lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode*
     return nullptr;
 }
 
+
+//257
+vector<string> Solution::binaryTreePaths(TreeNode* root) {
+    if (!root) {
+        return{};
+    }
+    if (!root->left && !root->right) {
+        return vector<string>({ to_string(root->val) });
+    }
+    vector<string> left = binaryTreePaths(root->left);
+    vector<string> right = binaryTreePaths(root->right);
+    string cur = to_string(root->val) + "->";
+    for (auto& s : left) {
+        s = cur + s;
+    }
+    for (auto& s : right) {
+        s = cur + s;
+    }
+    left.insert(left.end(), right.begin(), right.end());
+    return left;
+}
+
