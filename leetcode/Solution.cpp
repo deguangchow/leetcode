@@ -1412,3 +1412,15 @@ int Solution::kthSmallest(TreeNode* root, int k) {
     return res;
 }
 
+
+//235
+TreeNode* Solution::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (p->val < root->val && q->val < root->val) {
+        return lowestCommonAncestor(root->left, p, q);
+    }
+    if (p->val > root->val && q->val > root->val) {
+        return lowestCommonAncestor(root->right, p, q);
+    }
+    return root;
+}
+
