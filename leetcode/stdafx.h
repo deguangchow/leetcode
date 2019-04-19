@@ -26,6 +26,8 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <list>
+#include <unordered_map>
 using std::vector;
 using std::map;
 using std::string;
@@ -35,4 +37,7 @@ using std::stack;
 using std::pair;
 using std::swap;
 using std::to_string;
+using std::list;
+using std::unordered_map;
+using std::make_pair;
 

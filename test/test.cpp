@@ -10,6 +10,7 @@
 #include "stdafx.h"
 #include <gtest/gtest.h>
 #include "Solution.h"
+#include "LRUCache.h"
 
 
 //单链表转字符串
@@ -1067,4 +1068,21 @@ TEST(LeetCode, 114) {
     }
 }
 
+
+TEST(LeetCode, 146) {
+    LRUCache cache(2);
+    {
+        EXPECT_NO_THROW(cache.put(1, 1));
+        EXPECT_NO_THROW(cache.put(2, 2));
+        EXPECT_EQ(1, cache.get(1));
+        EXPECT_NO_THROW(cache.put(3, 3));
+        EXPECT_EQ(-1, cache.get(2));
+        EXPECT_NO_THROW(cache.put(4, 4));
+        EXPECT_EQ(-1, cache.get(1));
+        EXPECT_EQ(3, cache.get(3));
+        EXPECT_EQ(4, cache.get(4));
+        EXPECT_NO_THROW(cache.put(4, 5));
+        EXPECT_EQ(5, cache.get(4));
+    }
+}
 
