@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 #include "Solution.h"
 #include "LRUCache.h"
+#include "MinStack.h"
 
 
 //单链表转字符串
@@ -1083,6 +1084,20 @@ TEST(LeetCode, 146) {
         EXPECT_EQ(4, cache.get(4));
         EXPECT_NO_THROW(cache.put(4, 5));
         EXPECT_EQ(5, cache.get(4));
+    }
+}
+
+
+TEST(LeetCode, 155) {
+    MinStack minStack = MinStack();
+    {
+        EXPECT_NO_THROW(minStack.push(-2));
+        EXPECT_NO_THROW(minStack.push(0));
+        EXPECT_NO_THROW(minStack.push(-3));
+        EXPECT_EQ(-3, minStack.getMin());
+        EXPECT_NO_THROW(minStack.pop());
+        EXPECT_EQ(0, minStack.top());
+        EXPECT_EQ(-2, minStack.getMin());
     }
 }
 
