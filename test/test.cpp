@@ -12,6 +12,7 @@
 #include "Solution.h"
 #include "LRUCache.h"
 #include "MinStack.h"
+#include "Trie.h"
 
 
 //单链表转字符串
@@ -1100,4 +1101,18 @@ TEST(LeetCode, 155) {
         EXPECT_EQ(-2, minStack.getMin());
     }
 }
+
+
+TEST(LeetCode, 208) {
+    Trie trie = Trie();
+    {
+        EXPECT_NO_THROW(trie.insert("apple"));
+        EXPECT_TRUE(trie.search("apple"));
+        EXPECT_FALSE(trie.search("app"));
+        EXPECT_TRUE(trie.startsWith("app"));
+        EXPECT_NO_THROW(trie.insert("app"));
+        EXPECT_TRUE(trie.search("app"));
+    }
+}
+
 

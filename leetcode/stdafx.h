@@ -28,6 +28,7 @@
 #include <stack>
 #include <list>
 #include <unordered_map>
+#include <memory>
 using std::vector;
 using std::map;
 using std::string;
@@ -40,4 +41,5 @@ using std::to_string;
 using std::list;
 using std::unordered_map;
 using std::make_pair;
+using std::shared_ptr;
 
