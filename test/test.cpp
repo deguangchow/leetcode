@@ -14,6 +14,7 @@
 #include "MinStack.h"
 #include "Trie.h"
 #include "WordDictionary.h"
+#include "MyStack.h"
 #include "MyQueue.h"
 
 
@@ -1128,6 +1129,17 @@ TEST(LeetCode, 211) {
         EXPECT_EQ(wd.search("bad"), true);
         EXPECT_EQ(wd.search(".ad"), true);
         EXPECT_EQ(wd.search("b.."), true);
+    }
+}
+
+TEST(LeetCode, 225) {
+    MyStack stack = MyStack();
+    {
+        EXPECT_NO_THROW(stack.push(1));
+        EXPECT_NO_THROW(stack.push(2));
+        EXPECT_EQ(2, stack.top());  // 返回 2
+        EXPECT_EQ(2, stack.pop());   // 返回 2
+        EXPECT_FALSE(stack.empty()); // 返回 false
     }
 }
 

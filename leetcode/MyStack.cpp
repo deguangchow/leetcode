@@ -15,19 +15,28 @@ MyStack::MyStack() {
 }
 
 void MyStack::push(int x) {
-    m_lstData.push_back(x);
+    queue<int> quTemp;
+    quTemp.push(x);
+    while (!m_quData.empty()) {
+        quTemp.push(m_quData.front());
+        m_quData.pop();
+    }
+    while (!quTemp.empty()) {
+        m_quData.push(quTemp.front());
+        quTemp.pop();
+    }
 }
 
 int MyStack::pop() {
     auto const& res = top();
-    m_lstData.pop_back();
+    m_quData.pop();
     return res;
 }
 
 int MyStack::top() {
-    return m_lstData.back();
+    return m_quData.front();
 }
 
 bool MyStack::empty() {
-    return m_lstData.empty();
+    return m_quData.empty();
 }

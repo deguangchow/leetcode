@@ -26,7 +26,7 @@ empty() -- 返回栈是否为空
 你可以假设所有操作都是有效的（例如, 对一个空的栈不会调用 pop 或者 top 操作）。
 */
 class MyStack {
-    list<int> m_lstData;
+    queue<int> m_quData;
 public:
     /** Initialize your data structure here. */
     MyStack();
