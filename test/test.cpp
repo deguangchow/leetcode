@@ -13,6 +13,7 @@
 #include "LRUCache.h"
 #include "MinStack.h"
 #include "Trie.h"
+#include "WordDictionary.h"
 
 
 //单链表转字符串
@@ -1112,6 +1113,20 @@ TEST(LeetCode, 208) {
         EXPECT_TRUE(trie.startsWith("app"));
         EXPECT_NO_THROW(trie.insert("app"));
         EXPECT_TRUE(trie.search("app"));
+    }
+}
+
+
+TEST(LeetCode, 211) {
+    WordDictionary wd = WordDictionary();
+    {
+        EXPECT_NO_THROW(wd.addWord("bad"));
+        EXPECT_NO_THROW(wd.addWord("dad"));
+        EXPECT_NO_THROW(wd.addWord("mad"));
+        EXPECT_EQ(wd.search("pad"), false);
+        EXPECT_EQ(wd.search("bad"), true);
+        EXPECT_EQ(wd.search(".ad"), true);
+        EXPECT_EQ(wd.search("b.."), true);
     }
 }
 
