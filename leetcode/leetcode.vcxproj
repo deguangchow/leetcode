@@ -149,6 +149,7 @@
     <ClInclude Include="BSTIterator.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="LRUCache.h" />
+    <ClInclude Include="MedianFinder.h" />
     <ClInclude Include="MinStack.h" />
     <ClInclude Include="MyQueue.h" />
     <ClInclude Include="MyStack.h" />
@@ -165,6 +166,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="LRUCache.cpp" />
+    <ClCompile Include="MedianFinder.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="MinStack.cpp" />
     <ClCompile Include="MyQueue.cpp" />
     <ClCompile Include="MyStack.cpp">

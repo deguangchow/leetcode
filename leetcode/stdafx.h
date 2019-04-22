@@ -31,6 +31,7 @@
 #include <unordered_set>
 #include <memory>
 #include <queue>
+#include <xfunctional>
 using std::vector;
 using std::map;
 using std::string;
@@ -46,3 +47,5 @@ using std::unordered_set;
 using std::make_pair;
 using std::shared_ptr;
 using std::queue;
+using std::priority_queue;
+using std::greater;
