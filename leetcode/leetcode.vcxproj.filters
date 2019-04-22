@@ -51,6 +51,9 @@
     <ClInclude Include="MyQueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PeekingIterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MyQueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PeekingIterator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

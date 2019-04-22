@@ -16,6 +16,7 @@
 #include "WordDictionary.h"
 #include "MyStack.h"
 #include "MyQueue.h"
+#include "PeekingIterator.h"
 
 
 //单链表转字符串
@@ -1125,10 +1126,10 @@ TEST(LeetCode, 211) {
         EXPECT_NO_THROW(wd.addWord("bad"));
         EXPECT_NO_THROW(wd.addWord("dad"));
         EXPECT_NO_THROW(wd.addWord("mad"));
-        EXPECT_EQ(wd.search("pad"), false);
-        EXPECT_EQ(wd.search("bad"), true);
-        EXPECT_EQ(wd.search(".ad"), true);
-        EXPECT_EQ(wd.search("b.."), true);
+        EXPECT_FALSE(wd.search("pad"));
+        EXPECT_TRUE(wd.search("bad"));
+        EXPECT_TRUE(wd.search(".ad"));
+        EXPECT_TRUE(wd.search("b.."));
     }
 }
 
@@ -1154,4 +1155,17 @@ TEST(LeetCode, 232) {
         EXPECT_FALSE(queue.empty()); // 返回 false
     }
 }
+
+
+TEST(LeetCode, 284) {
+#if 0
+    PeekingIterator piter = PeekingIterator({ 1, 2, 3 });
+    EXPECT_EQ(1, piter.next());
+    EXPECT_EQ(2, piter.peek());
+    EXPECT_EQ(2, piter.next());
+    EXPECT_EQ(3, piter.next());
+    EXPECT_FALSE(piter.hasNext());
+#endif
+}
+
 
