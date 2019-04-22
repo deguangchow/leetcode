@@ -12,9 +12,16 @@
 
 
 Iterator::Iterator(const Iterator& iter) {
+    data = nullptr;
 }
 
 Iterator::Iterator(const vector<int>& nums) {
+    data = nullptr;
+}
+
+Iterator& Iterator::operator=(const Iterator& iter) {
+    data = nullptr;
+    return *this;
 }
 
 Iterator::~Iterator() {

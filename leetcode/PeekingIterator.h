@@ -33,6 +33,7 @@ class Iterator {
 public:
     explicit Iterator(const vector<int>& nums);
     Iterator(const Iterator& iter);
+    Iterator& operator=(const Iterator& iter);
     virtual ~Iterator();
     // Returns the next element in the iteration.
     int next();
