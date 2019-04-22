@@ -48,6 +48,9 @@
     <ClInclude Include="MyStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MyQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,6 +75,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MyStack.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyQueue.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

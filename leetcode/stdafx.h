@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <memory>
+#include <queue>
 using std::vector;
 using std::map;
 using std::string;
@@ -44,4 +45,4 @@ using std::unordered_map;
 using std::unordered_set;
 using std::make_pair;
 using std::shared_ptr;
-
+using std::queue;

@@ -14,6 +14,7 @@
 #include "MinStack.h"
 #include "Trie.h"
 #include "WordDictionary.h"
+#include "MyQueue.h"
 
 
 //单链表转字符串
@@ -1130,4 +1131,15 @@ TEST(LeetCode, 211) {
     }
 }
 
+
+TEST(LeetCode, 232) {
+    MyQueue queue = MyQueue();
+    {
+        EXPECT_NO_THROW(queue.push(1));
+        EXPECT_NO_THROW(queue.push(2));
+        EXPECT_EQ(1, queue.peek());  // 返回 1
+        EXPECT_EQ(1, queue.pop());   // 返回 1
+        EXPECT_FALSE(queue.empty()); // 返回 false
+    }
+}
 
