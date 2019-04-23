@@ -15,6 +15,8 @@ python tools/ci/cpplint.py --filter=\
 	$(find leetcode/ -name "*.cpp") \
 	$(find test/ -name "*.h") \
 	$(find test/ -name "*.cpp") \
+	$(find mock/ -name "*.h") \
+	$(find mock/ -name "*.cpp") \
     > $LOG_FILE
 
 echo "===================== cpplint end  ====================="
