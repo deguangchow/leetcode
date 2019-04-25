@@ -1483,3 +1483,32 @@ TEST(LeetCode, 239) {
     }
 }
 
+
+TEST(LeetCode, 264) {
+    Solution s;
+    vector<int> expect = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50,
+        54, 60, 64, 72, 75, 80, 81, 90, 96, 100 };
+
+    for (int i = 1; i <= expect.size(); ++i) {
+        EXPECT_EQ(expect[i - 1], s.nthUglyNumber(i));
+    }
+}
+
+
+TEST(LeetCode, 313) {
+    Solution s;
+    {
+        vector<int> primes = { 2, 3, 5 };
+        vector<int> expect = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50,
+            54, 60, 64, 72, 75, 80, 81, 90, 96, 100 };
+
+        for (int i = 1; i <= expect.size(); ++i) {
+            EXPECT_EQ(expect[i - 1], s.nthSuperUglyNumber(i, primes));
+        }
+    }
+    {
+        vector<int> primes = { 2, 7, 13, 19 };
+        EXPECT_EQ(32, s.nthSuperUglyNumber(12, primes));
+    }
+}
+

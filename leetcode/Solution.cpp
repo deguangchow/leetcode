@@ -1507,3 +1507,62 @@ vector<string> Solution::binaryTreePaths(TreeNode* root) {
     return left;
 }
 
+
+//264
+int Solution::nthUglyNumber(int n) {
+    vector<int> ans(n, 1);
+
+    //三指针法
+    vector<int> index(3, 0);
+
+    for (int i = 1; i < n; ++i) {
+        int a = ans[index[0]] * 2;
+        int b = ans[index[1]] * 3;
+        int c = ans[index[2]] * 5;
+        int min = std::min(a, std::min(b, c));
+
+        ans[i] = min;
+
+        if (min == a) {
+            ++index[0];
+        }
+        if (min == b) {
+            ++index[1];
+        }
+        if (min == c) {
+            ++index[2];
+        }
+    }
+    return ans.back();
+}
+
+
+//313
+int Solution::nthSuperUglyNumber(int n, vector<int>& primes) {
+    vector<int> ans(n, 1);
+
+    //多指针法
+    auto const& primesSize = primes.size();
+    vector<int> index(primesSize, 0);
+
+    for (int i = 1; i < n; ++i) {
+        int min = INT_MAX;
+
+        for (int j = 0; j < primesSize; ++j) {
+            auto const& temp = ans[index[j]] * primes[j];
+            if (temp < min) {
+                min = temp;
+            }
+        }
+
+        ans[i] = min;
+
+        for (int j = 0; j < primesSize; ++j) {
+            if (ans[index[j]] * primes[j] == min) {
+                ++index[j];
+            }
+        }
+    }
+    return ans.back();
+}
+
