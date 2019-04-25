@@ -33,7 +33,7 @@ findMedian() -> 2
 如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？
 如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？
 */
-#if 1
+#if 0
 class MedianFinder {
     size_t              m_uTotal = 0;
     map<int, int>       m_mapData;
@@ -53,48 +53,11 @@ class MedianFinder {
 
 public:
     /** initialize your data structure here. */
-    MedianFinder() {
-    }
+    MedianFinder();
 
-    void addNum(int num) {
-        if (bigque.empty()) {
-            bigque.push(num);
-        } else if (bigque.size() == smallque.size()) {
-            if (bigque.top() < num) {
-                smallque.push(num);
-            } else {
-                bigque.push(num);
-            }
-        } else if (bigque.size() > smallque.size()) {
-            if (bigque.top() < num) {
-                smallque.push(num);
-            } else {
-                smallque.push(bigque.top());
-                bigque.pop();
-                bigque.push(num);
-            }
-        } else {
-            if (smallque.top() > num) {
-                bigque.push(num);
-            } else {
-                bigque.push(smallque.top());
-                smallque.pop(); smallque.push(num);
-            }
-        }
-    }
+    void addNum(int num);
 
-    double findMedian() {
-        if (bigque.size() == smallque.size()) {
-            return static_cast<double>((bigque.top() + smallque.top()) / 2);
-        }
-        if (bigque.size() > smallque.size()) {
-            return bigque.top();
-        }
-        if (bigque.size() < smallque.size()) {
-            return smallque.top();
-        }
-        return 0;
-    }
+    double findMedian();
 };
 #endif
 

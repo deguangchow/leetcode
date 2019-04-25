@@ -11,7 +11,7 @@
 #include "MedianFinder.h"
 
 
-#if 1
+#if 0
 
 MedianFinder::MedianFinder() {
 }
@@ -53,4 +53,49 @@ double MedianFinder::findMedian() {
 
 #else
 
+MedianFinder::MedianFinder() {
+}
+
+void MedianFinder::addNum(int num) {
+    if (bigque.empty()) {
+        bigque.push(num);
+    } else if (bigque.size() == smallque.size()) {
+        if (bigque.top() < num) {
+            smallque.push(num);
+        } else {
+            bigque.push(num);
+        }
+    } else if (bigque.size() > smallque.size()) {
+        if (bigque.top() < num) {
+            smallque.push(num);
+        } else {
+            smallque.push(bigque.top());
+            bigque.pop();
+            bigque.push(num);
+        }
+    } else {
+        if (smallque.top() > num) {
+            bigque.push(num);
+        } else {
+            bigque.push(smallque.top());
+            smallque.pop(); smallque.push(num);
+        }
+    }
+}
+
+double MedianFinder::findMedian() {
+    if (bigque.size() == smallque.size()) {
+        return (bigque.top() + smallque.top()) / 2.0;
+    }
+    if (bigque.size() > smallque.size()) {
+        return bigque.top();
+    }
+    if (bigque.size() < smallque.size()) {
+        return smallque.top();
+    }
+    return 0;
+}
+
 #endif
+
+
