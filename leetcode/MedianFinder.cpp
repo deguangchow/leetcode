@@ -56,42 +56,49 @@ double MedianFinder::findMedian() {
 MedianFinder::MedianFinder() {
 }
 
+//【原理】大根堆的top为左边集合中最大的数，小根堆的top为右边集合中最小的值；
+//【建堆】保持大根堆和小根堆size的绝对值<=1；
+//【查找】
+//（1）当大根堆的size等于小根堆的size时，（大根堆的top和小根堆的top）/2.0 即中位数；
+//（2）当大根堆的size大于小根堆的size时，大根堆的top即中位数；
+//（3）当大根堆的size小于小根堆的size时，小根堆的top即中位数；
 void MedianFinder::addNum(int num) {
-    if (bigque.empty()) {
-        bigque.push(num);
-    } else if (bigque.size() == smallque.size()) {
-        if (bigque.top() < num) {
-            smallque.push(num);
+    if (maxHeap.empty()) {
+        maxHeap.push(num);
+    } else if (maxHeap.size() == minHeap.size()) {
+        if (maxHeap.top() < num) {
+            minHeap.push(num);
         } else {
-            bigque.push(num);
+            maxHeap.push(num);
         }
-    } else if (bigque.size() > smallque.size()) {
-        if (bigque.top() < num) {
-            smallque.push(num);
+    } else if (maxHeap.size() > minHeap.size()) {
+        if (maxHeap.top() < num) {
+            minHeap.push(num);
         } else {
-            smallque.push(bigque.top());
-            bigque.pop();
-            bigque.push(num);
+            minHeap.push(maxHeap.top());
+            maxHeap.pop();
+            maxHeap.push(num);
         }
     } else {
-        if (smallque.top() > num) {
-            bigque.push(num);
+        if (minHeap.top() > num) {
+            maxHeap.push(num);
         } else {
-            bigque.push(smallque.top());
-            smallque.pop(); smallque.push(num);
+            maxHeap.push(minHeap.top());
+            minHeap.pop();
+            minHeap.push(num);
         }
     }
 }
 
 double MedianFinder::findMedian() {
-    if (bigque.size() == smallque.size()) {
-        return (bigque.top() + smallque.top()) / 2.0;
+    if (maxHeap.size() == minHeap.size()) {
+        return (maxHeap.top() + minHeap.top()) / 2.0;
     }
-    if (bigque.size() > smallque.size()) {
-        return bigque.top();
+    if (maxHeap.size() > minHeap.size()) {
+        return maxHeap.top();
     }
-    if (bigque.size() < smallque.size()) {
-        return smallque.top();
+    if (maxHeap.size() < minHeap.size()) {
+        return minHeap.top();
     }
     return 0;
 }

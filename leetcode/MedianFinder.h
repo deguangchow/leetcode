@@ -48,8 +48,8 @@ public:
 };
 #else
 class MedianFinder {
-    priority_queue<int> bigque;                                 //大顶堆
-    priority_queue<int, vector<int>, greater<int>> smallque;    //小顶堆
+    priority_queue<int> maxHeap;                                    //大顶堆
+    priority_queue<int, vector<int>, greater<int>> minHeap;         //小顶堆
 
 public:
     /** initialize your data structure here. */
