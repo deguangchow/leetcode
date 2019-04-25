@@ -1363,14 +1363,16 @@ vector<int> Solution::rightSideView(TreeNode* root) {
 
 
 int Solution::findKthLargest(vector<int>& nums, int k) {
-    for (auto const& num : nums) {
-        if (minHeap.size() < k) {
-            minHeap.push(num);
-        } else {
-            if (minHeap.top() <= num) {
-                minHeap.pop();
-                minHeap.push(num);
-            }
+    priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
+
+    for (int i = 0; i < k; ++i) {
+        minHeap.push(nums[i]);
+    }
+    auto const& size = nums.size();
+    for (int i = k - 1; i < size; ++i) {
+        if (minHeap.top() <= nums[i]) {
+            minHeap.pop();
+            minHeap.push(nums[i]);
         }
     }
     return minHeap.top();
@@ -1462,6 +1464,25 @@ TreeNode* Solution::lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode*
         return right;
     }
     return nullptr;
+}
+
+
+//239
+vector<int> Solution::maxSlidingWindow(vector<int>& nums, int k) {
+    vector<int> ans(0);
+    priority_queue<pair<int, int>> maxHeap; // 大根堆
+    for (int i = 0; i < k - 1; i++) {
+        maxHeap.push(make_pair(nums[i], i));
+    }
+    for (int i = k - 1; i < nums.size(); i++) {
+        while (!maxHeap.empty() && (i - maxHeap.top().second >= k || maxHeap.top().first <= nums[i])) {
+            //删除过期的或者不可能称为最大值的值
+            maxHeap.pop();
+        }
+        maxHeap.push(make_pair(nums[i], i));
+        ans.push_back(maxHeap.top().first);
+    }
+    return ans;
 }
 
 

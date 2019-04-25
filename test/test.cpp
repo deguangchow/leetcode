@@ -1471,3 +1471,15 @@ TEST(LeetCode, 215) {
     }
 }
 
+
+TEST(LeetCode, 239) {
+    Solution s;
+    {
+        vector<int> expect = { 3, 3, 5, 5, 6, 7 };
+        vector<int> nums = { 1, 3, -1, -3, 5, 3, 6, 7 };
+        int k = 3;
+        auto const& res = s.maxSlidingWindow(nums, k);
+        EXPECT_VECTOR_VAL_EQ(expect, res);
+    }
+}
+

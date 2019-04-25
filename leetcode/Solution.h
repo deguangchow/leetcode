@@ -854,7 +854,6 @@ public:
     说明:
     你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
     */
-    priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
     int findKthLargest(vector<int>& nums, int k);
 
 
@@ -975,6 +974,34 @@ public:
     p、q 为不同节点且均存在于给定的二叉树中。
     */
     TreeNode* lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode* q);
+
+
+    /*239
+    239. 滑动窗口最大值
+    给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口 k 内的数字。滑动窗口每次只向右移动一位。
+    返回滑动窗口最大值。
+
+    示例:
+    输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+    输出: [3,3,5,5,6,7]
+
+    解释:
+    滑动窗口的位置                最大值
+    ---------------               -----
+    [1  3  -1] -3  5  3  6  7       3
+    1 [3  -1  -3] 5  3  6  7       3
+    1  3 [-1  -3  5] 3  6  7       5
+    1  3  -1 [-3  5  3] 6  7       5
+    1  3  -1  -3 [5  3  6] 7       6
+    1  3  -1  -3  5 [3  6  7]      7
+
+    注意：
+    你可以假设 k 总是有效的，1 ≤ k ≤ 输入数组的大小，且输入数组不为空。
+
+    进阶：
+    你能在线性时间复杂度内解决此题吗？
+    */
+    vector<int> maxSlidingWindow(vector<int>& nums, int k);
 
 
     /*257
