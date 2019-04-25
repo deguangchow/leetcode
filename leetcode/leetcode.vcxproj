@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="BSTIterator.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="HeapDemo.h" />
     <ClInclude Include="LRUCache.h" />
     <ClInclude Include="MedianFinder.h" />
     <ClInclude Include="MinStack.h" />

@@ -32,6 +32,7 @@
 #include <memory>
 #include <queue>
 #include <xfunctional>
+#include <iostream>
 using std::vector;
 using std::map;
 using std::string;
@@ -49,3 +50,5 @@ using std::shared_ptr;
 using std::queue;
 using std::priority_queue;
 using std::greater;
+using std::cout;
+using std::endl;

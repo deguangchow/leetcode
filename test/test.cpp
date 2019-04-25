@@ -18,6 +18,7 @@
 #include "MyQueue.h"
 #include "PeekingIterator.h"
 #include "MedianFinder.h"
+#include "HeapDemo.h"
 
 
 //单链表转字符串
@@ -126,6 +127,10 @@ TreeNode* str2tree(const std::string& s) {
     EXPECT_TRUE(pos1 == v1.end());\
     EXPECT_TRUE(pos2 == v2.end());\
 }
+
+
+//数组长度
+#define LENGTH_OF_ARRAY(a) sizeof(a)/sizeof(a[0])
 
 
 TEST(ListNodeString, str2list) {
@@ -1408,3 +1413,46 @@ TEST(LeetCode, 295) {
     }
 }
 
+
+TEST(LeetCode, HeapDemo) {
+    {
+        int a[] = { 11, 31, 5, 7, 9 };
+        EXPECT_NO_THROW(HeapDemo::buildMaxHeap(a, LENGTH_OF_ARRAY(a)));
+        cout << "buildMaxHeap: ";
+        for (auto const& pos : a) {
+            cout << pos <<',';
+        }
+        cout << endl;
+        EXPECT_EQ(31, a[0]);
+    }
+    {
+        int a[] = { 100, 2, 3, 8, 0, 1, 2, 3, 11, 31, 5, 7, 9 };
+        EXPECT_NO_THROW(HeapDemo::buildMaxHeap(a, LENGTH_OF_ARRAY(a)));
+        cout << "buildMaxHeap: ";
+        for (auto const& pos : a) {
+            cout << pos << ',';
+        }
+        cout << endl;
+        EXPECT_EQ(100, a[0]);
+    }
+    {
+        int a[] = { 11, 31, 5, 7, 9 };
+        EXPECT_NO_THROW(HeapDemo::buildMinHeap(a, LENGTH_OF_ARRAY(a)));
+        cout << "buildMinHeap: ";
+        for (auto const& pos : a) {
+            cout << pos << ',';
+        }
+        cout << endl;
+        EXPECT_EQ(5, a[0]);
+    }
+    {
+        int a[] = { 100, 2, 3, 8, 0, 1, 2, 3, 11, 31, 5, 7, 9 };
+        EXPECT_NO_THROW(HeapDemo::buildMinHeap(a, LENGTH_OF_ARRAY(a)));
+        cout << "buildMinHeap: ";
+        for (auto const& pos : a) {
+            cout << pos << ',';
+        }
+        cout << endl;
+        EXPECT_EQ(0, a[0]);
+    }
+}
