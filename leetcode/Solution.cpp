@@ -1361,6 +1361,22 @@ vector<int> Solution::rightSideView(TreeNode* root) {
 }
 
 
+
+int Solution::findKthLargest(vector<int>& nums, int k) {
+    for (auto const& num : nums) {
+        if (minHeap.size() < k) {
+            minHeap.push(num);
+        } else {
+            if (minHeap.top() <= num) {
+                minHeap.pop();
+                minHeap.push(num);
+            }
+        }
+    }
+    return minHeap.top();
+}
+
+
 //222
 int do_countNodes(TreeNode* root) {
     if (!root) {
@@ -1369,6 +1385,7 @@ int do_countNodes(TreeNode* root) {
     return (nullptr != root->left) + (nullptr != root->right) +
         do_countNodes(root->left) + do_countNodes(root->right);
 }
+
 int Solution::countNodes(TreeNode* root) {
     if (!root) {
         return 0;

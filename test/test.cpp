@@ -1456,3 +1456,18 @@ TEST(LeetCode, HeapDemo) {
         EXPECT_EQ(0, a[0]);
     }
 }
+
+
+TEST(LeetCode, 215) {
+    {
+        Solution s;
+        vector<int> nums = { 3, 2, 1, 5, 6, 4 };
+        EXPECT_EQ(5, s.findKthLargest(nums, 2));
+    }
+    {
+        Solution s;
+        vector<int> nums = { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+        EXPECT_EQ(4, s.findKthLargest(nums, 4));
+    }
+}
+
