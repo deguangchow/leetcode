@@ -442,6 +442,34 @@ vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {
 }
 
 
+//057
+vector<vector<int>> Solution::insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+    vector<vector<int>> res;
+    bool bMerge = false;
+    for (auto const& val : intervals) {
+        if (val[1] < newInterval[0]) {
+            res.push_back(val);
+        } else if (val[0] > newInterval[1]) {
+            if (!bMerge) {
+                bMerge = true;
+                res.push_back(newInterval);
+            }
+            res.push_back(val);
+        } else {
+            if (val[0] < newInterval[0]) {
+                newInterval[0] = val[0];
+            }
+            if (val[1] > newInterval[1]) {
+                newInterval[1] = val[1];
+            }
+        }
+    }
+    if (!bMerge) {
+        res.push_back(newInterval);
+    }
+    return res;
+}
+
 //061
 ListNode* Solution::rotateRight(ListNode* head, int k) {
     if (nullptr == head || nullptr == head->next) {
