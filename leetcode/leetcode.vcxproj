@@ -152,6 +152,7 @@
     <ClInclude Include="LRUCache.h" />
     <ClInclude Include="MedianFinder.h" />
     <ClInclude Include="MinStack.h" />
+    <ClInclude Include="MyCircularQueue.h" />
     <ClInclude Include="MyQueue.h" />
     <ClInclude Include="MyStack.h" />
     <ClInclude Include="PeekingIterator.h" />

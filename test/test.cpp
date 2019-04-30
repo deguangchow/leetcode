@@ -19,6 +19,7 @@
 #include "PeekingIterator.h"
 #include "MedianFinder.h"
 #include "HeapDemo.h"
+#include "MyCircularQueue.h"
 
 
 //单链表转字符串
@@ -1511,4 +1512,19 @@ TEST(LeetCode, 313) {
         EXPECT_EQ(32, s.nthSuperUglyNumber(12, primes));
     }
 }
+
+
+TEST(LeetCode, 622) {
+    MyCircularQueue cq(3); // 设置长度为 3
+    EXPECT_TRUE(cq.enQueue(1));
+    EXPECT_TRUE(cq.enQueue(2));
+    EXPECT_TRUE(cq.enQueue(3));
+    EXPECT_FALSE(cq.enQueue(4));
+    EXPECT_EQ(3, cq.Rear());
+    EXPECT_TRUE(cq.isFull());
+    EXPECT_TRUE(cq.deQueue());
+    EXPECT_TRUE(cq.enQueue(4));
+    EXPECT_EQ(4, cq.Rear());
+}
+
 
