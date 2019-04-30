@@ -11,8 +11,6 @@
 #pragma once
 
 #include "targetver.h"
-#include "Define.h"
-
 #include <stdio.h>
 #include <tchar.h>
 
@@ -52,3 +50,7 @@ using std::priority_queue;
 using std::greater;
 using std::cout;
 using std::endl;
+
+
+//自定义数据类型
+#include "Define.h"

@@ -1241,6 +1241,78 @@ int Solution::sumNumbers(TreeNode* root) {
 }
 
 
+//133
+UndirectedGraphNode* clone(UndirectedGraphNode* node, unordered_map<int, UndirectedGraphNode*>& mapValueNode) {
+    if (!node) {
+        return nullptr;
+    }
+
+    //1、查找缓存的节点：已存在，则直接返回；
+    auto const& posMap = mapValueNode.find(node->val);
+    if (posMap != mapValueNode.end()) {
+        return posMap->second;
+    }
+
+    //2、不存在则新建图节点res，并缓存；
+    auto* res = new UndirectedGraphNode(node->val, vector<UndirectedGraphNode*>{});
+    mapValueNode.insert(make_pair(node->val, res));
+
+    //3、遍历 node 节点的邻居节点集合：将邻居节点进行克隆，并将克隆节点添加到res的邻居节点集合中；
+    for (auto const& neighbor : node->neighbors) {
+        res->neighbors.push_back(clone(neighbor, mapValueNode));
+    }
+
+    return res;
+}
+UndirectedGraphNode* Solution::cloneGraph(UndirectedGraphNode* node) {
+#if 0
+    //DFS
+    unordered_map<int, UndirectedGraphNode*> mapValueNode;//缓存值对应的图节点
+    return clone(node, mapValueNode);
+#else
+    //BFS
+    if (!node) {
+        return nullptr;
+    }
+    map<UndirectedGraphNode*, UndirectedGraphNode*> mapNodeClone;
+    map<UndirectedGraphNode*, bool> mapNodeVisited;
+    queue<UndirectedGraphNode*> queNodes;
+    queNodes.push(node);
+
+    while (!queNodes.empty()) {
+        UndirectedGraphNode* front = queNodes.front();
+        queNodes.pop();
+        if (mapNodeVisited[front]) {
+            continue;
+        }
+
+        mapNodeVisited[front] = true;
+        UndirectedGraphNode* cur = nullptr;
+        auto posMap = mapNodeClone.find(front);
+        if (posMap == mapNodeClone.end()) {
+            cur = new UndirectedGraphNode(front->val, vector<UndirectedGraphNode*>{});
+            mapNodeClone.insert(make_pair(front, cur));
+        } else {
+            cur = posMap->second;
+        }
+
+        for (auto const& neighbor : front->neighbors) {
+            posMap = mapNodeClone.find(neighbor);
+            if (posMap == mapNodeClone.end()) {
+                UndirectedGraphNode* temp = new UndirectedGraphNode(neighbor->val, vector<UndirectedGraphNode*>{});
+                mapNodeClone.insert(make_pair(neighbor, temp));
+                cur->neighbors.push_back(temp);
+                queNodes.push(neighbor);
+            } else {
+                cur->neighbors.push_back(posMap->second);
+            }
+        }
+    }
+
+    return mapNodeClone[node];
+#endif
+}
+
 //144
 void do_preorderTraversal(TreeNode*root, vector<int>& vct) {
     if (!root) {

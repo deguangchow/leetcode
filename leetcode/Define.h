@@ -34,5 +34,17 @@ struct Node {
     Node *next;
 };
 
+//无向图节点
+class UndirectedGraphNode {
+public:
+    int val;
+    vector<UndirectedGraphNode*> neighbors;
+    UndirectedGraphNode(int _val, vector<UndirectedGraphNode*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+};
+
+
 #endif  //DEFINE_H
 
