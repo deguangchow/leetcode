@@ -50,6 +50,8 @@ using std::priority_queue;
 using std::greater;
 using std::cout;
 using std::endl;
+using std::max;
+using std::min;
 
 
 //自定义数据类型

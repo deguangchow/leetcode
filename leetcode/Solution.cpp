@@ -410,6 +410,39 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k) {
     return dummy->next;//哑结点的next即返回的结果
 }
 
+
+//056
+vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {
+    if (intervals.empty()) {
+        return intervals;
+    }
+
+    //区间集合按照左值排序
+    using Iter = vector<int> const&;
+    sort(intervals.begin(), intervals.end(), [](Iter l, Iter r) {
+        return l[0] < r[0];
+    });
+
+    vector<vector<int>> ans = { intervals[0] };
+    auto const& size = intervals.size();
+
+    for (auto i = 1; i < size; ++i) {
+        //比较当前区间的右值和下一个区间的左值
+        if (ans.back()[1] < intervals[i][0]) {
+            ans.push_back(intervals[i]);
+            continue;
+        }
+
+        if (intervals[i][1] > ans.back()[1]) {
+            ans.back()[1] = intervals[i][1];
+        }
+    }
+
+    return ans;
+}
+
+
+//061
 ListNode* Solution::rotateRight(ListNode* head, int k) {
     if (nullptr == head || nullptr == head->next) {
         return head;
