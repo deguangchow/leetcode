@@ -271,12 +271,19 @@ TEST(LeetCode, 004) {
 TEST(LeetCode, 018) {
     Solution s;
     {
+        vector<int> nums = {};
+        int target = 0;
+        vector<vector<int>> const& exp = {};
+        auto const& ret = s.fourSum(nums, target);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+    {
         vector<int> nums = { 1, 0, -1, 0, -2, 2 };
         int target = 0;
         vector<vector<int>> const& exp = {
-            { -1,  0, 0, 1 },
             { -2, -1, 1, 2 },
-            { -2,  0, 0, 2 }
+            { -2,  0, 0, 2 },
+            { -1,  0, 0, 1 }
         };
         auto const& ret = s.fourSum(nums, target);
         EXPECT_VECTORS_VAL_EQ(exp, ret);

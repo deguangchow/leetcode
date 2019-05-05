@@ -239,7 +239,51 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
 
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
-    return{ {} };
+    vector<vector<int>> res;
+    if (nums.empty()) {
+        return res;
+    }
+
+    sort(nums.begin(), nums.end());//首先排序
+    int const& size = nums.size();
+    for (int i1 = 0; i1 < size; ++i1) {
+        if (i1 > 0 && nums[i1] == nums[i1 - 1]) {
+            continue;
+        }
+
+        int target3 = target - nums[i1];//4数变3数
+        for (int i2 = i1 + 1; i2 < size; ++i2) {
+            if (i2 > i1 + 1 && nums[i2] == nums[i2 - 1]) {
+                continue;
+            }
+
+            int target2 = target3 - nums[i2];//3数变2数
+
+            //2数之和
+            int i3 = i2 + 1;
+            int i4 = size - 1;
+            while (i3 < i4) {
+                if (nums[i3] + nums[i4] == target2) {
+                    res.push_back({ nums[i1], nums[i2], nums[i3], nums[i4] });
+
+                    //去重
+                    while (i3 < i4 && nums[i3] == nums[i3 + 1]) {
+                        ++i3;
+                    }
+                    while (i3 < i4 && nums[i4] == nums[i4 - 1]) {
+                        --i4;
+                    }
+                    ++i3;
+                    --i4;
+                } else if (nums[i3] + nums[i4] < target2) {
+                    ++i3;
+                } else {
+                    --i4;
+                }
+            }
+        }
+    }
+    return res;
 }
 
 
