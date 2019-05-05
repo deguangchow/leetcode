@@ -268,6 +268,22 @@ TEST(LeetCode, 004) {
 }
 
 
+TEST(LeetCode, 018) {
+    Solution s;
+    {
+        vector<int> nums = { 1, 0, -1, 0, -2, 2 };
+        int target = 0;
+        vector<vector<int>> const& exp = {
+            { -1,  0, 0, 1 },
+            { -2, -1, 1, 2 },
+            { -2,  0, 0, 2 }
+        };
+        auto const& ret = s.fourSum(nums, target);
+        EXPECT_VECTORS_VAL_EQ(exp, ret);
+    }
+}
+
+
 TEST(LeetCode, 019) {
     Solution solution;
     {
@@ -1490,7 +1506,7 @@ TEST(LeetCode, 264) {
     vector<int> expect = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50,
         54, 60, 64, 72, 75, 80, 81, 90, 96, 100 };
 
-    for (int i = 1; i <= expect.size(); ++i) {
+    for (size_t i = 1; i <= expect.size(); ++i) {
         EXPECT_EQ(expect[i - 1], s.nthUglyNumber(i));
     }
 }
@@ -1503,7 +1519,7 @@ TEST(LeetCode, 313) {
         vector<int> expect = { 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50,
             54, 60, 64, 72, 75, 80, 81, 90, 96, 100 };
 
-        for (int i = 1; i <= expect.size(); ++i) {
+        for (size_t i = 1; i <= expect.size(); ++i) {
             EXPECT_EQ(expect[i - 1], s.nthSuperUglyNumber(i, primes));
         }
     }

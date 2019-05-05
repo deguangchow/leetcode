@@ -35,7 +35,7 @@ next() 和 hasNext() 操作的时间复杂度是 O(1)，并使用 O(h) 内存，
 你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 中至少存在一个下一个最小的数。
 */
 class BSTIterator {
-    int m_nCur = 0;
+    size_t m_nCur = 0;
     vector<int> m_vctData;
 public:
     explicit BSTIterator(TreeNode* root);

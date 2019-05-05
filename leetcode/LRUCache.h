@@ -40,7 +40,7 @@ class LRUCache {
     typedef list<pair<int, int>>                        LIST_PAIR;
     typedef unordered_map<int, LIST_PAIR::iterator>     HASH_MAP_KEY_POS;
 
-    int                     m_nCapacity;
+    size_t                  m_nCapacity;
     HASH_MAP_KEY_POS        m_mapKeyPos;
     LIST_PAIR               m_lstPair;
 

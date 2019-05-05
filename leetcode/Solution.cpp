@@ -237,6 +237,12 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
 }
 
 
+//018
+vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
+    return{ {} };
+}
+
+
 //019
 ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
     ListNode* p_n = head;
@@ -426,7 +432,7 @@ vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {
     vector<vector<int>> ans = { intervals[0] };
     auto const& size = intervals.size();
 
-    for (auto i = 1; i < size; ++i) {
+    for (size_t i = 1; i < size; ++i) {
         //比较当前区间的右值和下一个区间的左值
         if (ans.back()[1] < intervals[i][0]) {
             ans.push_back(intervals[i]);
@@ -651,8 +657,8 @@ vector<TreeNode*>* Solution::createBST(int begin, int end) {
         for (int i = begin; i <= end; ++i) {
             vector<TreeNode*>* left = createBST(begin, i - 1);
             vector<TreeNode*>* right = createBST(i + 1, end);
-            for (int l = 0; l < left->size(); ++l) {
-                for (int r = 0; r < right->size(); ++r) {//构建二叉查找树
+            for (size_t l = 0; l < left->size(); ++l) {
+                for (size_t r = 0; r < right->size(); ++r) {//构建二叉查找树
                     TreeNode* node = new TreeNode(i);//不同的根结点
                     node->left = (*left)[l];
                     node->right = (*right)[r];
@@ -1502,7 +1508,7 @@ int Solution::findKthLargest(vector<int>& nums, int k) {
         minHeap.push(nums[i]);
     }
     auto const& size = nums.size();
-    for (int i = k - 1; i < size; ++i) {
+    for (size_t i = k - 1; i < size; ++i) {
         if (minHeap.top() <= nums[i]) {
             minHeap.pop();
             minHeap.push(nums[i]);
@@ -1601,13 +1607,13 @@ TreeNode* Solution::lowestCommonAncestor2(TreeNode* root, TreeNode* p, TreeNode*
 
 
 //239
-vector<int> Solution::maxSlidingWindow(vector<int>& nums, int k) {
+vector<int> Solution::maxSlidingWindow(vector<int>& nums, size_t k) {
     vector<int> ans(0);
     priority_queue<pair<int, int>> maxHeap; // 大根堆
-    for (int i = 0; i < k - 1; i++) {
+    for (size_t i = 0; i < k - 1; ++i) {
         maxHeap.push(make_pair(nums[i], i));
     }
-    for (int i = k - 1; i < nums.size(); i++) {
+    for (size_t i = k - 1; i < nums.size(); ++i) {
         while (!maxHeap.empty() && (i - maxHeap.top().second >= k || maxHeap.top().first <= nums[i])) {
             //删除过期的或者不可能称为最大值的值
             maxHeap.pop();
@@ -1681,7 +1687,7 @@ int Solution::nthSuperUglyNumber(int n, vector<int>& primes) {
     for (int i = 1; i < n; ++i) {
         int min = INT_MAX;
 
-        for (int j = 0; j < primesSize; ++j) {
+        for (size_t j = 0; j < primesSize; ++j) {
             auto const& temp = ans[index[j]] * primes[j];
             if (temp < min) {
                 min = temp;
@@ -1690,7 +1696,7 @@ int Solution::nthSuperUglyNumber(int n, vector<int>& primes) {
 
         ans[i] = min;
 
-        for (int j = 0; j < primesSize; ++j) {
+        for (size_t j = 0; j < primesSize; ++j) {
             if (ans[index[j]] * primes[j] == min) {
                 ++index[j];
             }
