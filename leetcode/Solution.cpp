@@ -460,6 +460,86 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k) {
     return dummy->next;//哑结点的next即返回的结果
 }
 
+
+//036
+bool Solution::isValidSudoku(vector<vector<char>>& board) {
+#if 0
+    unordered_map<int, set<char>> mapX;//行对应已填的数
+    unordered_map<int, set<char>> mapY;//列对应已填的数
+    unordered_map<int, set<char>> mapZ;//宫对应已填的数
+    for (auto x = 0; x < 9; ++x) {
+        for (auto y = 0; y < 9; ++y) {
+            auto const& val = board[x][y];
+            if (val == '.') {
+                continue;
+            }
+
+            //行
+            auto const& posX = mapX.find(x);
+            if (posX == mapX.end()) {
+                mapX[x] = { val };
+            } else {
+                auto& setChars = posX->second;
+                auto const& posFind = setChars.find(val);
+                if (posFind != setChars.end()) {
+                    return false;
+                }
+                setChars.insert(val);
+            }
+
+            //列
+            auto const& posY = mapY.find(y);
+            if (posY == mapY.end()) {
+                mapY[y] = { val };
+            } else {
+                auto& setChars = posY->second;
+                auto const& posFind = setChars.find(val);
+                if (posFind != setChars.end()) {
+                    return false;
+                }
+                setChars.insert(val);
+            }
+
+            //宫
+            auto const& z = x / 3 * 3 + y / 3;
+            auto const& posZ = mapZ.find(z);
+            if (posZ == mapZ.end()) {
+                mapZ[z] = { val };
+            } else {
+                auto& setChars = posZ->second;
+                auto const& posFind = setChars.find(val);
+                if (posFind != setChars.end()) {
+                    return false;
+                }
+                setChars.insert(val);
+            }
+        }
+    }
+    return true;
+#else
+    bool row[9][9] = { 0 };
+    bool col[9][9] = { 0 };
+    bool box[9][9] = { 0 };
+    auto num = 0;
+
+    for (auto x = 0; x < 9; ++x) {
+        for (auto y = 0; y < 9; ++y) {
+            if (board[x][y] != '.') {
+                auto const& z = (x / 3) * 3 + y / 3;
+                num = board[x][y] - '1';
+                if (row[x][num] || col[y][num] || box[z][num]) {
+                    return false;
+                }
+                row[x][num] = true;
+                col[y][num] = true;
+                box[z][num] = true;
+            }
+        }
+    }
+    return true;
+#endif
+}
+
 //037
 //预处理
 void preSolveSudoku(vector<vector<char>>& board) {
@@ -469,33 +549,34 @@ void preSolveSudoku(vector<vector<char>>& board) {
     unordered_map<int, set<char>> mapZ;//宫对应已填的数
     for (auto x = 0; x < 9; ++x) {
         for (auto y = 0; y < 9; ++y) {
-            if (board[x][y] == '.') {
+            auto const& val = board[x][y];
+            if (val == '.') {
                 mapBlockOptions.insert(make_pair(x * 9 + y, set<char>{}));
                 continue;
             }
             //行
             auto const& posX = mapX.find(x);
             if (posX == mapX.end()) {
-                mapX[x] = { board[x][y] };
+                mapX[x] = { val };
             } else {
-                posX->second.insert(board[x][y]);
+                posX->second.insert(val);
             }
 
             //列
             auto const& posY = mapY.find(y);
             if (posY == mapY.end()) {
-                mapY[y] = { board[x][y] };
+                mapY[y] = { val };
             } else {
-                posY->second.insert(board[x][y]);
+                posY->second.insert(val);
             }
 
             //宫
             auto const& z = x / 3 * 3 + y / 3;
             auto const& posZ = mapZ.find(z);
             if (posZ == mapZ.end()) {
-                mapZ[z] = { board[x][y] };
+                mapZ[z] = { val };
             } else {
-                posZ->second.insert(board[x][y]);
+                posZ->second.insert(val);
             }
         }
     }
