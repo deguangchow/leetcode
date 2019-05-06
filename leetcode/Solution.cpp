@@ -460,6 +460,150 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k) {
     return dummy->next;//哑结点的next即返回的结果
 }
 
+//037
+//预处理
+void preSolveSudoku(vector<vector<char>>& board) {
+    unordered_map<int, set<char>> mapBlockOptions;//空格对应的可选项
+    unordered_map<int, set<char>> mapX;//行对应已填的数
+    unordered_map<int, set<char>> mapY;//列对应已填的数
+    unordered_map<int, set<char>> mapZ;//宫对应已填的数
+    for (auto x = 0; x < 9; ++x) {
+        for (auto y = 0; y < 9; ++y) {
+            if (board[x][y] == '.') {
+                mapBlockOptions.insert(make_pair(x * 9 + y, set<char>{}));
+                continue;
+            }
+            //行
+            auto const& posX = mapX.find(x);
+            if (posX == mapX.end()) {
+                mapX[x] = { board[x][y] };
+            } else {
+                posX->second.insert(board[x][y]);
+            }
+
+            //列
+            auto const& posY = mapY.find(y);
+            if (posY == mapY.end()) {
+                mapY[y] = { board[x][y] };
+            } else {
+                posY->second.insert(board[x][y]);
+            }
+
+            //宫
+            auto const& z = x / 3 * 3 + y / 3;
+            auto const& posZ = mapZ.find(z);
+            if (posZ == mapZ.end()) {
+                mapZ[z] = { board[x][y] };
+            } else {
+                posZ->second.insert(board[x][y]);
+            }
+        }
+    }
+
+    size_t sizeOld = INT_MAX;
+    while (!mapBlockOptions.empty() && mapBlockOptions.size() < sizeOld) {
+        sizeOld = mapBlockOptions.size();
+        for (auto posMap = mapBlockOptions.begin(); posMap != mapBlockOptions.end();) {
+            auto const& x = posMap->first / 9;
+            auto const& y = posMap->first % 9;;
+            auto const& z = x / 3 * 3 + y / 3;
+            auto const& setX = mapX[x];
+            auto const& setY = mapY[y];
+            auto const& setZ = mapZ[z];
+            auto& setOptions = posMap->second;
+            if (setOptions.empty()) {
+                for (auto c = '1'; c <= '9'; ++c) {
+                    if (setX.find(c) == setX.end() &&
+                        setY.find(c) == setY.end() &&
+                        setZ.find(c) == setZ.end()) {
+                        setOptions.insert(c);
+                    }
+                }
+            } else {
+                for (auto posSet = setOptions.begin(); posSet != setOptions.end();) {
+                    auto & c = *posSet;
+                    if (setX.find(c) == setX.end() &&
+                        setY.find(c) == setY.end() &&
+                        setZ.find(c) == setZ.end()) {
+                        ++posSet;
+                        continue;
+                    }
+                    posSet = setOptions.erase(posSet);
+                }
+            }
+
+            //可选项集合大小为1时，即此空格为确定值。
+            if (setOptions.size() == 1) {
+                auto const& c = *setOptions.begin();
+                mapX[x].insert(c);
+                mapY[y].insert(c);
+                mapZ[z].insert(c);
+                board[x][y] = c;
+                posMap = mapBlockOptions.erase(posMap);
+                continue;
+            }
+            ++posMap;
+        }
+    }
+}
+bool row[9][9];
+bool col[9][9];
+bool box[9][9];
+bool done;
+void dfs(vector<vector<char> > &board, int const& x, int const& y) {
+    if (x > 8) {
+        done = true;
+        return;
+    }
+    if (board[x][y] == '.') {
+        auto const& z = (x / 3) * 3 + y / 3;
+        for (auto i = 0; i < 9; ++i) {
+            if (!row[x][i] && !col[y][i] && !box[z][i]) {
+                board[x][y] = i + '1';
+                row[x][i] = col[y][i] = box[z][i] = true;
+                if (y >= 8) {
+                    dfs(board, x + 1, 0);
+                } else {
+                    dfs(board, x, y + 1);
+                }
+                if (done) {
+                    break;
+                }
+                board[x][y] = '.';
+                row[x][i] = col[y][i] = box[z][i] = false;
+            }
+        }
+    } else {
+        if (y >= 8) {
+            dfs(board, x + 1, 0);
+        } else {
+            dfs(board, x, y + 1);
+        }
+    }
+}
+void Solution::solveSudoku(vector<vector<char> > &board) {
+    preSolveSudoku(board);
+
+    memset(row, 0, 9 * 9 * sizeof(bool));
+    memset(col, 0, 9 * 9 * sizeof(bool));
+    memset(box, 0, 9 * 9 * sizeof(bool));
+    done = false;
+    auto num = 0;
+
+    for (auto x = 0; x < 9; ++x) {
+        for (auto y = 0; y < 9; ++y) {
+            if (board[x][y] != '.') {
+                auto const& z = (x / 3) * 3 + y / 3;
+                num = board[x][y] - '1';
+                row[x][num] = true;
+                col[y][num] = true;
+                box[z][num] = true;
+            }
+        }
+    }
+    dfs(board, 0, 0);
+}
+
 
 //056
 vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {

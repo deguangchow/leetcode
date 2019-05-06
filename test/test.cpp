@@ -130,6 +130,34 @@ TreeNode* str2tree(const std::string& s) {
 }
 
 
+template<class T>
+class expect_eq {
+private:
+    using VECTOR = vector<T>;
+    using VECTORS = vector<vector<T>>;
+
+public:
+    static void expect_vector_val_eq(VECTOR const& v1, VECTOR const& v2) {
+        VECTOR::const_iterator& pos1 = v1.begin();
+        VECTOR::const_iterator& pos2 = v2.begin();
+        for (; pos1 != v1.end() && pos2 != v2.end(); ++pos1, ++pos2) {
+            EXPECT_EQ(*pos1, *pos2);
+        }
+        EXPECT_TRUE(pos1 == v1.end());
+        EXPECT_TRUE(pos2 == v2.end());
+    }
+    static void expect_vectors_val_eq(VECTORS const& v1, VECTORS const& v2) {
+        VECTORS::const_iterator& pos1 = v1.begin();
+        VECTORS::const_iterator& pos2 = v2.begin();
+        for (; pos1 != v1.end() && pos2 != v2.end(); ++pos1, ++pos2) {
+            expect_vector_val_eq(*pos1, *pos2);
+        }
+        EXPECT_TRUE(pos1 == v1.end());
+        EXPECT_TRUE(pos2 == v2.end());
+    }
+};
+
+
 //数组长度
 #define LENGTH_OF_ARRAY(a) sizeof(a)/sizeof(a[0])
 
@@ -460,6 +488,74 @@ TEST(LeetCode, 025) {
         ListNode*exp = str2list("5,4,3,2,1,6");
         ListNode*ret = solution.reverseKGroup(l1, 5);
         EXPECT_LIST_VAL_EQ(exp, ret);
+    }
+}
+
+
+TEST(LeetCode, 037) {
+    auto const& lambda_print_sudoku = [](vector<vector<char>> const& board)->void {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                cout << board[i][j] << ' ';
+            }
+            cout << endl;
+        }
+    };
+
+    Solution s;
+    {
+        vector<vector<char>> board = {
+            { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
+            { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
+            { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
+            { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
+            { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
+            { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+            { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
+            { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
+            { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+        };
+        vector<vector<char>> const& exp = {
+            { '5', '3', '4', '6', '7', '8', '9', '1', '2' },
+            { '6', '7', '2', '1', '9', '5', '3', '4', '8' },
+            { '1', '9', '8', '3', '4', '2', '5', '6', '7' },
+            { '8', '5', '9', '7', '6', '1', '4', '2', '3' },
+            { '4', '2', '6', '8', '5', '3', '7', '9', '1' },
+            { '7', '1', '3', '9', '2', '4', '8', '5', '6' },
+            { '9', '6', '1', '5', '3', '7', '2', '8', '4' },
+            { '2', '8', '7', '4', '1', '9', '6', '3', '5' },
+            { '3', '4', '5', '2', '8', '6', '1', '7', '9' }
+        };
+        EXPECT_NO_THROW(s.solveSudoku(board));
+        lambda_print_sudoku(board);
+        expect_eq<char>::expect_vectors_val_eq(exp, board);
+    }
+    {
+        vector<vector<char>> board = {
+            { '.', '.', '9', '7', '4', '8', '.', '.', '.' },
+            { '7', '.', '.', '.', '.', '.', '.', '.', '.' },
+            { '.', '2', '.', '1', '.', '9', '.', '.', '.' },
+            { '.', '.', '7', '.', '.', '.', '2', '4', '.' },
+            { '.', '6', '4', '.', '1', '.', '5', '9', '.' },
+            { '.', '9', '8', '.', '.', '.', '3', '.', '.' },
+            { '.', '.', '.', '8', '.', '3', '.', '2', '.' },
+            { '.', '.', '.', '.', '.', '.', '.', '.', '6' },
+            { '.', '.', '.', '2', '7', '5', '9', '.', '.' }
+        };
+        vector<vector<char>> const& exp = {
+            { '5', '1', '9', '7', '4', '8', '6', '3', '2' },
+            { '7', '8', '3', '6', '5', '2', '4', '1', '9' },
+            { '4', '2', '6', '1', '3', '9', '8', '7', '5' },
+            { '3', '5', '7', '9', '8', '6', '2', '4', '1' },
+            { '2', '6', '4', '3', '1', '7', '5', '9', '8' },
+            { '1', '9', '8', '5', '2', '4', '3', '6', '7' },
+            { '9', '7', '5', '8', '6', '3', '1', '2', '4' },
+            { '8', '3', '2', '4', '9', '1', '7', '5', '6' },
+            { '6', '4', '1', '2', '7', '5', '9', '8', '3' }
+        };
+        EXPECT_NO_THROW(s.solveSudoku(board));
+        lambda_print_sudoku(board);
+        expect_eq<char>::expect_vectors_val_eq(exp, board);
     }
 }
 
