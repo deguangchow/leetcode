@@ -31,6 +31,10 @@
 #include <queue>
 #include <xfunctional>
 #include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <functional>
 using std::vector;
 using std::map;
 using std::string;
@@ -52,7 +56,10 @@ using std::cout;
 using std::endl;
 using std::max;
 using std::min;
-
+using std::mutex;
+using std::condition_variable;
+using std::function;
+using std::unique_lock;
 
 //自定义数据类型
 #include "Define.h"

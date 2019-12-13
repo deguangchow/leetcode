@@ -163,6 +163,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Trie.h" />
     <ClInclude Include="WordDictionary.h" />
+    <ClInclude Include="ZeroEvenOdd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BSTIterator.cpp">
@@ -200,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="WordDictionary.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ZeroEvenOdd.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
