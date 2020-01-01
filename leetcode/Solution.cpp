@@ -237,6 +237,75 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
 }
 
 
+//005
+string Solution::longestPalindrome(string s) {
+#if 0
+		int nLength = s.length();
+		if (nLength <= 1)
+		{
+			return s;
+		}
+		int nPos = 0;
+		int nLengthRet = 1;
+		int nPos1 = 0;
+		int nPos2 = 0;
+		for (int i = 0; i < nLength - nLengthRet; ++i)
+		{
+			nPos1 = i;
+			for (int j = nLength - 1; j >= i + nLengthRet; --j)
+			{
+				nPos2 = j;
+				while (s[nPos1] == s[nPos2])
+				{
+					if (nPos2 - nPos1 <= 1)
+					{
+						if (j - i + 1 > nLengthRet)
+						{
+							nPos = i;
+							nLengthRet = j - i + 1;
+						}
+						break;
+					}
+					else  
+					{
+						++nPos1;
+						--nPos2;
+					}
+				}
+				nPos1 = i;
+
+				continue;
+			}
+		}
+		return s.substr(nPos, nLengthRet);
+#else
+	if (s.empty()) return "";
+	int begin(0);
+	int end(0);
+	int next(0);
+	int m_b(0), m_e(0);
+	while (next < s.size() - 1) {
+		begin = next;
+		end = begin;
+		while (s[end + 1] == s[begin] && end < s.size() - 1) {
+			end++;
+		}
+		next = end;
+		while (begin > 0 && end < s.size() - 1 && s[begin - 1] == s[end + 1]) {
+			begin--;
+			end++;
+		}
+		if (end - begin > m_e - m_b) {
+			m_b = begin;
+			m_e = end;
+		}
+		next++;
+	}
+	return s.substr(m_b, m_e - m_b + 1);
+#endif
+}
+
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
