@@ -1671,9 +1671,11 @@ TEST(LeetCode, 622) {
 
 TEST(LeetCode, 005) {
 	Solution solution;
-	EXPECT_EQ("", solution.longestPalindrome(""));
-	EXPECT_EQ(" ", solution.longestPalindrome(" "));
-	EXPECT_EQ("a", solution.longestPalindrome("a"));
+    EXPECT_EQ("", solution.longestPalindrome(""));
+    EXPECT_EQ(" ", solution.longestPalindrome(" "));
+    EXPECT_EQ("bacab", solution.longestPalindrome("abacab"));
+    EXPECT_EQ("aaabaaa", solution.longestPalindrome("aaaabaaa"));
+    EXPECT_EQ("a", solution.longestPalindrome("a"));
 	EXPECT_EQ("a", solution.longestPalindrome("ac"));
 	EXPECT_EQ("bab", solution.longestPalindrome("babad"));
 	EXPECT_EQ("aaabaaa", solution.longestPalindrome("aaabaaaa"));
