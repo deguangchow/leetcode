@@ -309,6 +309,30 @@ string Solution::longestPalindrome(string s) {
 }
 
 
+string Solution::convert(string s, int numRows) {
+    if (numRows < 2) {
+        return s;
+    }
+    string sRet = "";
+    int nLength = s.length();
+    for (int i = 0; i < numRows; ++i) {
+        bool bLeft = false;
+        int m = 2 * (numRows - 1 - i);
+        int n = 2 * i;
+        if (n == 0) {
+            n = m;
+        }
+        if (m == 0) {
+            m = n;
+        }
+        for (int j = i; j < nLength; j = j + (bLeft ? m : n)) {
+            bLeft = !bLeft;
+            sRet += s[j];
+        }
+    }
+    return sRet;
+}
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
