@@ -343,13 +343,52 @@ int Solution::reverse(int x) {
 		x = x / 10;
 	} while (x / 10 || x % 10);
 
-	if (-pow(2, 31) > nRet || nRet > pow(2, 31) - 1) {
+	if (nRet < INT_MIN || nRet > INT_MAX) {
 		return 0;
 	}
 
 	return nRet;
 }
 
+
+//008
+int Solution::myAtoi(string str) {
+	long long nRet = 0;
+	int nSign = 1;
+	bool bSignSetted = false;
+
+	for (int i = 0; i < str.length(); ++i) {
+		if (!bSignSetted && (str[i] == '-' || str[i] == '+')) {
+			bSignSetted = true;
+			if (str[i] == '-') {
+				nSign = -1;
+			}
+		} else if (str[i] < '0' || str[i] > '9') {
+			if (!bSignSetted && str[i] == ' ') {
+				continue;
+			} else {
+				break;
+			}
+		} else {
+			bSignSetted = true;
+			nRet = nRet * 10 + (str[i] - '0');
+			if (nRet > INT_MAX) {
+				break;
+			}
+		}
+	}
+
+	nRet *= nSign;
+
+	if (nRet < INT_MIN) {
+		return INT_MIN;
+	}
+	if (nRet > INT_MAX) {
+		return INT_MAX;
+	}
+
+	return nRet;
+}
 
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {

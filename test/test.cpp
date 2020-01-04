@@ -329,7 +329,7 @@ TEST(LeetCode, 006) {
     EXPECT_EQ("LCIRETOESIIGEDHN", solution.convert("LEETCODEISHIRING", 3));
     EXPECT_EQ("LDREOEIIECIHNTSG", solution.convert("LEETCODEISHIRING", 4));
 }
-#endif
+
 
 TEST(LeetCode, 007) {
 	Solution solution;
@@ -342,10 +342,39 @@ TEST(LeetCode, 007) {
 	EXPECT_EQ(-1, solution.reverse(-1));
 	EXPECT_EQ(1, solution.reverse(10));
 	EXPECT_EQ(-1, solution.reverse(-10));
-	EXPECT_EQ(0, solution.reverse(pow(2, 31)-1));
-	EXPECT_EQ(0, solution.reverse(pow(2, 31)));
-	EXPECT_EQ(0, solution.reverse(-pow(2, 31)));
+	EXPECT_EQ(0, solution.reverse(INT_MAX));
+	EXPECT_EQ(0, solution.reverse(INT_MAX + 1));
+	EXPECT_EQ(0, solution.reverse(INT_MIN));
 }
+#endif
+
+
+TEST(LeetCode, 008) {
+	Solution solution;
+	EXPECT_EQ(0, solution.myAtoi("+0 123"));
+	EXPECT_EQ(0, solution.myAtoi("+-2"));
+	EXPECT_EQ(0, solution.myAtoi("+0"));
+	EXPECT_EQ(1, solution.myAtoi("+1"));
+	EXPECT_EQ(123, solution.myAtoi("+123"));
+	EXPECT_EQ(42, solution.myAtoi("42"));
+	EXPECT_EQ(-42, solution.myAtoi("-42"));
+	EXPECT_EQ(-42, solution.myAtoi("   -42"));
+	EXPECT_EQ(4193, solution.myAtoi("4193 with words"));
+	EXPECT_EQ(0, solution.myAtoi("words and 987"));
+	EXPECT_EQ(INT_MIN, solution.myAtoi("-91283472332"));
+	EXPECT_EQ(120, solution.myAtoi("120"));
+	EXPECT_EQ(0, solution.myAtoi("0"));
+	EXPECT_EQ(1, solution.myAtoi("1"));
+	EXPECT_EQ(-1, solution.myAtoi("-1"));
+	EXPECT_EQ(10, solution.myAtoi("10"));
+	EXPECT_EQ(-10, solution.myAtoi("-10"));
+	EXPECT_EQ(INT_MAX, solution.myAtoi("2147483647"));
+	EXPECT_EQ(INT_MAX, solution.myAtoi("2147483648"));
+	EXPECT_EQ(INT_MAX, solution.myAtoi("20000000000000000000"));
+	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483648"));
+	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483649"));
+}
+
 
 #if 0
 
