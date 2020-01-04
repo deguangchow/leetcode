@@ -333,6 +333,24 @@ string Solution::convert(string s, int numRows) {
     return sRet;
 }
 
+
+//007
+int Solution::reverse(int x) {
+	long long nRet = 0;
+
+	do {
+		nRet = nRet * 10 + x % 10;
+		x = x / 10;
+	} while (x / 10 || x % 10);
+
+	if (-pow(2, 31) > nRet || nRet > pow(2, 31) - 1) {
+		return 0;
+	}
+
+	return nRet;
+}
+
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
@@ -1829,7 +1847,7 @@ vector<int> Solution::postorderTraversal(TreeNode* root) {
             cur = cur->left;
         }
     }
-    reverse(res.begin(), res.end());
+    std::reverse(res.begin(), res.end());
 #endif
 #endif
     return res;
