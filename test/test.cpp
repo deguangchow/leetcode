@@ -346,7 +346,6 @@ TEST(LeetCode, 007) {
 	EXPECT_EQ(0, solution.reverse(INT_MAX + 1));
 	EXPECT_EQ(0, solution.reverse(INT_MIN));
 }
-#endif
 
 
 TEST(LeetCode, 008) {
@@ -373,6 +372,28 @@ TEST(LeetCode, 008) {
 	EXPECT_EQ(INT_MAX, solution.myAtoi("20000000000000000000"));
 	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483648"));
 	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483649"));
+}
+#endif
+
+
+TEST(LeetCode, 009) {
+	Solution solution;
+	EXPECT_TRUE(solution.isPalindrome(121));
+	EXPECT_TRUE(solution.isPalindrome(0));
+	EXPECT_TRUE(solution.isPalindrome(1));
+	EXPECT_TRUE(solution.isPalindrome(12321));
+
+	EXPECT_FALSE(solution.isPalindrome(-121));
+	EXPECT_FALSE(solution.isPalindrome(100));
+	EXPECT_FALSE(solution.isPalindrome(123));
+	EXPECT_FALSE(solution.isPalindrome(-123));
+	EXPECT_FALSE(solution.isPalindrome(120));
+	EXPECT_FALSE(solution.isPalindrome(-1));
+	EXPECT_FALSE(solution.isPalindrome(10));
+	EXPECT_FALSE(solution.isPalindrome(-10));
+	EXPECT_FALSE(solution.isPalindrome(INT_MAX));
+	EXPECT_FALSE(solution.isPalindrome(INT_MAX + 1));
+	EXPECT_FALSE(solution.isPalindrome(INT_MIN));
 }
 
 

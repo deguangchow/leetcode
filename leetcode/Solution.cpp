@@ -390,6 +390,53 @@ int Solution::myAtoi(string str) {
 	return nRet;
 }
 
+
+//009
+bool Solution::isPalindrome(int x) {
+#if 0
+	//转字符串
+	if (x < 0) {
+		return false;
+	}
+	string s = "";
+	do {
+		char c = ('0' + x % 10);
+		s = c + s;
+		x = x / 10;
+	} while (x / 10 || x % 10);
+
+	int i = 0;
+	int j = s.length() - 1;
+	while (i < j) {
+		if (s[i] != s[j]) {
+			return false;
+		}
+		++i;
+		--j;
+	}
+	return true;
+#else
+		if (x < 0) {
+			return false;
+		}
+		if (x < 10) {
+			return true;
+		}
+		int nDivisor = 10;
+		while (x / nDivisor >= 10) {
+			nDivisor *= 10;
+		}
+		while (x > 0) {
+			if (x / nDivisor != x % 10) {
+				return false;
+			}
+			x = x%nDivisor / 10;
+			nDivisor /= 100;
+		}
+		return true;
+#endif
+}
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
