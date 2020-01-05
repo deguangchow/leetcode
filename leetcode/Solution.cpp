@@ -437,6 +437,54 @@ bool Solution::isPalindrome(int x) {
 #endif
 }
 
+
+//012
+string Solution::intToRoman(int num) {
+	string sRet = "";
+
+	char Roman1[] = { 'M', 'C', 'X', 'I' };
+	int Number1[] = { 1000, 100, 10, 1 };
+
+	char Roman5[] = { 'D', 'L', 'V' };
+	int Number5[] = { 500, 50, 5 };
+
+	for (int i = 0; i < 4 && num > 0; ++i) {
+		int x = num / Number1[i];
+		switch (x)
+		{
+		case 9:
+			num -= x * Number1[i];
+			sRet += Roman1[i];
+			sRet += Roman1[i - 1];
+			break;
+		case 8:
+		case 7:
+		case 6:
+		case 5:
+			num -= Number5[i - 1];
+			sRet += Roman5[i - 1];
+			--i;
+			break;
+		case 4:
+			num -= x * Number1[i];
+			sRet += Roman1[i];
+			sRet += Roman5[i - 1];
+			break;
+		case 3:
+		case 2:
+		case 1:
+			num -= x * Number1[i];
+			while (x-- > 0) {
+				sRet += Roman1[i];
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	return sRet;
+}
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;

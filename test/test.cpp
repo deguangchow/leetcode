@@ -373,7 +373,6 @@ TEST(LeetCode, 008) {
 	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483648"));
 	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483649"));
 }
-#endif
 
 
 TEST(LeetCode, 009) {
@@ -394,6 +393,41 @@ TEST(LeetCode, 009) {
 	EXPECT_FALSE(solution.isPalindrome(INT_MAX));
 	EXPECT_FALSE(solution.isPalindrome(INT_MAX + 1));
 	EXPECT_FALSE(solution.isPalindrome(INT_MIN));
+}
+#endif
+
+
+TEST(LeetCode, 012) {
+	Solution solution;
+	EXPECT_EQ("I", solution.intToRoman(1));
+	EXPECT_EQ("II", solution.intToRoman(2));
+	EXPECT_EQ("III", solution.intToRoman(3));
+	EXPECT_EQ("IV", solution.intToRoman(4));
+	EXPECT_EQ("V", solution.intToRoman(5));
+	EXPECT_EQ("VI", solution.intToRoman(6));
+	EXPECT_EQ("VII", solution.intToRoman(7));
+	EXPECT_EQ("VIII", solution.intToRoman(8));
+	EXPECT_EQ("IX", solution.intToRoman(9));
+	EXPECT_EQ("X", solution.intToRoman(10));
+	EXPECT_EQ("XI", solution.intToRoman(11));
+	EXPECT_EQ("XII", solution.intToRoman(12));
+	EXPECT_EQ("XIII", solution.intToRoman(13));
+	EXPECT_EQ("XIV", solution.intToRoman(14));
+	EXPECT_EQ("XV", solution.intToRoman(15));
+	EXPECT_EQ("XVI", solution.intToRoman(16));
+	EXPECT_EQ("XVII", solution.intToRoman(17));
+	EXPECT_EQ("XVIII", solution.intToRoman(18));
+	EXPECT_EQ("XIX", solution.intToRoman(19));
+	EXPECT_EQ("XX", solution.intToRoman(20));
+	EXPECT_EQ("LIX", solution.intToRoman(59));
+	EXPECT_EQ("LXIX", solution.intToRoman(69));
+	EXPECT_EQ("LXXIX", solution.intToRoman(79));
+	EXPECT_EQ("LXXXIX", solution.intToRoman(89));
+	EXPECT_EQ("XCIX", solution.intToRoman(99));
+	EXPECT_EQ("C", solution.intToRoman(100));
+	EXPECT_EQ("CXX", solution.intToRoman(120));
+	EXPECT_EQ("CXXIII", solution.intToRoman(123));
+	EXPECT_EQ("MMMCMLIX", solution.intToRoman(3959));
 }
 
 
