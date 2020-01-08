@@ -485,6 +485,56 @@ string Solution::intToRoman(int num) {
 	return sRet;
 }
 
+
+//013
+int Solution::romanToInt(string s) {
+    int nRet = 0;
+
+    int nLength = s.length();
+    for (int i = 0; i < nLength; ++i) {
+        switch (s[i]) {
+        case 'M':
+            nRet += 1000;
+            break;
+        case 'D':
+            nRet += 500;
+            break;
+        case 'C':
+            if (s[i + 1] == 'M' || s[i + 1] == 'D') {
+                nRet -= 100;
+            } else {
+                nRet += 100;
+            }
+            break;
+        case 'L':
+            nRet += 50;
+            break;
+        case 'X':
+            if (s[i + 1] == 'C' || s[i + 1] == 'L') {
+                nRet -= 10;
+            } else {
+                nRet += 10;
+            }
+            break;
+        case 'V':
+            nRet += 5;
+            break;
+        case 'I':
+            if (s[i + 1] == 'X' || s[i + 1] == 'V') {
+                nRet -= 1;
+            } else {
+                nRet += 1;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    return nRet;
+}
+
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
