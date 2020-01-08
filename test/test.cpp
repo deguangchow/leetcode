@@ -462,7 +462,7 @@ TEST(LeetCode, 013) {
     EXPECT_EQ(123, solution.romanToInt("CXXIII"));
     EXPECT_EQ(3959, solution.romanToInt("MMMCMLIX"));
 }
-#endif
+
 
 TEST(LeetCode, 014) {
     Solution solution;
@@ -489,6 +489,51 @@ TEST(LeetCode, 014) {
     {
         vector<string> vctS = { "a", "ab", "abc" };
         EXPECT_EQ("a", solution.longestCommonPrefix(vctS));
+    }
+}
+#endif
+
+
+TEST(LeetCode, 017) {
+    Solution s;
+    {
+        vector<string> const& exp = {
+            "a",
+            "b",
+            "c"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("2"));
+    }
+    {
+        vector<string> const& exp = {
+            "p",
+            "q",
+            "r",
+            "s"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("7"));
+    }
+    {
+        vector<string> const& exp = {
+            "ad", "ae", "af",
+            "bd", "be", "bf",
+            "cd", "ce", "cf"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("23"));
+    }
+    {
+        vector<string> const& exp = {
+            "adg", "adh", "adi",
+            "aeg", "aeh", "aei",
+            "afg", "afh", "afi",
+            "bdg", "bdh", "bdi",
+            "beg", "beh", "bei",
+            "bfg", "bfh", "bfi",
+            "cdg", "cdh", "cdi",
+            "ceg", "ceh", "cei",
+            "cfg", "cfh", "cfi"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("234"));
     }
 }
 

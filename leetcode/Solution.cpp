@@ -561,6 +561,47 @@ string Solution::longestCommonPrefix(vector<string>& strs) {
     return sRet.substr(0, i);
 }
 
+
+//017
+vector<string> Solution::letterCombinations(string digits) {
+    static vector<string> vctPhoneKeys = {
+        "abc",  // 电话按键：2
+        "def",  // 电话按键：3
+        "ghi",  // 电话按键：4
+        "jkl",  // 电话按键：5
+        "mno",  // 电话按键：6
+        "pqrs", // 电话按键：7
+        "tuv",  // 电话按键：8
+        "wxyz"  // 电话按键：9
+    };
+
+    vector<string> vctRet;
+    int nLength = digits.length();
+    if (nLength < 1) {
+        return vctRet;
+    }
+
+    int nRows = 1;
+    vector<int> vctMod(nLength);
+    for (int i = nLength - 1; i >= 0; --i) {
+        vctMod[i] = nRows;
+        nRows *= vctPhoneKeys[digits[i] - '2'].length();
+    }
+
+    for (int row = 0; row < nRows; ++row) {
+        string s = "";
+        for (int col = 0; col < nLength; ++col) {
+            string &sKey = vctPhoneKeys[digits[col] - '2'];
+            int index = row / vctMod[col] % sKey.length();
+            s += sKey[index];
+        }
+        vctRet.push_back(s);
+    }
+
+    return vctRet;
+}
+
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;
