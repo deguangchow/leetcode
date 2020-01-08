@@ -535,6 +535,32 @@ int Solution::romanToInt(string s) {
 }
 
 
+//014
+string Solution::longestCommonPrefix(vector<string>& strs) {
+    int nSize = strs.size();
+    if (nSize < 1) {
+        return "";
+    }
+    if (nSize == 1) {
+        return strs[0];
+    }
+    string sRet = strs[0];
+    int nLength = sRet.length();
+    int i = 0;
+    int j = 1;
+    for (; i < nLength; ++i) {
+        for (j = 1; j < nSize; ++j) {
+            if (strs[j][i] != sRet[i]) {
+                break;
+            }
+        }
+        if (j < nSize) {
+            break;
+        }
+    }
+    return sRet.substr(0, i);
+}
+
 //018
 vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
     vector<vector<int>> res;

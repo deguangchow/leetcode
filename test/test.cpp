@@ -428,7 +428,6 @@ TEST(LeetCode, 012) {
 	EXPECT_EQ("CXXIII", solution.intToRoman(123));
 	EXPECT_EQ("MMMCMLIX", solution.intToRoman(3959));
 }
-#endif
 
 
 TEST(LeetCode, 013) {
@@ -462,6 +461,35 @@ TEST(LeetCode, 013) {
     EXPECT_EQ(120, solution.romanToInt("CXX"));
     EXPECT_EQ(123, solution.romanToInt("CXXIII"));
     EXPECT_EQ(3959, solution.romanToInt("MMMCMLIX"));
+}
+#endif
+
+TEST(LeetCode, 014) {
+    Solution solution;
+    {
+        vector<string> vctS = { "flower", "flow", "flight" };
+        EXPECT_EQ("fl", solution.longestCommonPrefix(vctS));
+    }
+    {
+        vector<string> vctS = { "flower", "flow", "flight", "f"};
+        EXPECT_EQ("f", solution.longestCommonPrefix(vctS));
+    }
+    {
+        vector<string> vctS = { "flower", "flow", "flo" };
+        EXPECT_EQ("flo", solution.longestCommonPrefix(vctS));
+    }
+    {
+        vector<string> vctS = { "flower", "flow", "flows", "f" };
+        EXPECT_EQ("f", solution.longestCommonPrefix(vctS));
+    }
+    {
+        vector<string> vctS = { "dog", "racecar", "car" };
+        EXPECT_EQ("", solution.longestCommonPrefix(vctS));
+    }
+    {
+        vector<string> vctS = { "a", "ab", "abc" };
+        EXPECT_EQ("a", solution.longestCommonPrefix(vctS));
+    }
 }
 
 
