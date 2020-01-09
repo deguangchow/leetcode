@@ -888,8 +888,6 @@ void getNext(string const &s, vector<int> &next) {
     }
 }
 //KMP 算法
-    getNext(needle, vctNext);
-            ++j;
 int Solution::strStr(string haystack, string needle) {
         int nLenN = needle.length();
         if (0 == nLenN) {
