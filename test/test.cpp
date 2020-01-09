@@ -491,7 +491,6 @@ TEST(LeetCode, 014) {
         EXPECT_EQ("a", solution.longestCommonPrefix(vctS));
     }
 }
-#endif
 
 
 TEST(LeetCode, 017) {
@@ -536,9 +535,6 @@ TEST(LeetCode, 017) {
         expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("234"));
     }
 }
-
-
-#if 0
 
 
 TEST(LeetCode, 018) {
@@ -597,8 +593,19 @@ TEST(LeetCode, 019) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
+#endif
 
 
+TEST(LeetCode, 020) {
+    Solution solution;
+    EXPECT_TRUE(solution.isValid("()"));
+    EXPECT_TRUE(solution.isValid("()[]{}"));
+    EXPECT_TRUE(solution.isValid("{[]}"));
+    EXPECT_FALSE(solution.isValid("(]"));
+    EXPECT_FALSE(solution.isValid("([)]"));
+}
+
+#if 0
 TEST(LeetCode, 021) {
     Solution solution;
     ListNode*l1 = str2list("1,2,4");

@@ -722,6 +722,22 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2) {
 }
 
 
+//020
+bool Solution::isValid(string s) {
+    stack<char> stk;
+    char *p = &s[0];
+    while (*p != '\0') {
+        if (stk.empty() || *p - stk.top() != 1 && *p - stk.top() != 2) {
+            stk.push(*p);
+        } else {
+            stk.pop();
+        }
+        ++p;
+    }
+    return stk.empty();
+}
+
+
 //023
 ListNode* Solution::mergeKLists(vector<ListNode*>& lists) {
 #if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists
