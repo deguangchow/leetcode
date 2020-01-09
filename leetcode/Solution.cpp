@@ -181,7 +181,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
             vector<int> nums1_left;
             nums1_left.insert(nums1_left.end(), nums1.begin(), nums1.begin() + pos_mid1 + mod1);
             vector<int> nums2_right;
-            nums2_right.insert(nums2_right.end(), nums2.begin() + pos_mid2 , nums2.end());
+            nums2_right.insert(nums2_right.end(), nums2.begin() + pos_mid2, nums2.end());
             return findMedianSortedArrays(nums1_left, nums2_right);
         } else {
             vector<int> nums1_right;
@@ -205,7 +205,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
         int j = halfLen - i;
         if (i<iMax && nums2[j - 1]>nums1[i]) {
             iMin = i + 1;//i is too small
-        } else if (i > iMin && nums1[i-1] > nums2[j]) {
+        } else if (i > iMin && nums1[i - 1] > nums2[j]) {
             iMax = i - 1;//i is too big
         } else {//i is perfect
             int maxLeft = 0;
@@ -241,8 +241,7 @@ double Solution::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
 string Solution::longestPalindrome(string s) {
 #if 1
     int nLength = s.length();
-    if (nLength <= 1)
-    {
+    if (nLength <= 1) {
         return s;
     }
     int nPos = 0;
@@ -251,26 +250,19 @@ string Solution::longestPalindrome(string s) {
     int nPos2 = 0;
     int i = 0;
     int j = nLength - 1;
-    while (i < nLength - nLengthRet)
-    {
-        while (j >= i + nLengthRet)
-        {
+    while (i < nLength - nLengthRet) {
+        while (j >= i + nLengthRet) {
             nPos1 = i;
             nPos2 = j;
-            while (s[nPos1] == s[nPos2])
-            {
-                if (nPos2 - nPos1 <= 1)
-                {
-                    if (j - i + 1 > nLengthRet)
-                    {
+            while (s[nPos1] == s[nPos2]) {
+                if (nPos2 - nPos1 <= 1) {
+                    if (j - i + 1 > nLengthRet) {
                         nPos = i;
                         nLengthRet = j - i + 1;
                         i = nPos1 - 1;
                     }
                     break;
-                }
-                else
-                {
+                } else {
                     ++nPos1;
                     --nPos2;
                 }
@@ -282,29 +274,29 @@ string Solution::longestPalindrome(string s) {
     }
     return s.substr(nPos, nLengthRet);
 #else
-	if (s.empty()) return "";
-	int begin(0);
-	int end(0);
-	int next(0);
-	int m_b(0), m_e(0);
-	while (next < s.size() - 1) {
-		begin = next;
-		end = begin;
-		while (s[end + 1] == s[begin] && end < s.size() - 1) {
-			end++;
-		}
-		next = end;
-		while (begin > 0 && end < s.size() - 1 && s[begin - 1] == s[end + 1]) {
-			begin--;
-			end++;
-		}
-		if (end - begin > m_e - m_b) {
-			m_b = begin;
-			m_e = end;
-		}
-		next++;
-	}
-	return s.substr(m_b, m_e - m_b + 1);
+    if (s.empty()) return "";
+    int begin(0);
+    int end(0);
+    int next(0);
+    int m_b(0), m_e(0);
+    while (next < s.size() - 1) {
+        begin = next;
+        end = begin;
+        while (s[end + 1] == s[begin] && end < s.size() - 1) {
+            end++;
+        }
+        next = end;
+        while (begin > 0 && end < s.size() - 1 && s[begin - 1] == s[end + 1]) {
+            begin--;
+            end++;
+        }
+        if (end - begin > m_e - m_b) {
+            m_b = begin;
+            m_e = end;
+        }
+        next++;
+    }
+    return s.substr(m_b, m_e - m_b + 1);
 #endif
 }
 
@@ -336,153 +328,152 @@ string Solution::convert(string s, int numRows) {
 
 //007
 int Solution::reverse(int x) {
-	long long nRet = 0;
+    long long nRet = 0;
 
-	do {
-		nRet = nRet * 10 + x % 10;
-		x = x / 10;
-	} while (x / 10 || x % 10);
+    do {
+        nRet = nRet * 10 + x % 10;
+        x = x / 10;
+    } while (x / 10 || x % 10);
 
-	if (nRet < INT_MIN || nRet > INT_MAX) {
-		return 0;
-	}
+    if (nRet < INT_MIN || nRet > INT_MAX) {
+        return 0;
+    }
 
-	return nRet;
+    return nRet;
 }
 
 
 //008
 int Solution::myAtoi(string str) {
-	long long nRet = 0;
-	int nSign = 1;
-	bool bSignSetted = false;
+    long long nRet = 0;
+    int nSign = 1;
+    bool bSignSetted = false;
 
-	for (int i = 0; i < str.length(); ++i) {
-		if (!bSignSetted && (str[i] == '-' || str[i] == '+')) {
-			bSignSetted = true;
-			if (str[i] == '-') {
-				nSign = -1;
-			}
-		} else if (str[i] < '0' || str[i] > '9') {
-			if (!bSignSetted && str[i] == ' ') {
-				continue;
-			} else {
-				break;
-			}
-		} else {
-			bSignSetted = true;
-			nRet = nRet * 10 + (str[i] - '0');
-			if (nRet > INT_MAX) {
-				break;
-			}
-		}
-	}
+    for (int i = 0; i < str.length(); ++i) {
+        if (!bSignSetted && (str[i] == '-' || str[i] == '+')) {
+            bSignSetted = true;
+            if (str[i] == '-') {
+                nSign = -1;
+            }
+        } else if (str[i] < '0' || str[i] > '9') {
+            if (!bSignSetted && str[i] == ' ') {
+                continue;
+            } else {
+                break;
+            }
+        } else {
+            bSignSetted = true;
+            nRet = nRet * 10 + (str[i] - '0');
+            if (nRet > INT_MAX) {
+                break;
+            }
+        }
+    }
 
-	nRet *= nSign;
+    nRet *= nSign;
 
-	if (nRet < INT_MIN) {
-		return INT_MIN;
-	}
-	if (nRet > INT_MAX) {
-		return INT_MAX;
-	}
+    if (nRet < INT_MIN) {
+        return INT_MIN;
+    }
+    if (nRet > INT_MAX) {
+        return INT_MAX;
+    }
 
-	return nRet;
+    return nRet;
 }
 
 
 //009
 bool Solution::isPalindrome(int x) {
 #if 0
-	//转字符串
-	if (x < 0) {
-		return false;
-	}
-	string s = "";
-	do {
-		char c = ('0' + x % 10);
-		s = c + s;
-		x = x / 10;
-	} while (x / 10 || x % 10);
+    //转字符串
+    if (x < 0) {
+        return false;
+    }
+    string s = "";
+    do {
+        char c = ('0' + x % 10);
+        s = c + s;
+        x = x / 10;
+    } while (x / 10 || x % 10);
 
-	int i = 0;
-	int j = s.length() - 1;
-	while (i < j) {
-		if (s[i] != s[j]) {
-			return false;
-		}
-		++i;
-		--j;
-	}
-	return true;
+    int i = 0;
+    int j = s.length() - 1;
+    while (i < j) {
+        if (s[i] != s[j]) {
+            return false;
+        }
+        ++i;
+        --j;
+    }
+    return true;
 #else
-		if (x < 0) {
-			return false;
-		}
-		if (x < 10) {
-			return true;
-		}
-		int nDivisor = 10;
-		while (x / nDivisor >= 10) {
-			nDivisor *= 10;
-		}
-		while (x > 0) {
-			if (x / nDivisor != x % 10) {
-				return false;
-			}
-			x = x%nDivisor / 10;
-			nDivisor /= 100;
-		}
-		return true;
+    if (x < 0) {
+        return false;
+    }
+    if (x < 10) {
+        return true;
+    }
+    int nDivisor = 10;
+    while (x / nDivisor >= 10) {
+        nDivisor *= 10;
+    }
+    while (x > 0) {
+        if (x / nDivisor != x % 10) {
+            return false;
+        }
+        x = x%nDivisor / 10;
+        nDivisor /= 100;
+    }
+    return true;
 #endif
 }
 
 
 //012
 string Solution::intToRoman(int num) {
-	string sRet = "";
+    string sRet = "";
 
-	char Roman1[] = { 'M', 'C', 'X', 'I' };
-	int Number1[] = { 1000, 100, 10, 1 };
+    char Roman1[] = { 'M', 'C', 'X', 'I' };
+    int Number1[] = { 1000, 100, 10, 1 };
 
-	char Roman5[] = { 'D', 'L', 'V' };
-	int Number5[] = { 500, 50, 5 };
+    char Roman5[] = { 'D', 'L', 'V' };
+    int Number5[] = { 500, 50, 5 };
 
-	for (int i = 0; i < 4 && num > 0; ++i) {
-		int x = num / Number1[i];
-		switch (x)
-		{
-		case 9:
-			num -= x * Number1[i];
-			sRet += Roman1[i];
-			sRet += Roman1[i - 1];
-			break;
-		case 8:
-		case 7:
-		case 6:
-		case 5:
-			num -= Number5[i - 1];
-			sRet += Roman5[i - 1];
-			--i;
-			break;
-		case 4:
-			num -= x * Number1[i];
-			sRet += Roman1[i];
-			sRet += Roman5[i - 1];
-			break;
-		case 3:
-		case 2:
-		case 1:
-			num -= x * Number1[i];
-			while (x-- > 0) {
-				sRet += Roman1[i];
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	return sRet;
+    for (int i = 0; i < 4 && num > 0; ++i) {
+        int x = num / Number1[i];
+        switch (x) {
+        case 9:
+            num -= x * Number1[i];
+            sRet += Roman1[i];
+            sRet += Roman1[i - 1];
+            break;
+        case 8:
+        case 7:
+        case 6:
+        case 5:
+            num -= Number5[i - 1];
+            sRet += Roman5[i - 1];
+            --i;
+            break;
+        case 4:
+            num -= x * Number1[i];
+            sRet += Roman1[i];
+            sRet += Roman5[i - 1];
+            break;
+        case 3:
+        case 2:
+        case 1:
+            num -= x * Number1[i];
+            while (x-- > 0) {
+                sRet += Roman1[i];
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    return sRet;
 }
 
 
@@ -624,7 +615,7 @@ vector<vector<int>> Solution::fourSum(vector<int>& nums, int target) {
 
             int target2 = target3 - nums[i2];//3数变2数
 
-            //2数之和
+                                             //2数之和
             int i3 = i2 + 1;
             int i4 = size - 1;
             while (i3 < i4) {
@@ -889,34 +880,34 @@ void getNext(string const &s, vector<int> &next) {
 }
 //KMP 算法
 int Solution::strStr(string haystack, string needle) {
-        int nLenN = needle.length();
-        if (0 == nLenN) {
-            return 0;
-        }
+    int nLenN = needle.length();
+    if (0 == nLenN) {
+        return 0;
+    }
 
-        int nLenH = haystack.length();
-        if (nLenH < nLenN) {
-            return -1;
-        }
-        vector<int> vctNext(nLenN);
-        getNext(needle, vctNext);
-
-        int i = 0;
-        int j = 0;
-        while (i < nLenH && j < nLenN) {
-            if (j == -1 || haystack[i] == needle[j]) {
-                ++i;
-                ++j;
-            } else {
-                j = vctNext[j];
-            }
-        }
-
-        if (j == nLenN) {
-            return i - nLenN;
-        }
-
+    int nLenH = haystack.length();
+    if (nLenH < nLenN) {
         return -1;
+    }
+    vector<int> vctNext(nLenN);
+    getNext(needle, vctNext);
+
+    int i = 0;
+    int j = 0;
+    while (i < nLenH && j < nLenN) {
+        if (j == -1 || haystack[i] == needle[j]) {
+            ++i;
+            ++j;
+        } else {
+            j = vctNext[j];
+        }
+    }
+
+    if (j == nLenN) {
+        return i - nLenN;
+    }
+
+    return -1;
 }
 #else
 int Solution::strStr(string haystack, string needle) {
@@ -1354,7 +1345,7 @@ ListNode* Solution::reverseBetween(ListNode* head, int m, int n) {
     ListNode* p1 = head;        //第m个节点
     ListNode* p2 = head->next;  //第n个节点
 
-    //1、确定位置m
+                                //1、确定位置m
     for (auto i = 0; i < m - 1; ++i) {
         p0 = p0->next;
     }
@@ -2021,11 +2012,11 @@ int maxsum(TreeNode* root, int& ans) {
         return 0;
     }
 
-    int max_left    = maxsum(root->left, ans);
-    int max_right   = maxsum(root->right, ans);
-    int max_son     = std::max(max_left, max_right);
-    int res         = 0;
-    int tmp         = root->val;
+    int max_left = maxsum(root->left, ans);
+    int max_right = maxsum(root->right, ans);
+    int max_son = std::max(max_left, max_right);
+    int res = 0;
+    int tmp = root->val;
 
     if (max_son > 0) {
         res = max_son + root->val;

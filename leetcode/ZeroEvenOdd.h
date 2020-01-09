@@ -24,7 +24,7 @@ private:
     std::condition_variable m_cv;
 
 public:
-    ZeroEvenOdd(int n);
+    explicit ZeroEvenOdd(int n);
 
     // printNumber(x) outputs "x", where x is an integer.
     void zero(function<void(int)> printNumber);

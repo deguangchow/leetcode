@@ -97,7 +97,7 @@ public:
 	输入: "cbbd"
 	输出: "bb"
 	*/
-	string longestPalindrome(string s);
+    string longestPalindrome(string s);
 
 
     /*006
@@ -146,7 +146,7 @@ public:
 	注意:
 	假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31,  2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
 	*/
-	int reverse(int x);
+    int reverse(int x);
 
 
 	/*008
@@ -188,7 +188,7 @@ public:
 	解释: 数字 "-91283472332" 超过 32 位有符号整数范围。
 	因此返回 INT_MIN (−2^31) 。
 	*/
-	int myAtoi(string str);
+    int myAtoi(string str);
 
 
 	/*009
@@ -212,7 +212,7 @@ public:
 	进阶:
 	你能不将整数转为字符串来解决这个问题吗？
 	*/
-	bool isPalindrome(int x);
+    bool isPalindrome(int x);
 
 
 	/*012
@@ -255,7 +255,7 @@ public:
 	输出: "MCMXCIV"
 	解释: M = 1000, CM = 900, XC = 90, IV = 4.
 	*/
-	string intToRoman(int num);
+    string intToRoman(int num);
 
 
     /*013

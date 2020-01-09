@@ -317,7 +317,16 @@ TEST(LeetCode, 005) {
     EXPECT_EQ("aabaa", solution.longestPalindrome("aabaab!bb"));
     EXPECT_EQ("121", solution.longestPalindrome("12123536216"));
     EXPECT_EQ("...", solution.longestPalindrome("',...1212353632.2.16"));
-    string const &s = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
+    string const &s = "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        "111111111111111111111111111111111";
     EXPECT_EQ(s, solution.longestPalindrome(s));
 }
 
@@ -332,101 +341,101 @@ TEST(LeetCode, 006) {
 
 
 TEST(LeetCode, 007) {
-	Solution solution;
-	EXPECT_EQ(1, solution.reverse(100));
-	EXPECT_EQ(321, solution.reverse(123));
-	EXPECT_EQ(-321, solution.reverse(-123));
-	EXPECT_EQ(21, solution.reverse(120));
-	EXPECT_EQ(0, solution.reverse(0));
-	EXPECT_EQ(1, solution.reverse(1));
-	EXPECT_EQ(-1, solution.reverse(-1));
-	EXPECT_EQ(1, solution.reverse(10));
-	EXPECT_EQ(-1, solution.reverse(-10));
-	EXPECT_EQ(0, solution.reverse(INT_MAX));
-	EXPECT_EQ(0, solution.reverse(INT_MAX + 1));
-	EXPECT_EQ(0, solution.reverse(INT_MIN));
+    Solution solution;
+    EXPECT_EQ(1, solution.reverse(100));
+    EXPECT_EQ(321, solution.reverse(123));
+    EXPECT_EQ(-321, solution.reverse(-123));
+    EXPECT_EQ(21, solution.reverse(120));
+    EXPECT_EQ(0, solution.reverse(0));
+    EXPECT_EQ(1, solution.reverse(1));
+    EXPECT_EQ(-1, solution.reverse(-1));
+    EXPECT_EQ(1, solution.reverse(10));
+    EXPECT_EQ(-1, solution.reverse(-10));
+    EXPECT_EQ(0, solution.reverse(INT_MAX));
+    EXPECT_EQ(0, solution.reverse(INT_MAX + 1));
+    EXPECT_EQ(0, solution.reverse(INT_MIN));
 }
 
 
 TEST(LeetCode, 008) {
-	Solution solution;
-	EXPECT_EQ(0, solution.myAtoi("+0 123"));
-	EXPECT_EQ(0, solution.myAtoi("+-2"));
-	EXPECT_EQ(0, solution.myAtoi("+0"));
-	EXPECT_EQ(1, solution.myAtoi("+1"));
-	EXPECT_EQ(123, solution.myAtoi("+123"));
-	EXPECT_EQ(42, solution.myAtoi("42"));
-	EXPECT_EQ(-42, solution.myAtoi("-42"));
-	EXPECT_EQ(-42, solution.myAtoi("   -42"));
-	EXPECT_EQ(4193, solution.myAtoi("4193 with words"));
-	EXPECT_EQ(0, solution.myAtoi("words and 987"));
-	EXPECT_EQ(INT_MIN, solution.myAtoi("-91283472332"));
-	EXPECT_EQ(120, solution.myAtoi("120"));
-	EXPECT_EQ(0, solution.myAtoi("0"));
-	EXPECT_EQ(1, solution.myAtoi("1"));
-	EXPECT_EQ(-1, solution.myAtoi("-1"));
-	EXPECT_EQ(10, solution.myAtoi("10"));
-	EXPECT_EQ(-10, solution.myAtoi("-10"));
-	EXPECT_EQ(INT_MAX, solution.myAtoi("2147483647"));
-	EXPECT_EQ(INT_MAX, solution.myAtoi("2147483648"));
-	EXPECT_EQ(INT_MAX, solution.myAtoi("20000000000000000000"));
-	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483648"));
-	EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483649"));
+    Solution solution;
+    EXPECT_EQ(0, solution.myAtoi("+0 123"));
+    EXPECT_EQ(0, solution.myAtoi("+-2"));
+    EXPECT_EQ(0, solution.myAtoi("+0"));
+    EXPECT_EQ(1, solution.myAtoi("+1"));
+    EXPECT_EQ(123, solution.myAtoi("+123"));
+    EXPECT_EQ(42, solution.myAtoi("42"));
+    EXPECT_EQ(-42, solution.myAtoi("-42"));
+    EXPECT_EQ(-42, solution.myAtoi("   -42"));
+    EXPECT_EQ(4193, solution.myAtoi("4193 with words"));
+    EXPECT_EQ(0, solution.myAtoi("words and 987"));
+    EXPECT_EQ(INT_MIN, solution.myAtoi("-91283472332"));
+    EXPECT_EQ(120, solution.myAtoi("120"));
+    EXPECT_EQ(0, solution.myAtoi("0"));
+    EXPECT_EQ(1, solution.myAtoi("1"));
+    EXPECT_EQ(-1, solution.myAtoi("-1"));
+    EXPECT_EQ(10, solution.myAtoi("10"));
+    EXPECT_EQ(-10, solution.myAtoi("-10"));
+    EXPECT_EQ(INT_MAX, solution.myAtoi("2147483647"));
+    EXPECT_EQ(INT_MAX, solution.myAtoi("2147483648"));
+    EXPECT_EQ(INT_MAX, solution.myAtoi("20000000000000000000"));
+    EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483648"));
+    EXPECT_EQ(INT_MIN, solution.myAtoi("-2147483649"));
 }
 
 
 TEST(LeetCode, 009) {
-	Solution solution;
-	EXPECT_TRUE(solution.isPalindrome(121));
-	EXPECT_TRUE(solution.isPalindrome(0));
-	EXPECT_TRUE(solution.isPalindrome(1));
-	EXPECT_TRUE(solution.isPalindrome(12321));
+    Solution solution;
+    EXPECT_TRUE(solution.isPalindrome(121));
+    EXPECT_TRUE(solution.isPalindrome(0));
+    EXPECT_TRUE(solution.isPalindrome(1));
+    EXPECT_TRUE(solution.isPalindrome(12321));
 
-	EXPECT_FALSE(solution.isPalindrome(-121));
-	EXPECT_FALSE(solution.isPalindrome(100));
-	EXPECT_FALSE(solution.isPalindrome(123));
-	EXPECT_FALSE(solution.isPalindrome(-123));
-	EXPECT_FALSE(solution.isPalindrome(120));
-	EXPECT_FALSE(solution.isPalindrome(-1));
-	EXPECT_FALSE(solution.isPalindrome(10));
-	EXPECT_FALSE(solution.isPalindrome(-10));
-	EXPECT_FALSE(solution.isPalindrome(INT_MAX));
-	EXPECT_FALSE(solution.isPalindrome(INT_MAX + 1));
-	EXPECT_FALSE(solution.isPalindrome(INT_MIN));
+    EXPECT_FALSE(solution.isPalindrome(-121));
+    EXPECT_FALSE(solution.isPalindrome(100));
+    EXPECT_FALSE(solution.isPalindrome(123));
+    EXPECT_FALSE(solution.isPalindrome(-123));
+    EXPECT_FALSE(solution.isPalindrome(120));
+    EXPECT_FALSE(solution.isPalindrome(-1));
+    EXPECT_FALSE(solution.isPalindrome(10));
+    EXPECT_FALSE(solution.isPalindrome(-10));
+    EXPECT_FALSE(solution.isPalindrome(INT_MAX));
+    EXPECT_FALSE(solution.isPalindrome(INT_MAX + 1));
+    EXPECT_FALSE(solution.isPalindrome(INT_MIN));
 }
 
 
 TEST(LeetCode, 012) {
-	Solution solution;
-	EXPECT_EQ("I", solution.intToRoman(1));
-	EXPECT_EQ("II", solution.intToRoman(2));
-	EXPECT_EQ("III", solution.intToRoman(3));
-	EXPECT_EQ("IV", solution.intToRoman(4));
-	EXPECT_EQ("V", solution.intToRoman(5));
-	EXPECT_EQ("VI", solution.intToRoman(6));
-	EXPECT_EQ("VII", solution.intToRoman(7));
-	EXPECT_EQ("VIII", solution.intToRoman(8));
-	EXPECT_EQ("IX", solution.intToRoman(9));
-	EXPECT_EQ("X", solution.intToRoman(10));
-	EXPECT_EQ("XI", solution.intToRoman(11));
-	EXPECT_EQ("XII", solution.intToRoman(12));
-	EXPECT_EQ("XIII", solution.intToRoman(13));
-	EXPECT_EQ("XIV", solution.intToRoman(14));
-	EXPECT_EQ("XV", solution.intToRoman(15));
-	EXPECT_EQ("XVI", solution.intToRoman(16));
-	EXPECT_EQ("XVII", solution.intToRoman(17));
-	EXPECT_EQ("XVIII", solution.intToRoman(18));
-	EXPECT_EQ("XIX", solution.intToRoman(19));
-	EXPECT_EQ("XX", solution.intToRoman(20));
-	EXPECT_EQ("LIX", solution.intToRoman(59));
-	EXPECT_EQ("LXIX", solution.intToRoman(69));
-	EXPECT_EQ("LXXIX", solution.intToRoman(79));
-	EXPECT_EQ("LXXXIX", solution.intToRoman(89));
-	EXPECT_EQ("XCIX", solution.intToRoman(99));
-	EXPECT_EQ("C", solution.intToRoman(100));
-	EXPECT_EQ("CXX", solution.intToRoman(120));
-	EXPECT_EQ("CXXIII", solution.intToRoman(123));
-	EXPECT_EQ("MMMCMLIX", solution.intToRoman(3959));
+    Solution solution;
+    EXPECT_EQ("I", solution.intToRoman(1));
+    EXPECT_EQ("II", solution.intToRoman(2));
+    EXPECT_EQ("III", solution.intToRoman(3));
+    EXPECT_EQ("IV", solution.intToRoman(4));
+    EXPECT_EQ("V", solution.intToRoman(5));
+    EXPECT_EQ("VI", solution.intToRoman(6));
+    EXPECT_EQ("VII", solution.intToRoman(7));
+    EXPECT_EQ("VIII", solution.intToRoman(8));
+    EXPECT_EQ("IX", solution.intToRoman(9));
+    EXPECT_EQ("X", solution.intToRoman(10));
+    EXPECT_EQ("XI", solution.intToRoman(11));
+    EXPECT_EQ("XII", solution.intToRoman(12));
+    EXPECT_EQ("XIII", solution.intToRoman(13));
+    EXPECT_EQ("XIV", solution.intToRoman(14));
+    EXPECT_EQ("XV", solution.intToRoman(15));
+    EXPECT_EQ("XVI", solution.intToRoman(16));
+    EXPECT_EQ("XVII", solution.intToRoman(17));
+    EXPECT_EQ("XVIII", solution.intToRoman(18));
+    EXPECT_EQ("XIX", solution.intToRoman(19));
+    EXPECT_EQ("XX", solution.intToRoman(20));
+    EXPECT_EQ("LIX", solution.intToRoman(59));
+    EXPECT_EQ("LXIX", solution.intToRoman(69));
+    EXPECT_EQ("LXXIX", solution.intToRoman(79));
+    EXPECT_EQ("LXXXIX", solution.intToRoman(89));
+    EXPECT_EQ("XCIX", solution.intToRoman(99));
+    EXPECT_EQ("C", solution.intToRoman(100));
+    EXPECT_EQ("CXX", solution.intToRoman(120));
+    EXPECT_EQ("CXXIII", solution.intToRoman(123));
+    EXPECT_EQ("MMMCMLIX", solution.intToRoman(3959));
 }
 
 
@@ -471,7 +480,7 @@ TEST(LeetCode, 014) {
         EXPECT_EQ("fl", solution.longestCommonPrefix(vctS));
     }
     {
-        vector<string> vctS = { "flower", "flow", "flight", "f"};
+        vector<string> vctS = { "flower", "flow", "flight", "f" };
         EXPECT_EQ("f", solution.longestCommonPrefix(vctS));
     }
     {
@@ -1915,7 +1924,7 @@ TEST(LeetCode, HeapDemo) {
         EXPECT_NO_THROW(HeapDemo::buildMaxHeap(a, LENGTH_OF_ARRAY(a)));
         cout << "buildMaxHeap: ";
         for (auto const& pos : a) {
-            cout << pos <<',';
+            cout << pos << ',';
         }
         cout << endl;
         EXPECT_EQ(31, a[0]);
