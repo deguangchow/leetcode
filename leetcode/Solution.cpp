@@ -739,6 +739,26 @@ ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2) {
 }
 
 
+//022
+void doGenerateParenthesis(vector<string> &vctRes, string str, int l, int r, int n) {
+    if (l > n || r > n || r > l) {
+        return;
+    }
+    if (l == n && r == n) {
+        vctRes.push_back(str);
+        return;
+    }
+    doGenerateParenthesis(vctRes, str + '(', l + 1, r, n);
+    doGenerateParenthesis(vctRes, str + ')', l, r + 1, n);
+    return;
+}
+vector<string> Solution::generateParenthesis(int n) {
+    vector<string> vctRes;
+    doGenerateParenthesis(vctRes, "", 0, 0, n);
+    return vctRes;
+}
+
+
 //023
 ListNode* Solution::mergeKLists(vector<ListNode*>& lists) {
 #if 1//023.1：复用021解题思路，多次调用接口mergeTwoLists

@@ -593,7 +593,6 @@ TEST(LeetCode, 019) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
-#endif
 
 
 TEST(LeetCode, 020) {
@@ -605,7 +604,7 @@ TEST(LeetCode, 020) {
     EXPECT_FALSE(solution.isValid("([)]"));
 }
 
-#if 0
+
 TEST(LeetCode, 021) {
     Solution solution;
     ListNode*l1 = str2list("1,2,4");
@@ -614,8 +613,103 @@ TEST(LeetCode, 021) {
     ListNode*ret = solution.mergeTwoLists(l1, l2);
     EXPECT_LIST_VAL_EQ(exp, ret);
 }
+#endif
 
 
+TEST(LeetCode, 022) {
+    Solution s;
+    {
+        vector<string> const& exp = {
+            "()",
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.generateParenthesis(1));
+    }
+    {
+        vector<string> const& exp = {
+            "(())",
+            "()()",
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.generateParenthesis(2));
+    }
+    {
+        vector<string> const& exp = {
+            "((()))",
+            "(()())",
+            "(())()",
+            "()(())",
+            "()()()"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.generateParenthesis(3));
+    }
+    {
+        vector<string> const& exp = {
+            "(((())))",
+            "((()()))",
+            "((())())",
+            "((()))()",
+            "(()(()))",
+            "(()()())",
+            "(()())()",
+            "(())(())",
+            "(())()()",
+            "()((()))",
+            "()(()())",
+            "()(())()",
+            "()()(())",
+            "()()()()"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.generateParenthesis(4));
+    }
+    {
+        vector<string> const& exp = {
+            "((((()))))",
+            "(((()())))",
+            "(((())()))",
+            "(((()))())",
+            "(((())))()",
+            "((()(())))",
+            "((()()()))",
+            "((()())())",
+            "((()()))()",
+            "((())(()))",
+            "((())()())",
+            "((())())()",
+            "((()))(())",
+            "((()))()()",
+            "(()((())))",
+            "(()(()()))",
+            "(()(())())",
+            "(()(()))()",
+            "(()()(()))",
+            "(()()()())",
+            "(()()())()",
+            "(()())(())",
+            "(()())()()",
+            "(())((()))",
+            "(())(()())",
+            "(())(())()",
+            "(())()(())",
+            "(())()()()",
+            "()(((())))",
+            "()((()()))",
+            "()((())())",
+            "()((()))()",
+            "()(()(()))",
+            "()(()()())",
+            "()(()())()",
+            "()(())(())",
+            "()(())()()",
+            "()()((()))",
+            "()()(()())",
+            "()()(())()",
+            "()()()(())",
+            "()()()()()"
+        };
+        expect_eq<string>::expect_vector_val_eq(exp, s.generateParenthesis(5));
+    }
+}
+
+#if 0
 TEST(LeetCode, 023) {
     Solution solution;
     ListNode*l1 = str2list("1,2,4");
