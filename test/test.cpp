@@ -613,7 +613,6 @@ TEST(LeetCode, 021) {
     ListNode*ret = solution.mergeTwoLists(l1, l2);
     EXPECT_LIST_VAL_EQ(exp, ret);
 }
-#endif
 
 
 TEST(LeetCode, 022) {
@@ -709,7 +708,6 @@ TEST(LeetCode, 022) {
     }
 }
 
-#if 0
 TEST(LeetCode, 023) {
     Solution solution;
     ListNode*l1 = str2list("1,2,4");
@@ -836,8 +834,21 @@ TEST(LeetCode, 025) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
+#endif
 
 
+TEST(LeetCode, 025) {
+    Solution s;
+    EXPECT_EQ(15, s.strStr("BBC ABCDAB ABCDABCDABDE", "ABCDABD"));
+    EXPECT_EQ(2, s.strStr("hello", "ll"));
+    EXPECT_EQ(-1, s.strStr("aaaaa", "bba"));
+    EXPECT_EQ(0, s.strStr("", ""));
+    EXPECT_EQ(-1, s.strStr("", "a"));
+    EXPECT_EQ(0, s.strStr("a", ""));
+    EXPECT_EQ(0, s.strStr("a", "a"));
+}
+
+#if 0
 TEST(LeetCode, 036) {
     Solution s;
     {

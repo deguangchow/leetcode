@@ -863,6 +863,89 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k) {
 }
 
 
+//028
+//获取 next 集合
+#if 0
+void getNext(string const &s, vector<int> &next) {
+    int n = s.length();
+    int j = 0;
+    int k = -1;
+    next[0] = -1;
+
+    while (j < n -1) {
+        if (k == -1 || s[k] == s[j]) {
+            ++j;
+            ++k;
+            next[j] = k;
+        } else {
+            k = next[k];
+        }
+    }
+}
+//KMP 算法
+int Solution::strStr(string haystack, string needle) {
+    int nLengthNeedle = needle.length();
+    if (0 == nLengthNeedle) {
+        return 0;
+    }
+
+    int nLengthHayStack = haystack.length();
+    if (nLengthHayStack < nLengthNeedle) {
+        return -1;
+    }
+    vector<int> vctNext(nLengthNeedle);
+    getNext(needle, vctNext);
+
+    int i = 0;
+    int j = 0;
+    while (i < nLengthHayStack && j < nLengthNeedle) {
+        if (j == -1 || haystack[i] == needle[j]) {
+            ++i;
+            ++j;
+        } else {
+            j = vctNext[j];
+        }
+    }
+
+    if (j == nLengthNeedle) {
+        return i - nLengthNeedle;
+    }
+
+    return -1;
+}
+#else
+int Solution::strStr(string haystack, string needle) {
+        int nLenN = needle.length();
+        if (0 == nLenN) {
+            return 0;
+        }
+
+        int nLenH = haystack.length();
+        if (nLenH < nLenN) {
+            return -1;
+        }
+
+        //暴力法（优化 i 的位置）
+        int i = 0;
+        int j = 0;
+        while (i < nLenH && j < nLenN) {
+            if (haystack[i] == needle[j]) {
+                ++i;
+                ++j;
+            } else {
+                i -= j - 1;
+                j = 0;
+            }
+        }
+
+        if (j == nLenN) {
+            return i - nLenN;
+        }
+
+        return -1;
+}
+#endif
+
 //036
 bool Solution::isValidSudoku(vector<vector<char>>& board) {
 #if 0
