@@ -942,6 +942,74 @@ int Solution::strStr(string haystack, string needle) {
 }
 #endif
 
+
+//030
+#if 0
+vector<int> Solution::findSubstring(string s, vector<string>& words) {
+    if (s.empty() || words.empty()) return{};
+    int n = words.size(), m = words[0].size(), j = 0;
+    if (s.size() < m * n) return{};
+    vector<int> res;
+    unordered_map<string, int> mp, tmp;
+    for (auto str : words) {
+        ++mp[str];
+    }
+    string str = "";
+    for (int i = 0; i + m * n <= s.size(); ++i) {
+        for (j = i; j < i + m * n; j += m) {
+            str = s.substr(j, m);
+            if (mp.find(str) == mp.end()) break;
+            ++tmp[str];
+        }
+        if (j == i + m * n && tmp == mp) res.push_back(i);
+        tmp.clear();
+    }
+    return res;
+}
+#else
+vector<int> Solution::findSubstring(string s, vector<string>& words) {
+        vector<int> vctRet;
+        int const l = s.length();
+        int const n = words.size();
+        if (l == 0 || n == 0) {
+            return vctRet;
+        }
+        int const m = words[0].length();
+        if (l < m * n) {
+            return vctRet;
+        }
+
+        //1、hash
+        unordered_map<string, int> mapCache;//缓存
+        for (auto word : words) {
+            ++mapCache[word];
+        }
+
+        unordered_map<string, int> mapStatistics;//统计
+
+        //2、滑动窗口
+        //搜索 s 中长度为 m 的子串，在缓存 mapCache 中查找并汇总统计信息到 mapStatistics 中
+        for (int i = 0; i <= l - m * n; ++i) {
+            mapStatistics.clear();
+            int j = i;
+            for (; j < i + m * n; j += m) {
+                auto const &sSub = s.substr(j, m);
+                if (mapCache.find(sSub) == mapCache.end()) {
+                    break;
+                }
+                ++mapStatistics[sSub];
+            }
+
+            //3、比较统计的 map 和缓存的 map 数据是否一致
+            if (mapCache == mapStatistics) {
+                vctRet.push_back(i);
+            }
+        }
+        return vctRet;
+}
+#endif
+
+
 //036
 bool Solution::isValidSudoku(vector<vector<char>>& board) {
 #if 0
