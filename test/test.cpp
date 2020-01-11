@@ -855,7 +855,6 @@ TEST(LeetCode, 025) {
     EXPECT_EQ(0, s.strStr("a", ""));
     EXPECT_EQ(0, s.strStr("a", "a"));
 }
-#endif
 
 
 TEST(LeetCode, 030) {
@@ -1040,6 +1039,37 @@ TEST(LeetCode, 030) {
                 "jpyrhamivfcdcotodwhvtuyyjlthbaxmrvfzxrhvzkydartfqbalxyjilepmemawjfxhzecyqcdswxxmaaxxyifmouauibstgpcfw"
                 "gfmjlfhketkeshfcorqirmssfnbuqiqwqfhbmol", words));
     }
+}
+#endif
+
+
+TEST(LeetCode, 032) {
+	Solution s;
+	EXPECT_EQ(0, s.longestValidParentheses(""));
+	EXPECT_EQ(0, s.longestValidParentheses("("));
+	EXPECT_EQ(0, s.longestValidParentheses(")"));
+	EXPECT_EQ(2, s.longestValidParentheses("()"));
+	EXPECT_EQ(0, s.longestValidParentheses(")("));
+	EXPECT_EQ(0, s.longestValidParentheses("(("));
+	EXPECT_EQ(0, s.longestValidParentheses("))"));
+	EXPECT_EQ(0, s.longestValidParentheses("((("));
+	EXPECT_EQ(2, s.longestValidParentheses("(()"));
+	EXPECT_EQ(2, s.longestValidParentheses("()("));
+	EXPECT_EQ(2, s.longestValidParentheses("())"));
+	EXPECT_EQ(0, s.longestValidParentheses(")(("));
+	EXPECT_EQ(2, s.longestValidParentheses(")()"));
+	EXPECT_EQ(0, s.longestValidParentheses("))("));
+	EXPECT_EQ(0, s.longestValidParentheses(")))"));
+	EXPECT_EQ(2, s.longestValidParentheses("(()"));
+	EXPECT_EQ(2, s.longestValidParentheses("()(()"));
+	EXPECT_EQ(2, s.longestValidParentheses("()(()("));
+	EXPECT_EQ(4, s.longestValidParentheses("()())"));
+	EXPECT_EQ(2, s.longestValidParentheses("((()"));
+	EXPECT_EQ(4, s.longestValidParentheses("((())"));
+	EXPECT_EQ(4, s.longestValidParentheses(")()())"));
+	EXPECT_EQ(6, s.longestValidParentheses("((()))"));
+	EXPECT_EQ(6, s.longestValidParentheses("()(())"));
+	EXPECT_EQ(6, s.longestValidParentheses(")()())()()()"));
 }
 
 

@@ -1010,6 +1010,27 @@ vector<int> Solution::findSubstring(string s, vector<string>& words) {
 #endif
 
 
+//032
+int Solution::longestValidParentheses(string s) {
+	int nMax = 0;
+	stack<int> stk;
+	stk.push(-1);
+	for (int i=0; i<s.length(); ++i) {
+		if (s[i] == '(') {
+			stk.push(i);
+		} else {
+			stk.pop();
+			if (stk.empty()) {
+				stk.push(i);
+			} else {
+				nMax = std::max(nMax, i - stk.top());
+			}
+		}
+	}
+	return nMax;
+}
+
+
 //036
 bool Solution::isValidSudoku(vector<vector<char>>& board) {
 #if 0
