@@ -1040,7 +1040,6 @@ TEST(LeetCode, 030) {
                 "gfmjlfhketkeshfcorqirmssfnbuqiqwqfhbmol", words));
     }
 }
-#endif
 
 
 TEST(LeetCode, 032) {
@@ -1071,7 +1070,18 @@ TEST(LeetCode, 032) {
 	EXPECT_EQ(6, s.longestValidParentheses("()(())"));
 	EXPECT_EQ(6, s.longestValidParentheses(")()())()()()"));
 }
+#endif
 
+TEST(LeetCode, 037) {
+	Solution s;
+	EXPECT_EQ("1", s.countAndSay(1));
+	EXPECT_EQ("11", s.countAndSay(2));
+	EXPECT_EQ("21", s.countAndSay(3));
+	EXPECT_EQ("1211", s.countAndSay(4));
+	EXPECT_EQ("111221", s.countAndSay(5));
+	EXPECT_EQ("312211", s.countAndSay(6));
+	EXPECT_EQ("13112221", s.countAndSay(7));
+}
 
 #if 0
 TEST(LeetCode, 036) {

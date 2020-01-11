@@ -1256,6 +1256,30 @@ void Solution::solveSudoku(vector<vector<char> > &board) {
 }
 
 
+string Solution::countAndSay(int n) {
+	string s = "1";
+	string sRet = s;
+	while (--n) {
+		s = sRet;
+		sRet = "";
+		int i = 0;
+		while (i < s.length()) {
+			char c = s[i];
+			int cnt = 0;
+			int j = i;
+			while (s[j] == c) {
+				++cnt;
+				++j;
+			}
+			sRet += '0' + cnt;
+			sRet += c;
+			i += cnt;
+		}
+	}
+	return sRet;
+}
+
+
 //056
 vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {
     if (intervals.empty()) {
