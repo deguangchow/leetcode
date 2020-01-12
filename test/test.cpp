@@ -1081,7 +1081,6 @@ TEST(LeetCode, 037) {
 	EXPECT_EQ("312211", s.countAndSay(6));
 	EXPECT_EQ("13112221", s.countAndSay(7));
 }
-#endif
 
 
 TEST(LeetCode, 043) {
@@ -1096,7 +1095,22 @@ TEST(LeetCode, 043) {
 	EXPECT_EQ("5535", s.multiply("123", "45"));
 	EXPECT_EQ("3060", s.multiply("102", "30"));
 }
+#endif
 
+
+TEST(LeetCode, 058) {
+	Solution s;
+	EXPECT_EQ(1, s.lengthOfLastWord("a"));
+	EXPECT_EQ(1, s.lengthOfLastWord("a "));
+	EXPECT_EQ(1, s.lengthOfLastWord("a    "));
+	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode"));
+	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode   "));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello World"));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello World   "));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello"));
+	EXPECT_EQ(5, s.lengthOfLastWord("World"));
+	EXPECT_EQ(0, s.lengthOfLastWord(""));
+}
 
 #if 0
 TEST(LeetCode, 036) {

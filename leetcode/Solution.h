@@ -697,6 +697,18 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval);
 
 
+	/*058
+	58. 最后一个单词的长度
+	给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。
+	如果不存在最后一个单词，请返回 0 。
+	说明：一个单词是指由字母组成，但不包含任何空格的字符串。
+
+	示例:
+	输入: "Hello World"
+	输出: 5
+	*/
+	int lengthOfLastWord(string s);
+
     /*061
     61. 旋转链表
     给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。

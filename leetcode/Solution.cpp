@@ -1383,6 +1383,22 @@ vector<vector<int>> Solution::insert(vector<vector<int>>& intervals, vector<int>
     return res;
 }
 
+
+//058
+int Solution::lengthOfLastWord(string s) {
+	int i = s.length() - 1;
+	int j = i;
+	while (i >= 0 && s[i] == ' ') {
+		--i;
+		--j;
+	}
+	while (i >= 0 && s[i] != ' ') {
+		--i;
+	}
+	return j - i;
+}
+
+
 //061
 ListNode* Solution::rotateRight(ListNode* head, int k) {
     if (nullptr == head || nullptr == head->next) {
