@@ -1070,7 +1070,6 @@ TEST(LeetCode, 032) {
 	EXPECT_EQ(6, s.longestValidParentheses("()(())"));
 	EXPECT_EQ(6, s.longestValidParentheses(")()())()()()"));
 }
-#endif
 
 TEST(LeetCode, 037) {
 	Solution s;
@@ -1082,6 +1081,22 @@ TEST(LeetCode, 037) {
 	EXPECT_EQ("312211", s.countAndSay(6));
 	EXPECT_EQ("13112221", s.countAndSay(7));
 }
+#endif
+
+
+TEST(LeetCode, 043) {
+	Solution s;
+	EXPECT_EQ("0", s.multiply("9133", "0"));
+	EXPECT_EQ("6", s.multiply("2", "3"));
+	EXPECT_EQ("1", s.multiply("1", "1"));
+	EXPECT_EQ("2", s.multiply("1", "2"));
+	EXPECT_EQ("72", s.multiply("9", "8"));
+	EXPECT_EQ("8811", s.multiply("89", "99"));
+	EXPECT_EQ("253", s.multiply("11", "23"));
+	EXPECT_EQ("5535", s.multiply("123", "45"));
+	EXPECT_EQ("3060", s.multiply("102", "30"));
+}
+
 
 #if 0
 TEST(LeetCode, 036) {

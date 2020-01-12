@@ -1256,6 +1256,7 @@ void Solution::solveSudoku(vector<vector<char> > &board) {
 }
 
 
+//038
 string Solution::countAndSay(int n) {
 	string s = "1";
 	string sRet = s;
@@ -1279,6 +1280,49 @@ string Solution::countAndSay(int n) {
 	return sRet;
 }
 
+
+//043
+string Solution::multiply(string num1, string num2) {
+	if (num1 == "0" || num2 == "0") {
+		return "0";
+	}
+
+	int nLen1 = num1.length();
+	int nLen2 = num2.length();
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	int *arrCache = new int[nLen1 + nLen2];//缓存计算结果的数组
+	while (k < nLen1 + nLen2) {//初始化缓存数组中所有的数据为 0
+		arrCache[k++] = 0;
+	}
+
+	int nCarry = 0;//缓存进位
+
+	for (j = nLen2 - 1; j >= 0; --j) {
+		for (i = nLen1 - 1, k = nLen2 - 1 - j; i >= 0; --i, ++k) {
+			int nOld = arrCache[k];
+			arrCache[k] = (nOld + (num1[i] - '0') * (num2[j] - '0') + nCarry) % 10;
+			nCarry = (nOld + (num1[i] - '0') * (num2[j] - '0') + nCarry) / 10;
+		}
+		while (nCarry > 0) {
+			int nOld = arrCache[k];
+			arrCache[k] = (nOld + nCarry) % 10;
+			nCarry = (nOld + nCarry) / 10;
+			++k;
+		}
+	}
+
+	string sRet = "";
+	for (i = k - 1; i >= 0; --i) {
+		sRet += '0' + arrCache[i];
+	}
+
+	delete []arrCache;
+	arrCache = nullptr;
+
+	return sRet;
+}
 
 //056
 vector<vector<int>> Solution::merge(vector<vector<int>>& intervals) {
