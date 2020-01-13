@@ -1095,7 +1095,6 @@ TEST(LeetCode, 043) {
 	EXPECT_EQ("5535", s.multiply("123", "45"));
 	EXPECT_EQ("3060", s.multiply("102", "30"));
 }
-#endif
 
 
 TEST(LeetCode, 058) {
@@ -1111,6 +1110,24 @@ TEST(LeetCode, 058) {
 	EXPECT_EQ(5, s.lengthOfLastWord("World"));
 	EXPECT_EQ(0, s.lengthOfLastWord(""));
 }
+#endif
+
+
+TEST(LeetCode, 067) {
+    Solution s;
+    EXPECT_EQ("0", s.addBinary("0", "0"));
+    EXPECT_EQ("1", s.addBinary("1", "0"));
+    EXPECT_EQ("1", s.addBinary("0", "1"));
+    EXPECT_EQ("10", s.addBinary("1", "1"));
+    EXPECT_EQ("11", s.addBinary("10", "1"));
+    EXPECT_EQ("11", s.addBinary("1", "10"));
+    EXPECT_EQ("100", s.addBinary("10", "10"));
+    EXPECT_EQ("101", s.addBinary("11", "10"));
+    EXPECT_EQ("110", s.addBinary("11", "11"));
+    EXPECT_EQ("111", s.addBinary("100", "11"));
+    EXPECT_EQ("10101", s.addBinary("1010", "1011"));
+}
+
 
 #if 0
 TEST(LeetCode, 036) {

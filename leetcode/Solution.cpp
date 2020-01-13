@@ -1425,6 +1425,93 @@ ListNode* Solution::rotateRight(ListNode* head, int k) {
     return ret;
 }
 
+
+//067
+#if 0
+//异或
+string Solution::addBinary(string a, string b) {
+    int nLenA = a.size();
+    int nLenB = b.size();
+    if (nLenA < nLenB) {
+        swap(a, b);
+        swap(nLenA, nLenB);
+    }
+    if (nLenA - nLenB > 0) {
+        b.insert(0, nLenA - nLenB, '0');
+    }
+    int nPre = 0, nCur = 0;
+    string sRet;
+    for (int i = nLenA - 1; i >= 0; i--) {
+        int ia = a[i] - '0';
+        int ib = b[i] - '0';
+        nCur = ia ^ ib ^ nPre;  // 二进制数相加结果与异或结果相同
+        if (ia + ib + nPre >= 2) {
+            nPre = 1;
+        } else {
+            nPre = 0;
+        }
+        sRet.insert(0, 1, nCur + '0');
+    }
+    if (nPre) { // 最高位的进位单独处理
+        sRet.insert(0, 1, nPre + '0');
+    }
+    return sRet;
+}
+#else
+//大数加法
+string Solution::addBinary(string a, string b) {
+    int i = a.length() - 1;
+    int j = b.length() - 1;
+    int k = 0;
+    int nLen = std::max(a.length(), b.length()) + 1;
+    int *arrCache = new int[nLen];
+    while (k < nLen) {
+        arrCache[k++] = 0;
+    }
+    k = 0;
+    int nCarry = 0;//缓存进位
+
+    while (i >= 0 && j >= 0) {
+        arrCache[k] = (nCarry + (a[i] - '0') + (b[j] - '0')) % 2;
+        nCarry = (nCarry + a[i] - '0' + b[j] - '0') / 2;
+        --i;
+        --j;
+        ++k;
+    }
+    while (i >= 0) {
+        arrCache[k] = (nCarry + (a[i] - '0')) % 2;
+        nCarry = (nCarry + a[i] - '0') / 2;
+        --i;
+        ++k;
+    }
+    while (j >= 0) {
+        arrCache[k] = (nCarry + (b[j] - '0')) % 2;
+        nCarry = (nCarry + b[j] - '0') / 2;
+        --j;
+        ++k;
+    }
+    if (nCarry > 0) {
+        arrCache[k] = nCarry;
+    }
+
+    i = k;
+    if (arrCache[i] == 0) {
+        --i;
+    }
+    string sRet = "";
+    while (i >= 0) {
+        sRet += '0' + arrCache[i];
+        --i;
+    }
+
+    delete[]arrCache;
+    arrCache = nullptr;
+
+    return sRet;
+}
+#endif
+
+
 //082
 ListNode* Solution::deleteDuplicates(ListNode* head) {
     if (nullptr == head || nullptr == head->next) {
