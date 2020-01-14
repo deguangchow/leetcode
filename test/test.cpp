@@ -1110,7 +1110,6 @@ TEST(LeetCode, 058) {
 	EXPECT_EQ(5, s.lengthOfLastWord("World"));
 	EXPECT_EQ(0, s.lengthOfLastWord(""));
 }
-#endif
 
 
 TEST(LeetCode, 067) {
@@ -1127,7 +1126,59 @@ TEST(LeetCode, 067) {
     EXPECT_EQ("111", s.addBinary("100", "11"));
     EXPECT_EQ("10101", s.addBinary("1010", "1011"));
 }
+#endif
 
+TEST(LeetCode, 075) {
+    Solution s;
+    {
+        vector<int> vctInput = { 0 };
+        vector<int> const &vctExpect = { 0 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 2, 0, 1 };
+        vector<int> const &vctExpect = { 0, 1, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+	    vector<int> vctInput = { 2, 0, 2, 1, 1, 0 };
+	    vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
+	    s.sortColors(vctInput);
+	    EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 0, 1, 1, 2, 2, 0 };
+        vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 0, 2, 2, 1, 2, 2, 1, 1, 2, 2, 0, 0 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 1, 1, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 1, 1, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2};
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+}
 
 #if 0
 TEST(LeetCode, 036) {

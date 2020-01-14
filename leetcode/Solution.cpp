@@ -1512,6 +1512,64 @@ string Solution::addBinary(string a, string b) {
 #endif
 
 
+//075
+void Solution::sortColors(vector<int>& nums) {
+#if 1
+    //多指针
+    int nSize = nums.size();
+    int i = 0;//0
+    int j = 0;//1
+    int k = nSize - 1;//2
+    int x = 0;
+    while (1) {
+        while (i < nSize && nums[i] == 0) {
+            ++i;
+        }
+        j = i;
+        while (j < nSize && nums[j] == 1) {
+            ++j;
+        }
+        while (k >= 0 && nums[k] == 2) {
+            --k;
+        }
+        if (j > k) {
+            break;
+        }
+        if (nums[i] == 2 || nums[k] == 0) {
+            x = nums[i];
+            nums[i] = nums[k];
+            nums[k] = x;
+        } else {
+            if (nums[j] == 0) {
+                x = nums[i];
+                nums[i] = nums[j];
+                nums[j] = x;
+            } else {
+                x = nums[j];
+                nums[j] = nums[k];
+                nums[k] = x;
+            }
+        }
+    }
+}
+#else
+void Solution::sortColors(vector<int>& nums) {
+    //插入排序
+    int arrCache[3] = { 0 };
+    for (auto const &pos : nums) {
+        ++arrCache[pos];
+    }
+    int i = -1, j = -1;
+    while (++i < 3) {
+        while (arrCache[i]--) {
+            nums[++j] = i;
+        }
+    }
+}
+#endif
+
+
+
 //082
 ListNode* Solution::deleteDuplicates(ListNode* head) {
     if (nullptr == head || nullptr == head->next) {
