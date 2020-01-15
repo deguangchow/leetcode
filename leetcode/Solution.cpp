@@ -2568,7 +2568,54 @@ vector<int> Solution::rightSideView(TreeNode* root) {
 }
 
 
+//147
+#if 1
+//缓存法
+ListNode* Solution::insertionSortList(ListNode* head) {
+    map<int, unsigned> mapCache;
+    ListNode *p = head;
+    while (p) {
+        ++mapCache[p->val];
+        p = p->next;
+    }
+    p = head;
+    for (auto &pos : mapCache) {
+        while (pos.second--) {
+            p->val = pos.first;
+            p = p->next;
+        }
+    }
+    return  head;
+}
+#else
+//哑结点法
+ListNode* Solution::insertionSortList(ListNode* head) {
+    ListNode *pDummy = new ListNode(0);//哑结点
+    ListNode *p = nullptr;
+    ListNode *pNext = nullptr;
+    
+    while (head) {
+        p = pDummy;
+        while (p->next && p->next->val < head->val) {
+            p = p->next;
+        }
+        pNext = p->next;
+        p->next = head;
+        head = head->next;
+        p->next->next = pNext;
+    }
 
+    p = pDummy->next;
+    
+    delete pDummy;
+    pDummy = nullptr;
+
+    return  p;
+}
+#endif
+
+
+//215
 int Solution::findKthLargest(vector<int>& nums, int k) {
     priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
 

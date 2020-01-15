@@ -845,7 +845,7 @@ TEST(LeetCode, 025) {
 }
 
 
-TEST(LeetCode, 025) {
+TEST(LeetCode, 028) {
     Solution s;
     EXPECT_EQ(15, s.strStr("BBC ABCDAB ABCDABCDABDE", "ABCDABD"));
     EXPECT_EQ(2, s.strStr("hello", "ll"));
@@ -1071,116 +1071,7 @@ TEST(LeetCode, 032) {
 	EXPECT_EQ(6, s.longestValidParentheses(")()())()()()"));
 }
 
-TEST(LeetCode, 037) {
-	Solution s;
-	EXPECT_EQ("1", s.countAndSay(1));
-	EXPECT_EQ("11", s.countAndSay(2));
-	EXPECT_EQ("21", s.countAndSay(3));
-	EXPECT_EQ("1211", s.countAndSay(4));
-	EXPECT_EQ("111221", s.countAndSay(5));
-	EXPECT_EQ("312211", s.countAndSay(6));
-	EXPECT_EQ("13112221", s.countAndSay(7));
-}
 
-
-TEST(LeetCode, 043) {
-	Solution s;
-	EXPECT_EQ("0", s.multiply("9133", "0"));
-	EXPECT_EQ("6", s.multiply("2", "3"));
-	EXPECT_EQ("1", s.multiply("1", "1"));
-	EXPECT_EQ("2", s.multiply("1", "2"));
-	EXPECT_EQ("72", s.multiply("9", "8"));
-	EXPECT_EQ("8811", s.multiply("89", "99"));
-	EXPECT_EQ("253", s.multiply("11", "23"));
-	EXPECT_EQ("5535", s.multiply("123", "45"));
-	EXPECT_EQ("3060", s.multiply("102", "30"));
-}
-
-
-TEST(LeetCode, 058) {
-	Solution s;
-	EXPECT_EQ(1, s.lengthOfLastWord("a"));
-	EXPECT_EQ(1, s.lengthOfLastWord("a "));
-	EXPECT_EQ(1, s.lengthOfLastWord("a    "));
-	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode"));
-	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode   "));
-	EXPECT_EQ(5, s.lengthOfLastWord("Hello World"));
-	EXPECT_EQ(5, s.lengthOfLastWord("Hello World   "));
-	EXPECT_EQ(5, s.lengthOfLastWord("Hello"));
-	EXPECT_EQ(5, s.lengthOfLastWord("World"));
-	EXPECT_EQ(0, s.lengthOfLastWord(""));
-}
-
-
-TEST(LeetCode, 067) {
-    Solution s;
-    EXPECT_EQ("0", s.addBinary("0", "0"));
-    EXPECT_EQ("1", s.addBinary("1", "0"));
-    EXPECT_EQ("1", s.addBinary("0", "1"));
-    EXPECT_EQ("10", s.addBinary("1", "1"));
-    EXPECT_EQ("11", s.addBinary("10", "1"));
-    EXPECT_EQ("11", s.addBinary("1", "10"));
-    EXPECT_EQ("100", s.addBinary("10", "10"));
-    EXPECT_EQ("101", s.addBinary("11", "10"));
-    EXPECT_EQ("110", s.addBinary("11", "11"));
-    EXPECT_EQ("111", s.addBinary("100", "11"));
-    EXPECT_EQ("10101", s.addBinary("1010", "1011"));
-}
-#endif
-
-TEST(LeetCode, 075) {
-    Solution s;
-    {
-        vector<int> vctInput = { 0 };
-        vector<int> const &vctExpect = { 0 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 2, 0, 1 };
-        vector<int> const &vctExpect = { 0, 1, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-	    vector<int> vctInput = { 2, 0, 2, 1, 1, 0 };
-	    vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
-	    s.sortColors(vctInput);
-	    EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 0, 1, 1, 2, 2, 0 };
-        vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 0, 2, 2, 1, 2, 2, 1, 1, 2, 2, 0, 0 };
-        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 1, 1, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2 };
-        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0 };
-        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-    {
-        vector<int> vctInput = { 1, 1, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2};
-        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
-        s.sortColors(vctInput);
-        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
-    }
-}
-
-#if 0
 TEST(LeetCode, 036) {
     Solution s;
     {
@@ -1267,6 +1158,47 @@ TEST(LeetCode, 037) {
 }
 
 
+TEST(LeetCode, 038) {
+    Solution s;
+    EXPECT_EQ("1", s.countAndSay(1));
+    EXPECT_EQ("11", s.countAndSay(2));
+    EXPECT_EQ("21", s.countAndSay(3));
+    EXPECT_EQ("1211", s.countAndSay(4));
+    EXPECT_EQ("111221", s.countAndSay(5));
+    EXPECT_EQ("312211", s.countAndSay(6));
+    EXPECT_EQ("13112221", s.countAndSay(7));
+}
+
+
+TEST(LeetCode, 043) {
+	Solution s;
+	EXPECT_EQ("0", s.multiply("9133", "0"));
+	EXPECT_EQ("6", s.multiply("2", "3"));
+	EXPECT_EQ("1", s.multiply("1", "1"));
+	EXPECT_EQ("2", s.multiply("1", "2"));
+	EXPECT_EQ("72", s.multiply("9", "8"));
+	EXPECT_EQ("8811", s.multiply("89", "99"));
+	EXPECT_EQ("253", s.multiply("11", "23"));
+	EXPECT_EQ("5535", s.multiply("123", "45"));
+	EXPECT_EQ("3060", s.multiply("102", "30"));
+}
+
+
+TEST(LeetCode, 058) {
+	Solution s;
+	EXPECT_EQ(1, s.lengthOfLastWord("a"));
+	EXPECT_EQ(1, s.lengthOfLastWord("a "));
+	EXPECT_EQ(1, s.lengthOfLastWord("a    "));
+	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode"));
+	EXPECT_EQ(8, s.lengthOfLastWord("Hello World LeetCode   "));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello World"));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello World   "));
+	EXPECT_EQ(5, s.lengthOfLastWord("Hello"));
+	EXPECT_EQ(5, s.lengthOfLastWord("World"));
+	EXPECT_EQ(0, s.lengthOfLastWord(""));
+}
+
+
 TEST(LeetCode, 061) {
     Solution solution;
     {
@@ -1318,6 +1250,76 @@ TEST(LeetCode, 061) {
         EXPECT_LIST_VAL_EQ(exp, ret);
     }
 }
+
+
+TEST(LeetCode, 067) {
+    Solution s;
+    EXPECT_EQ("0", s.addBinary("0", "0"));
+    EXPECT_EQ("1", s.addBinary("1", "0"));
+    EXPECT_EQ("1", s.addBinary("0", "1"));
+    EXPECT_EQ("10", s.addBinary("1", "1"));
+    EXPECT_EQ("11", s.addBinary("10", "1"));
+    EXPECT_EQ("11", s.addBinary("1", "10"));
+    EXPECT_EQ("100", s.addBinary("10", "10"));
+    EXPECT_EQ("101", s.addBinary("11", "10"));
+    EXPECT_EQ("110", s.addBinary("11", "11"));
+    EXPECT_EQ("111", s.addBinary("100", "11"));
+    EXPECT_EQ("10101", s.addBinary("1010", "1011"));
+}
+
+
+TEST(LeetCode, 075) {
+    Solution s;
+    {
+        vector<int> vctInput = { 0 };
+        vector<int> const &vctExpect = { 0 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 2, 0, 1 };
+        vector<int> const &vctExpect = { 0, 1, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+	    vector<int> vctInput = { 2, 0, 2, 1, 1, 0 };
+	    vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
+	    s.sortColors(vctInput);
+	    EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 0, 1, 1, 2, 2, 0 };
+        vector<int> const &vctExpect = { 0, 0, 1, 1, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 0, 2, 2, 1, 2, 2, 1, 1, 2, 2, 0, 0 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 1, 1, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0 };
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+    {
+        vector<int> vctInput = { 1, 1, 1, 0, 0, 0, 2, 2, 2, 2, 2, 2};
+        vector<int> const &vctExpect = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2 };
+        s.sortColors(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExpect, vctInput);
+    }
+}
+
 
 TEST(LeetCode, 082) {
     Solution solution;
@@ -2357,4 +2359,30 @@ TEST(LeetCode, 622) {
 #endif
 
 
-
+TEST(LeetCode, 147) {
+    Solution s;
+    {
+	    ListNode *pInput = str2list("4,2,1,3");
+	    ListNode *pOutput = s.insertionSortList(pInput);
+	    ListNode *pExp = str2list("1,2,3,4");
+	    EXPECT_LIST_VAL_EQ(pExp, pOutput);
+    }
+    {
+        ListNode *pInput = str2list("-1,5,3,4,0");
+        ListNode *pOutput = s.insertionSortList(pInput);
+        ListNode *pExp = str2list("-1,0,3,4,5");
+        EXPECT_LIST_VAL_EQ(pExp, pOutput);
+    }
+    {
+        ListNode *pInput = str2list("2, -3, 5, 1, 5, 3, 2, 4, 0");
+        ListNode *pOutput = s.insertionSortList(pInput);
+        ListNode *pExp = str2list("-3, 0, 1, 2, 2, 3, 4, 5, 5");
+        EXPECT_LIST_VAL_EQ(pExp, pOutput);
+    }
+    {
+        ListNode *pInput = str2list("3, 4, 5, 1, 2, 3, -1, -3, -5");
+        ListNode *pOutput = s.insertionSortList(pInput);
+        ListNode *pExp = str2list("-5, -3, -1, 1, 2, 3, 3, 4, 5");
+        EXPECT_LIST_VAL_EQ(pExp, pOutput);
+    }
+}
