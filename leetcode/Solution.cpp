@@ -2615,6 +2615,12 @@ ListNode* Solution::insertionSortList(ListNode* head) {
 #endif
 
 
+//148
+ListNode* Solution::sortList(ListNode* head) {
+    //缓存法
+    return insertionSortList(head);
+}
+
 //215
 int Solution::findKthLargest(vector<int>& nums, int k) {
     priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
