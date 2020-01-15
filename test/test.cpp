@@ -2359,6 +2359,7 @@ TEST(LeetCode, 622) {
 #endif
 
 
+#if 0
 TEST(LeetCode, 147) {
     Solution s;
     {
@@ -2384,5 +2385,26 @@ TEST(LeetCode, 147) {
         ListNode *pOutput = s.insertionSortList(pInput);
         ListNode *pExp = str2list("-5, -3, -1, 1, 2, 3, 3, 4, 5");
         EXPECT_LIST_VAL_EQ(pExp, pOutput);
+    }
+}
+#endif
+
+TEST(LeetCode, 148) {
+    Solution s;
+    {
+	    vector<int> vctInput = { 3, 6, 9, 1 };
+	    EXPECT_EQ(3, s.maximumGap(vctInput));
+    }
+    {
+        vector<int> vctInput = {};
+        EXPECT_EQ(0, s.maximumGap(vctInput));
+    }
+    {
+        vector<int> vctInput = { 10 };
+        EXPECT_EQ(0, s.maximumGap(vctInput));
+    }
+    {
+        vector<int> vctInput = { 10, 1 };
+        EXPECT_EQ(9, s.maximumGap(vctInput));
     }
 }

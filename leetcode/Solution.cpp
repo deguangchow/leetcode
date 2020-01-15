@@ -2621,6 +2621,41 @@ ListNode* Solution::sortList(ListNode* head) {
     return insertionSortList(head);
 }
 
+
+//164
+#if 0
+int Solution::maximumGap(vector<int>& nums) {
+    int nRet = 0;
+    return nRet;
+}
+#else
+//先排序去重，再计算排序后相邻之间的间距（性能差）
+int Solution::maximumGap(vector<int>& nums) {
+    if (nums.size() < 2) {
+        return 0;
+    }
+    map<int, unsigned> mapCache;
+    for (auto const &num : nums) {
+        ++mapCache[num];
+    }
+    auto pos = mapCache.cbegin();
+    int nPre = pos->first;
+    ++pos;
+    int nRet = 0;
+    int nTmp = 0;
+    while (pos != mapCache.cend()) {
+        nTmp = abs(pos->first - nPre);
+        if (nRet < nTmp) {
+            nRet = nTmp;
+        }
+        nPre = pos->first;
+        ++pos;
+    }
+    return nRet;
+}
+#endif
+
+
 //215
 int Solution::findKthLargest(vector<int>& nums, int k) {
     priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
