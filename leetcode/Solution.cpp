@@ -2623,10 +2623,57 @@ ListNode* Solution::sortList(ListNode* head) {
 
 
 //164
-#if 0
+#if 1
+//桶排序
+class Bucket {
+public:
+    bool bUsed = false;
+    int nMinVal = INT_MAX;        // same as INT_MAX
+    int nMaxVal = INT_MIN;        // same as INT_MIN
+};
 int Solution::maximumGap(vector<int>& nums) {
-    int nRet = 0;
-    return nRet;
+    if (nums.empty() || nums.size() < 2) {
+        return 0;
+    }
+
+    //1.建桶
+    int const nMin = *min_element(nums.begin(), nums.end());
+    int const nMax = *max_element(nums.begin(), nums.end());
+    int nBucketSize = max(1, (nMax - nMin) / ((int)nums.size() - 1));   //桶的大小
+    int nBucketNum = (nMax - nMin) / nBucketSize + 1;                   //桶的个数
+    vector<Bucket> vctBuckets(nBucketNum);
+    for (auto&& num : nums) {
+        int nBucketIndex = (num - nMin) / nBucketSize;                  //放入哪个桶
+        vctBuckets[nBucketIndex].bUsed = true;
+        vctBuckets[nBucketIndex].nMinVal = min(num, vctBuckets[nBucketIndex].nMinVal);
+        vctBuckets[nBucketIndex].nMaxVal = max(num, vctBuckets[nBucketIndex].nMaxVal);
+    }
+
+    //2.查桶
+    int nMaxGap = 0;
+    int nPrevBucketMaxVal = nMin;
+    for (auto&& bucket : vctBuckets) {
+        if (!bucket.bUsed) {
+            continue;
+        }
+        nMaxGap = max(nMaxGap, bucket.nMinVal - nPrevBucketMaxVal);
+        nPrevBucketMaxVal = bucket.nMaxVal;
+    }
+
+    return nMaxGap;
+}
+#elif 0
+//std::sort
+int Solution::maximumGap(vector<int>& nums) {
+    if (nums.size() < 2) {
+        return 0;
+    }
+    sort(nums.begin(), nums.end());
+    int nMaxGap = 0;
+    for (int i = 1; i < nums.size(); i++) {
+        nMaxGap = max(nums[i] - nums[i - 1], nMaxGap);
+    }
+    return nMaxGap;
 }
 #else
 //先排序去重，再计算排序后相邻之间的间距（性能差）

@@ -2407,4 +2407,8 @@ TEST(LeetCode, 148) {
         vector<int> vctInput = { 10, 1 };
         EXPECT_EQ(9, s.maximumGap(vctInput));
     }
+    {
+        vector<int> vctInput = { 1, 2, 15, 16, 30, 39, 58, 59, 60, 66 };
+        EXPECT_EQ(19, s.maximumGap(vctInput));
+    }
 }
