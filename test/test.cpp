@@ -2387,7 +2387,6 @@ TEST(LeetCode, 147) {
         EXPECT_LIST_VAL_EQ(pExp, pOutput);
     }
 }
-#endif
 
 TEST(LeetCode, 148) {
     Solution s;
@@ -2412,3 +2411,37 @@ TEST(LeetCode, 148) {
         EXPECT_EQ(19, s.maximumGap(vctInput));
     }
 }
+#endif
+
+TEST(LeetCode, 179) {
+    Solution s;
+    {
+        vector<int> vctInput = { 0, 0 };
+        EXPECT_EQ("0", s.largestNumber(vctInput));
+    }
+    {
+        vector<int> vctInput = { 0, 0, 0 };
+        EXPECT_EQ("0", s.largestNumber(vctInput));
+    }
+    {
+        vector<int> vctInput = { 0, 0, 0, 1 };
+        EXPECT_EQ("1000", s.largestNumber(vctInput));
+    }
+    {
+	    vector<int> vctInput = {10, 2};
+	    EXPECT_EQ("210", s.largestNumber(vctInput));
+    }
+    {
+        vector<int> vctInput = { 30, 12, 21 };
+        EXPECT_EQ("302112", s.largestNumber(vctInput));
+    }
+    {
+        vector<int> vctInput = { 3, 30, 34, 5, 9 };
+        EXPECT_EQ("9534330", s.largestNumber(vctInput));
+    }
+    {
+        vector<int> vctInput = { 98, 89, 88, 99, 91, 8, 9 };
+        EXPECT_EQ("999989189888", s.largestNumber(vctInput));
+    }
+}
+

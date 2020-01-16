@@ -2703,6 +2703,23 @@ int Solution::maximumGap(vector<int>& nums) {
 #endif
 
 
+//179
+//重写 std::sort() 的比较函数
+string Solution::largestNumber(vector<int>& nums) {
+    sort(nums.begin(), nums.end(), [](int const &l, int const &r) {
+        auto &&s1 = to_string(l);
+        auto &&s2 = to_string(r);
+        return s1 + s2 > s2 + s1;
+    });
+    string s = "";
+    for (auto &&num : nums) {
+        s += to_string(num);
+    }
+    return s[0] == '0' ? "0" : s;
+}
+
+
+
 //215
 int Solution::findKthLargest(vector<int>& nums, int k) {
     priority_queue<int, vector<int>, greater<int>> minHeap;     //小根堆
