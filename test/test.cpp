@@ -2411,7 +2411,6 @@ TEST(LeetCode, 148) {
         EXPECT_EQ(19, s.maximumGap(vctInput));
     }
 }
-#endif
 
 TEST(LeetCode, 179) {
     Solution s;
@@ -2444,4 +2443,20 @@ TEST(LeetCode, 179) {
         EXPECT_EQ("999989189888", s.largestNumber(vctInput));
     }
 }
+#endif
 
+TEST(LeetCode, 220) {
+	Solution s;
+	{
+		vector<int> vctInput = { 1, 2, 3, 1 };
+		EXPECT_TRUE(s.containsNearbyAlmostDuplicate(vctInput, 3, 0));
+	}
+	{
+		vector<int> vctInput = { 1, 0, 1, 1 };
+		EXPECT_TRUE(s.containsNearbyAlmostDuplicate(vctInput, 1, 2));
+	}
+	{
+		vector<int> vctInput = { 1, 5, 9, 1, 5, 9 };
+		EXPECT_FALSE(s.containsNearbyAlmostDuplicate(vctInput, 2, 3));
+	}
+}

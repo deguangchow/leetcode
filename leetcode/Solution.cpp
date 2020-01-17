@@ -2738,6 +2738,23 @@ int Solution::findKthLargest(vector<int>& nums, int k) {
 }
 
 
+//220
+bool Solution::containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+	set<long> setCache;
+	for (int i = 0; i < nums.size(); ++i) {
+		auto s = setCache.lower_bound(long(nums[i]) - long(t));
+		if (s != setCache.end() && *s <= long(nums[i]) + long(t)) {
+			return true;
+		}
+		setCache.insert(nums[i]);
+		if (setCache.size() > k) {
+			setCache.erase(nums[i - k]);
+		}
+	}
+	return false;
+}
+
+
 //222
 int do_countNodes(TreeNode* root) {
     if (!root) {
