@@ -2864,6 +2864,12 @@ vector<int> Solution::maxSlidingWindow(vector<int>& nums, size_t k) {
 //242
 #if 1
 bool Solution::isAnagram(string s, string t) {
+	sort(s.begin(), s.end());
+	sort(t.begin(), t.end());
+	return s == t;
+}
+#elif 0
+bool Solution::isAnagram(string s, string t) {
 	if (s.length() != t.length()) {
 		return false;
 	}
