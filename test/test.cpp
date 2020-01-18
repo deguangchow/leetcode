@@ -2443,7 +2443,6 @@ TEST(LeetCode, 179) {
         EXPECT_EQ("999989189888", s.largestNumber(vctInput));
     }
 }
-#endif
 
 TEST(LeetCode, 220) {
 	Solution s;
@@ -2459,4 +2458,19 @@ TEST(LeetCode, 220) {
 		vector<int> vctInput = { 1, 5, 9, 1, 5, 9 };
 		EXPECT_FALSE(s.containsNearbyAlmostDuplicate(vctInput, 2, 3));
 	}
+}
+#endif
+
+
+TEST(LeetCode, 242) {
+	Solution s;
+	EXPECT_TRUE(s.isAnagram("", ""));
+	EXPECT_FALSE(s.isAnagram("ab", "a"));
+	EXPECT_FALSE(s.isAnagram("aa", "b"));
+	EXPECT_FALSE(s.isAnagram("ac", "bb"));
+	EXPECT_TRUE(s.isAnagram("anagram", "nagaram"));
+	EXPECT_TRUE(s.isAnagram("apple", "apple"));
+	EXPECT_TRUE(s.isAnagram("apple", "appel"));
+	EXPECT_FALSE(s.isAnagram("apple", "apple1"));
+	EXPECT_FALSE(s.isAnagram("rat", "car"));
 }

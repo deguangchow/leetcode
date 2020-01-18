@@ -2763,7 +2763,6 @@ int do_countNodes(TreeNode* root) {
     return (nullptr != root->left) + (nullptr != root->right) +
         do_countNodes(root->left) + do_countNodes(root->right);
 }
-
 int Solution::countNodes(TreeNode* root) {
     if (!root) {
         return 0;
@@ -2860,6 +2859,61 @@ vector<int> Solution::maxSlidingWindow(vector<int>& nums, size_t k) {
     }
     return ans;
 }
+
+
+//242
+#if 1
+bool Solution::isAnagram(string s, string t) {
+	if (s.length() != t.length()) {
+		return false;
+	}
+	int arrCache[26] = { 0 };//26个英文字母
+	for (int i = 0; i < s.length(); ++i) {
+		++arrCache[s[i] - 'a'];
+	}
+	for (int i = 0; i < s.length(); ++i) {
+		if (--arrCache[t[i] - 'a'] < 0) {
+			return false;
+		}
+	}
+	return true;
+}
+#elif 0
+bool Solution::isAnagram(string s, string t) {
+	if (s.length() != t.length()) {
+		return false;
+	}
+	int arrCache[26] = { 0 };//26个英文字母
+	for (int i = 0; i < s.length(); ++i) {
+		++arrCache[s[i] - 'a'];
+		--arrCache[t[i] - 'a'];
+	}
+	for (auto &&count : arrCache) {
+		if (count != 0) {
+			return false;
+		}
+	}
+	return true;
+}
+#else
+bool Solution::isAnagram(string s, string t) {
+	if (s.length() != t.length()) {
+		return false;
+	}
+	map<char, int> mapCache;
+	int i = 0;
+	while (i < s.length()) {
+		++mapCache[s[i++]];
+	}
+	i = 0;
+	while (i < t.length()) {
+		if (--mapCache[t[i++]] < 0) {
+			return false;
+		}
+	}
+	return true;
+}
+#endif
 
 
 //257
