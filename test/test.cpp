@@ -2459,7 +2459,6 @@ TEST(LeetCode, 220) {
 		EXPECT_FALSE(s.containsNearbyAlmostDuplicate(vctInput, 2, 3));
 	}
 }
-#endif
 
 
 TEST(LeetCode, 242) {
@@ -2473,4 +2472,40 @@ TEST(LeetCode, 242) {
 	EXPECT_TRUE(s.isAnagram("apple", "appel"));
 	EXPECT_FALSE(s.isAnagram("apple", "apple1"));
 	EXPECT_FALSE(s.isAnagram("rat", "car"));
+}
+#endif
+
+
+TEST(LeetCode, 315) {
+    Solution s;
+    {
+        vector<int> &&vctInput = {};
+        vector<int> &&vctExp = {};
+        auto &&vctRes = s.countSmaller(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
+    }
+    {
+        vector<int> &&vctInput = { 5, 2, 6, 1 };
+        vector<int> &&vctExp = { 2, 1, 1, 0 };
+        auto &&vctRes = s.countSmaller(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
+    }
+    {
+        vector<int> &&vctInput = { 1, 2, 3, 4 };
+        vector<int> &&vctExp = { 0, 0, 0, 0 };
+        auto &&vctRes = s.countSmaller(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
+    }
+    {
+        vector<int> &&vctInput = { 1, 2, 1, 2 };
+        vector<int> &&vctExp = { 0, 1, 0, 0 };
+        auto &&vctRes = s.countSmaller(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
+    }
+    {
+        vector<int> &&vctInput = { 4, 3, 2, 1 };
+        vector<int> &&vctExp = { 3, 2, 1, 0 };
+        auto &&vctRes = s.countSmaller(vctInput);
+        EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
+    }
 }

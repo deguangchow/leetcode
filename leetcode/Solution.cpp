@@ -3002,3 +3002,74 @@ int Solution::nthSuperUglyNumber(int n, vector<int>& primes) {
     return ans.back();
 }
 
+
+//315
+#if 1
+//二叉搜索树
+// binary search tree
+struct BSTNode {
+    int val;
+    int smaller;//小于当前树节点的树节点个数：默认为0
+    BSTNode *left, *right;
+    BSTNode(int v) : val(v), smaller(0), left(nullptr), right(nullptr) {}
+};
+//建树
+int insertBST(BSTNode *&root, int v) {
+    if (!root) {
+        root = new BSTNode(v);
+        return 0;
+    }
+    if (v < root->val) {
+        root->smaller++;
+        return insertBST(root->left, v);
+    } else {
+        return insertBST(root->right, v) + root->smaller + (root->val < v ? 1 : 0);
+    }
+}
+vector<int> Solution::countSmaller(vector<int>& nums) {
+    vector<int> res(nums.size());
+    BSTNode *root = nullptr;
+    for (int i = nums.size() - 1; i >= 0; --i) {
+        res[i] = insertBST(root, nums[i]);
+    }
+    return res;
+}
+#elif 0
+//暴力法（超时）
+vector<int> Solution::countSmaller(vector<int>& nums) {
+    if (nums.size() == 0) {
+        return {};
+    }
+    vector<int> vctRet(nums.size());
+    int i, nCount;
+    for (i = 0; i < nums.size() - 1; ++i) {
+        nCount = 0;
+        for (int j = i + 1; j < nums.size(); ++j) {
+            nCount += nums[i] > nums[j];
+        }
+        vctRet[i] = nCount;
+    }
+    vctRet[i] = 0;
+    return vctRet;
+}
+#else
+//map::lower_bound（超时）
+vector<int> Solution::countSmaller(vector<int>& nums) {
+    vector<int> vctRet = {};
+    map<int, unsigned> mapCache;
+    int nCount;
+
+    for (auto &&posVct = nums.rbegin(); posVct != nums.rend(); ++posVct) {
+        nCount = 0;
+        for (auto &&posMap = mapCache.begin(); posMap != mapCache.lower_bound(*posVct); ++posMap) {
+            nCount += posMap->second;
+        }
+        vctRet.push_back(nCount);
+        ++mapCache[*posVct];
+    }
+
+    std::reverse(vctRet.begin(), vctRet.end());
+    return vctRet;
+}
+#endif
+
