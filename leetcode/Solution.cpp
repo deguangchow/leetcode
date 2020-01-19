@@ -3073,3 +3073,42 @@ vector<int> Solution::countSmaller(vector<int>& nums) {
 }
 #endif
 
+
+//324
+void Solution::wiggleSort(vector<int>& nums) {
+	/*sort(nums.begin(), nums.end());
+	int i = 0, j = 0;
+	*/
+
+	map<int, unsigned> mapCache;
+	for (auto &&num : nums)
+	{
+		++mapCache[num];
+	}
+	
+	auto pos1 = mapCache.begin();
+	auto pos2 = mapCache.rbegin();
+	for (int i = 0; i < nums.size(); ++i)
+	{
+		if (i % 2 == 0)
+		{
+			while (pos1->second <= 0)
+			{
+				pos1 == mapCache.end() ? pos1 = mapCache.begin() : ++pos1;
+			}
+			nums[i] = pos1->first;
+			pos1->second--;
+			pos1 == mapCache.end() ? pos1 = mapCache.begin() : ++pos1;
+		}
+		else {
+			while (pos2->second <= 0)
+			{
+				++pos2;
+			}
+			nums[i] = pos2->first;
+			pos2->second--;
+		}
+
+	}
+}
+

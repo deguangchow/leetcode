@@ -2473,7 +2473,6 @@ TEST(LeetCode, 242) {
 	EXPECT_FALSE(s.isAnagram("apple", "apple1"));
 	EXPECT_FALSE(s.isAnagram("rat", "car"));
 }
-#endif
 
 
 TEST(LeetCode, 315) {
@@ -2508,4 +2507,34 @@ TEST(LeetCode, 315) {
         auto &&vctRes = s.countSmaller(vctInput);
         EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
     }
+}
+#endif
+
+
+TEST(LeetCode, 324) {
+	Solution s;
+	{
+		vector<int> vctInput = { 1, 5, 1, 1, 6, 4 };
+		vector<int> vctExp = { 1, 4, 1, 5, 1, 6 };
+		s.wiggleSort(vctInput);
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> vctInput = { 1, 1, 1, 4, 5, 6 };
+		vector<int> vctExp = { 1, 4, 1, 5, 1, 6 };
+		s.wiggleSort(vctInput);
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> vctInput = { 1, 3, 2, 2, 3, 1 };
+		vector<int> vctExp = { 1, 3, 2, 3, 1, 2 };
+		s.wiggleSort(vctInput);
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> vctInput = { 1, 1, 2, 2, 3, 3 };
+		vector<int> vctExp = { 1, 3, 2, 3, 1, 2 };
+		s.wiggleSort(vctInput);
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
 }
