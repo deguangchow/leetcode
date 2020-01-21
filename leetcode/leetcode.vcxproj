@@ -148,6 +148,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryTreeSerialize.h" />
     <ClInclude Include="BSTIterator.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="HeapDemo.h" />
@@ -166,6 +167,9 @@
     <ClInclude Include="ZeroEvenOdd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryTreeSerialize.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="BSTIterator.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>

@@ -20,6 +20,7 @@
 #include "MedianFinder.h"
 #include "HeapDemo.h"
 #include "MyCircularQueue.h"
+#include "BinaryTreeSerialize.h"
 
 
 //单链表转字符串
@@ -2508,7 +2509,6 @@ TEST(LeetCode, 315) {
         EXPECT_VECTOR_VAL_EQ(vctExp, vctRes);
     }
 }
-#endif
 
 
 TEST(LeetCode, 324) {
@@ -2537,4 +2537,46 @@ TEST(LeetCode, 324) {
 		s.wiggleSort(vctInput);
 		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
 	}
+}
+#endif
+
+TEST(LeetCode, 297) {
+    Solution solution;
+    CodeC cc;
+    {
+        TreeNode* root = new TreeNode(-1);
+        root->left = new TreeNode(0);
+        root->right = new TreeNode(-1);
+
+        auto &&s = cc.serialize(root);
+        EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
+    }
+    {
+        TreeNode* root = new TreeNode(-1);
+        root->left = new TreeNode(0);
+        root->right = new TreeNode(-1);
+
+        auto &&s = cc.serialize(root);
+        EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
+    }
+    {
+        TreeNode* root = new TreeNode(1);
+        root->left = new TreeNode(2);
+        root->right = new TreeNode(3);
+        root->right->left = new TreeNode(4);
+        root->right->right = new TreeNode(5);
+
+        auto &&s = cc.serialize(root);
+        EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
+    }
+    {
+        TreeNode* root = new TreeNode(1);
+        root->left = new TreeNode(2);
+        root->right = new TreeNode(3);
+        root->left->left = new TreeNode(4);
+        root->left->right = new TreeNode(5);
+
+        auto &&s = cc.serialize(root);
+        EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
+    }
 }
