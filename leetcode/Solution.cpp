@@ -430,6 +430,95 @@ bool Solution::isPalindrome(int x) {
 }
 
 
+//010
+//比较 s 和 p 是否相等：相等的规则即为正则表达式要求。
+#if 0
+//解答错误。未考虑以下等场景：
+/*
+"aaa"
+"a*a"
+
+"aaa"
+"ab*a*c*a"
+
+"bbbba"
+".*a*a"
+
+"ab"
+".*c"
+
+因为 * 的不确定性，需回溯来试错。
+*/
+bool Solution::isMatch(string s, string p) {
+    int i = 0;
+    int j = 0;
+    bool bBreak = false;
+    while (i < s.length() && j < p.length()) {
+        switch (p[j]) {
+        case '.':
+            ++i;
+            ++j;
+            break;
+        case '*':
+            if (j > 0) {
+                if (s[i] == p[j - 1] || p[j - 1] == '.') {
+                    ++i;
+                    if (i == s.length()) {
+                        ++j;
+                    }
+                }
+                else {
+                    ++j;
+                }
+            }
+            else {
+                ++j;
+            }
+            break;
+        default:
+            if (s[i] == p[j]) {
+                ++i;
+                ++j;
+            }
+            else {
+                if (j + 1 < p.length() && p[j + 1] != '*') {
+                    bBreak = true;
+                }
+                else {
+                    j += 2;
+                }
+            }
+            break;
+        }
+        if (bBreak) {
+            break;
+        }
+    }
+
+    return i == s.length() && j == p.length();
+}
+#else
+//递归法
+bool doMatch(const char *s, const char *p) {
+    if (*p == '\0') {
+        return *s == '\0';
+    }
+
+    auto bPreMatched = (*s != '\0') && (*s == *p || *p == '.');
+
+    if (*(p + 1) == '*') {
+        //先试错：假设 X* 的个数为0的情况。
+        //再进行s的下一位 和 X 的比较处理。
+        return doMatch(s, p + 2) || (bPreMatched && doMatch(++s, p));
+    } else {
+        return bPreMatched && doMatch(++s, ++p);
+    }
+}
+bool Solution::isMatch(string s, string p) {
+    return doMatch(s.c_str(), p.c_str());
+}
+#endif
+
 //012
 string Solution::intToRoman(int num) {
     string sRet = "";

@@ -2579,7 +2579,6 @@ TEST(LeetCode, 297) {
         EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
     }
 }
-#endif
 
 
 TEST(LeetCode, 171) {
@@ -2597,5 +2596,25 @@ TEST(LeetCode, 171) {
     EXPECT_EQ(701, s.titleToNumber("ZY"));
     EXPECT_EQ(702, s.titleToNumber("ZZ"));
 }
+#endif
 
+
+TEST(LeetCode, 010) {
+    Solution s;
+    EXPECT_FALSE(s.isMatch("ab", ".*c"));
+    EXPECT_TRUE(s.isMatch("bbbba", ".*a*a"));
+    EXPECT_TRUE(s.isMatch("aaa", "ab*a*c*a"));
+    EXPECT_TRUE(s.isMatch("aaa", "a*a"));
+    EXPECT_TRUE(s.isMatch("aaa", "a*a*"));
+    EXPECT_TRUE(s.isMatch("aaabbb", "a*a*b*"));
+    EXPECT_TRUE(s.isMatch("", ""));
+    EXPECT_TRUE(s.isMatch("", "**"));
+    EXPECT_FALSE(s.isMatch("abcdef", "**"));
+    EXPECT_TRUE(s.isMatch("abbc", ".b*."));
+    EXPECT_FALSE(s.isMatch("aa", "a"));
+    EXPECT_TRUE(s.isMatch("aa", "a*"));
+    EXPECT_TRUE(s.isMatch("ab", ".*"));
+    EXPECT_TRUE(s.isMatch("aab", "c*a*b"));
+    EXPECT_FALSE(s.isMatch("mississippi", "mis*is*p*."));
+}
 
