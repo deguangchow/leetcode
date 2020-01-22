@@ -2703,6 +2703,19 @@ int Solution::maximumGap(vector<int>& nums) {
 #endif
 
 
+//171
+//二十六进制
+int Solution::titleToNumber(string s) {
+    int nRet = 0;
+    int i = 0;
+    while (i < s.length()) {
+        nRet += (s[i] - 'A' + 1) * pow(26, s.length() - 1 - i);
+        ++i;
+    }
+    return nRet;
+}
+
+
 //179
 //重写 std::sort() 的比较函数
 string Solution::largestNumber(vector<int>& nums) {
@@ -3119,4 +3132,6 @@ void Solution::wiggleSort(vector<int>& nums) {
 	}
 }
 #endif
+
+
 

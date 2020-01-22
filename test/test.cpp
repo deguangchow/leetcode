@@ -2538,7 +2538,6 @@ TEST(LeetCode, 324) {
 		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
 	}
 }
-#endif
 
 TEST(LeetCode, 297) {
     Solution solution;
@@ -2580,3 +2579,23 @@ TEST(LeetCode, 297) {
         EXPECT_TRUE(solution.isSameTree(root, cc.deserialize(s)));
     }
 }
+#endif
+
+
+TEST(LeetCode, 171) {
+    Solution s;
+    EXPECT_EQ(1, s.titleToNumber("A"));
+    EXPECT_EQ(2, s.titleToNumber("B"));
+    EXPECT_EQ(3, s.titleToNumber("C"));
+    EXPECT_EQ(24, s.titleToNumber("X"));
+    EXPECT_EQ(25, s.titleToNumber("Y"));
+    EXPECT_EQ(26, s.titleToNumber("Z"));
+    EXPECT_EQ(27, s.titleToNumber("AA"));
+    EXPECT_EQ(28, s.titleToNumber("AB"));
+    EXPECT_EQ(29, s.titleToNumber("AC"));
+    EXPECT_EQ(700, s.titleToNumber("ZX"));
+    EXPECT_EQ(701, s.titleToNumber("ZY"));
+    EXPECT_EQ(702, s.titleToNumber("ZZ"));
+}
+
+
