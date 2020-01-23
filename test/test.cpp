@@ -2617,10 +2617,38 @@ TEST(LeetCode, 010) {
     EXPECT_FALSE(s.isMatch("mississippi", "mis*is*p*."));
 }
 
-#endif
 
 TEST(LeetCode, 011) {
 	Solution s;
 	vector<int> vctInput = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 	EXPECT_EQ(49, s.maxArea(vctInput));
+}
+#endif
+
+TEST(LeetCode, 015) {
+	Solution s;
+	{
+		vector<int> vctInput = { -4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6 };
+		auto &&vctOutput = s.threeSum(vctInput);
+		vector<vector<int>> &&vctExp = { { -4,-2,6 },{ -4,0,4 },{ -4,1,3 },{ -4,2,2 },{ -2,-2,4 },{ -2,0,2 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> vctInput = { -4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6 };
+		auto &&vctOutput = s.threeSum(vctInput);
+		vector<vector<int>> &&vctExp = { { -4,-2,6 },{ -4,0,4 },{ -4,1,3 },{ -4,2,2 },{ -2,-2,4 },{ -2,0,2 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> vctInput = { -1, 0, 1, 2, -1, -4 };
+		auto &&vctOutput = s.threeSum(vctInput);
+		vector<vector<int>> &&vctExp = { { -1, -1, 2 },{ -1, 0, 1 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> vctInput = { -1, -1, 0, 1, 2, -1, -4 };
+		auto &&vctOutput = s.threeSum(vctInput);
+		vector<vector<int>> &&vctExp = { { -1, -1, 2 },{ -1, 0, 1 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
 }

@@ -654,6 +654,81 @@ string Solution::longestCommonPrefix(vector<string>& strs) {
 }
 
 
+//015
+//排序+三指针
+#if 1
+vector<vector<int>> Solution::threeSum(vector<int>& nums) {
+	sort(nums.begin(), nums.end());
+	vector<vector<int>> vctRet;
+	for (int i = 0; i < nums.size(); ++i) {
+		int a = nums[i];
+		if (a > 0) {
+			break;
+		}
+		if (i > 0 && a == nums[i - 1]) {
+			continue;
+		}
+		bool is_reset_a = true;
+		int k_end = nums.size();
+		for (int j = i + 1; j < k_end; ++j) {
+			int b = nums[j];
+			if (!is_reset_a && b == nums[j - 1]) {
+				continue;
+			}
+			is_reset_a = false;
+			for (int k = k_end - 1; k > j; --k) {
+				int c = nums[k];
+				if (a + b + c == 0) {
+					vctRet.push_back({ a, b, c });
+				}
+				if (a + b + c <= 0) {
+					k_end = k + 1;
+					break;
+				}
+			}
+		}
+	}
+	return vctRet;
+}
+#else
+vector<vector<int>> Solution::threeSum(vector<int>& nums) {
+	set<vector<int>> setCache;
+	sort(nums.begin(), nums.end());
+	vector<vector<int>> vctRet = {};
+	int nSize = nums.size();
+	int i = 0, j = nSize - 1, k = 1;
+	while (k < nSize - 1) {
+		while (i < k && k < j) {
+			auto &&nSum = nums[i] + nums[k] + nums[j];
+			if (nSum == 0) {
+				vector<int> &&tmp = { nums[i], nums[k], nums[j] };
+				if (setCache.find(tmp) == setCache.end()) {
+					vctRet.push_back(tmp);
+					setCache.insert(tmp);
+				}
+				++i;
+				--j;
+			} else if (nSum < 0) {
+				++i;
+			} else {
+				--j;
+			}
+		}
+		i = 0;
+		j = nSize - 1;
+		++k;
+		while (k + 1 < nSize && nums[k - 1] == nums[k] && nums[k] == nums[k + 1]) {
+			if (nums[k] == 0 && setCache.find({0,0,0}) == setCache.end()) {
+				vctRet.push_back({ 0,0,0 });
+				setCache.insert({ 0,0,0 });
+			}
+			++k;
+		}
+	}
+	return vctRet;
+}
+#endif
+
 //017
 vector<string> Solution::letterCombinations(string digits) {
     static vector<string> vctPhoneKeys = {
