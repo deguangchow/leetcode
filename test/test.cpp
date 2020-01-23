@@ -2596,7 +2596,6 @@ TEST(LeetCode, 171) {
     EXPECT_EQ(701, s.titleToNumber("ZY"));
     EXPECT_EQ(702, s.titleToNumber("ZZ"));
 }
-#endif
 
 
 TEST(LeetCode, 010) {
@@ -2618,3 +2617,10 @@ TEST(LeetCode, 010) {
     EXPECT_FALSE(s.isMatch("mississippi", "mis*is*p*."));
 }
 
+#endif
+
+TEST(LeetCode, 011) {
+	Solution s;
+	vector<int> vctInput = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+	EXPECT_EQ(49, s.maxArea(vctInput));
+}

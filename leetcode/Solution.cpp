@@ -519,6 +519,18 @@ bool Solution::isMatch(string s, string p) {
 }
 #endif
 
+
+//011
+int Solution::maxArea(vector<int>& height) {
+	int i = 0, j = height.size() - 1, nMax = 0;
+	while (i < j) {
+		nMax = max(nMax, (j - i)*min(height[i], height[j]));
+		height[i] < height[j] ? ++i : --j;
+	}
+	return nMax;
+}
+
+
 //012
 string Solution::intToRoman(int num) {
     string sRet = "";
