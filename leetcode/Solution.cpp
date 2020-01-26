@@ -1186,6 +1186,27 @@ vector<int> Solution::findSubstring(string s, vector<string>& words) {
 #endif
 
 
+//031
+void Solution::nextPermutation(vector<int>& nums) {
+	int nI = -1;
+	int nJ = -1;
+	for (int i = nums.size() - 1; i > 0; --i) {
+		for (int j = i - 1; j >= 0; --j) {
+			if (nums[j] < nums[i] && j > nJ) {
+				nI = i;
+				nJ = j;
+			}
+		}
+	}
+
+	if (nJ != -1) {
+		swap(nums[nI], nums[nJ]);
+	}
+
+	std::reverse(nums.begin() + (nJ + 1), nums.end());
+}
+
+
 //032
 int Solution::longestValidParentheses(string s) {
 	int nMax = 0;

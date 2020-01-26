@@ -502,7 +502,6 @@ TEST(LeetCode, 014) {
     }
 }
 
-
 TEST(LeetCode, 017) {
     Solution s;
     {
@@ -545,8 +544,9 @@ TEST(LeetCode, 017) {
         expect_eq<string>::expect_vector_val_eq(exp, s.letterCombinations("234"));
     }
 }
+#endif
 
-
+#if 0
 TEST(LeetCode, 018) {
     Solution s;
     {
@@ -2623,7 +2623,6 @@ TEST(LeetCode, 011) {
 	vector<int> vctInput = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 	EXPECT_EQ(49, s.maxArea(vctInput));
 }
-#endif
 
 TEST(LeetCode, 015) {
 	Solution s;
@@ -2650,5 +2649,40 @@ TEST(LeetCode, 015) {
 		auto &&vctOutput = s.threeSum(vctInput);
 		vector<vector<int>> &&vctExp = { { -1, -1, 2 },{ -1, 0, 1 } };
 		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+}
+#endif
+
+TEST(LeetCode, 031) {
+	Solution s;
+	{
+		vector<int> &&vctInput = { 4, 2, 0, 2, 3, 2, 0 };
+		s.nextPermutation(vctInput);
+		vector<int> &&vctExp = { 4,2,0,3,0,2,2 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> &&vctInput = { 1, 3, 2 };
+		s.nextPermutation(vctInput);
+		vector<int> &&vctExp = { 2, 1, 3 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> &&vctInput = { 1, 2, 3 };
+		s.nextPermutation(vctInput);
+		vector<int> &&vctExp = { 1, 3, 2 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> &&vctInput = { 3, 2, 1 };
+		s.nextPermutation(vctInput);
+		vector<int> &&vctExp = { 1, 2, 3 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
+	}
+	{
+		vector<int> &&vctInput = { 1, 1, 5 };
+		s.nextPermutation(vctInput);
+		vector<int> &&vctExp = { 1, 5, 1 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
 	}
 }
