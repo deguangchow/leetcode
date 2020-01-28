@@ -729,6 +729,72 @@ vector<vector<int>> Solution::threeSum(vector<int>& nums) {
 }
 #endif
 
+
+//016
+#if 1
+//排序+坐标系（去重）+双指针+双向
+int Solution::threeSumClosest(vector<int>& nums, int target) {
+	sort(nums.begin(), nums.end());
+	int sumI = 0;
+	int minI = INT_MAX;
+	int i, j, k;
+	for (i = 0; i < nums.size() - 2; ++i) {
+		int sumJ = 0;
+		int minJ = INT_MAX;
+		for (j = i + 1; j < nums.size() - 1; ++j) {
+			int sumK = 0;
+			int minK = INT_MAX;
+			for (k = nums.size() - 1; k > j; --k) {
+				auto &&tmpSum = nums[i] + nums[j] + nums[k];
+				auto &&tmpMin = abs(target - tmpSum);
+				if (0 == tmpMin) {
+					return target;
+				} else if (minK >= tmpMin) {
+					sumK = tmpSum;
+					minK = tmpMin;
+				} else {
+					break;
+				}
+			}
+			if (minJ >= minK) {
+				minJ = minK;
+				sumJ = sumK;
+			} else {
+				break;
+			}
+		}
+		if (minI >= minJ) {
+			minI = minJ;
+			sumI = sumJ;
+		}
+	}
+	return sumI;
+}
+#else
+int Solution::threeSumClosest(vector<int>& nums, int target) {
+	sort(nums.begin(), nums.end());
+	int ans = nums[0] + nums[1] + nums[2];
+	for (int i = 0; i < nums.size(); i++) {
+		int st = i + 1, ed = nums.size() - 1;
+		while (st < ed) {
+			int sum = nums[st] + nums[ed] + nums[i];
+			if (abs(target - sum) < abs(target - ans)) {
+				ans = sum;
+			}
+			if (sum == target) {
+				return ans;
+			} else if (sum < target) {
+				st++;
+			} else {
+				ed--;
+			}
+		}
+	}
+	return ans;
+}
+#endif
+
+
 //017
 vector<string> Solution::letterCombinations(string digits) {
     static vector<string> vctPhoneKeys = {
