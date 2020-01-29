@@ -1096,6 +1096,21 @@ ListNode* Solution::reverseKGroup(ListNode* head, int k) {
 }
 
 
+//026
+int Solution::removeDuplicates(vector<int>& nums) {
+	if (nums.size() < 2) {
+		return nums.size();
+	}
+	int i = 0, j = 1;
+	for (; j < nums.size(); ++j) {
+		if (nums[i] < nums[j]) {
+			nums[++i] = nums[j];
+		}
+	}
+	return ++i;
+}
+
+
 //028
 //获取 next 集合
 #if 1

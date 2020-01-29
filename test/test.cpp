@@ -2685,7 +2685,6 @@ TEST(LeetCode, 031) {
 		EXPECT_VECTOR_VAL_EQ(vctExp, vctInput);
 	}
 }
-#endif
 
 TEST(LeetCode, 016) {
 	Solution s;
@@ -2714,4 +2713,24 @@ TEST(LeetCode, 016) {
 		EXPECT_EQ(2, s.threeSumClosest(vctInput, 0));
 	}
 }
+#endif
 
+TEST(LeetCode, 016) {
+	Solution s;
+	{
+		vector<int> &&vctInput = {};
+		EXPECT_EQ(0, s.removeDuplicates(vctInput));
+	}
+	{
+		vector<int> &&vctInput = {1};
+		EXPECT_EQ(1, s.removeDuplicates(vctInput));
+	}
+	{
+		vector<int> &&vctInput = { 0,0,1,1,1,2,2,3,3,4 };
+		EXPECT_EQ(5, s.removeDuplicates(vctInput));
+	}
+	{
+		vector<int> &&vctInput = { 0,0,1,1,1,2,2,3,3,4, 5, 6 };
+		EXPECT_EQ(7, s.removeDuplicates(vctInput));
+	}
+}
