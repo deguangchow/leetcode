@@ -1111,6 +1111,29 @@ int Solution::removeDuplicates(vector<int>& nums) {
 }
 
 
+//027
+int Solution::removeElement(vector<int>& nums, int val) {
+	int i = 0, j = 0, k = 0;
+	int tmp = 0;
+	for (; j < nums.size(); ++j) {
+		if (nums[j] != val) {
+			if (nums[i] == val) {
+				tmp = nums[i];
+				nums[i] = nums[j];
+				nums[j] = tmp;
+			}
+			++i;
+		} else {
+			if (nums[i] != val) {
+				i = j;
+			}
+			++k;
+		}
+	}
+	return nums.size() - k;
+}
+
+
 //028
 //获取 next 集合
 #if 1
