@@ -2798,7 +2798,6 @@ TEST(LeetCode, 033) {
 		EXPECT_EQ(3, s.search(vctInput, 2));
 	}
 }
-#endif
 
 TEST(LeetCode, 034) {
 	Solution s;
@@ -2820,4 +2819,17 @@ TEST(LeetCode, 034) {
 		vector<int> &&vctExp = { 0, 0 };
 		EXPECT_VECTOR_VAL_EQ(vctExp, vctOutput);
 	}
+}
+#endif
+
+
+TEST(LeetCode, 035) {
+	Solution s;
+	EXPECT_EQ(0, s.searchInsert(vector<int>{}, 5));
+	EXPECT_EQ(0, s.searchInsert(vector<int>{6}, 5));
+	EXPECT_EQ(1, s.searchInsert(vector<int>{1}, 5));
+	EXPECT_EQ(2, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 5));
+	EXPECT_EQ(1, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 2));
+	EXPECT_EQ(4, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 7));
+	EXPECT_EQ(0, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 0));
 }

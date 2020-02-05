@@ -1455,6 +1455,24 @@ vector<int> Solution::searchRange(vector<int>& nums, int target) {
 	return { -1, -1 };
 }
 
+
+//035
+int Solution::searchInsert(vector<int>& nums, int target) {
+	int i = 0, j = nums.size() - 1, m = (i + j) / 2;
+	while (i <= m && m <= j) {
+		if (nums[m] < target) {
+			i = m + 1;
+		} else if (nums[m] > target) {
+			j = m - 1;
+		} else {
+			return m;
+		}
+		m = (i + j) / 2;
+	}
+	return (nums.empty() || nums[m] >= target) ? m : m + 1;
+}
+
+
 //036
 bool Solution::isValidSudoku(vector<vector<char>>& board) {
 #if 0
