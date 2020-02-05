@@ -2733,7 +2733,6 @@ TEST(LeetCode, 016) {
 		EXPECT_EQ(7, s.removeDuplicates(vctInput));
 	}
 }
-#endif
 
 TEST(LeetCode, 027) {
 	Solution s;
@@ -2746,3 +2745,58 @@ TEST(LeetCode, 027) {
 		EXPECT_EQ(5, s.removeElement(vctInput, 2));
 	}
 }
+
+TEST(LeetCode, 029) {
+	Solution s;
+	EXPECT_EQ(-1073741824, s.divide(-2147483648, 2));
+	EXPECT_EQ(-1073741823, s.divide(2147483647, -2));
+	EXPECT_EQ(1073741824, s.divide(-2147483648, -2));
+	EXPECT_EQ(-1073741824, s.divide(-2147483648, 2));
+	EXPECT_EQ(1073741823, s.divide(2147483647, 2));
+	EXPECT_EQ(3, s.divide(10, 3));
+	EXPECT_EQ(-2, s.divide(7, -3));
+	EXPECT_EQ(0, s.divide(0, 3));
+	EXPECT_EQ(INT_MAX, s.divide(INT_MIN, -1));
+}
+#endif
+
+TEST(LeetCode, 033) {
+	Solution s;
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 1, 2, 3 };
+		EXPECT_EQ(4, s.search(vctInput, 8));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 0, 1, 2 };
+		EXPECT_EQ(4, s.search(vctInput, 0));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 0, 1, 2, 3 };
+		EXPECT_EQ(4, s.search(vctInput, 0));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 0, 1, 2 };
+		EXPECT_EQ(5, s.search(vctInput, 0));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 0, 1, 2 };
+		EXPECT_EQ(-1, s.search(vctInput, 3));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 0, 1, 2 };
+		EXPECT_EQ(0, s.search(vctInput, 4));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 0, 1, 2 };
+		EXPECT_EQ(7, s.search(vctInput, 2));
+	}
+	{
+		vector<int> &&vctInput = { 4, 5, 6, 7, 8, 2 };
+		EXPECT_EQ(5, s.search(vctInput, 2));
+	}
+	{
+		vector<int> &&vctInput = { 4, 0, 1, 2 };
+		EXPECT_EQ(3, s.search(vctInput, 2));
+	}
+}
+

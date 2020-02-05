@@ -1223,6 +1223,64 @@ int Solution::strStr(string haystack, string needle) {
 #endif
 
 
+//029
+unsigned doDivide(unsigned a, unsigned b) {
+	if (a < b) {
+		return 0;
+	}
+	unsigned cnt = 1;
+	unsigned tmp = b;
+	while (tmp < INT_MAX && a >= (tmp + tmp)) {
+		tmp += tmp;
+		cnt += cnt;
+	}
+	return cnt + doDivide(a - tmp, b);
+}
+int Solution::divide(int dividend, int divisor) {
+	switch (divisor)
+	{
+	case 1:
+		return dividend;
+	case -1:
+		return dividend == INT_MIN ? INT_MAX : -dividend;
+	case INT_MIN:
+		return dividend == INT_MIN ? 1 : 0;
+	default:
+		unsigned a = 0U;
+		unsigned b = 0U;
+		bool bSign = false;
+		if (dividend > 0) {
+			a = dividend;
+			if (divisor < 0) {
+				b = -divisor;
+				bSign = true;
+			} else {
+				b = divisor;
+			}
+		} else if (dividend < 0) {
+			if (dividend == INT_MIN) {
+				a = INT_MAX + 1;
+			} else {
+				a = -dividend;
+			}
+			if (divisor > 0) {
+				b = divisor;
+				bSign = true;
+			} else {
+				b = -divisor;
+			}
+		} else {
+			return 0;
+		}
+		int nRet = doDivide(a, b);
+		if (bSign) {
+			return -nRet;
+		}
+		return nRet;
+	}
+}
+
+
 //030
 #if 0
 vector<int> Solution::findSubstring(string s, vector<string>& words) {
@@ -1329,6 +1387,35 @@ int Solution::longestValidParentheses(string s) {
 		}
 	}
 	return nMax;
+}
+
+
+//033
+int Solution::search(vector<int>& nums, int target) {
+	int i = 0, j = nums.size() - 1, m = (i + j) / 2;
+	while (i <= m && m <= j) {
+		if (nums[m] > target) {
+			if (nums[i] < target) {
+				j = m - 1;
+			} else if (nums[i] > target) {
+				++i;
+			} else {
+				return i;
+			}
+		} else if (nums[m] < target) {
+			if (nums[j] > target) {
+				i = m + 1;
+			} else if (nums[j] < target) {
+				--j;
+			} else {
+				return j;
+			}
+		} else {
+			return m;
+		}
+		m = (i + j) / 2;
+	}
+	return -1;
 }
 
 
