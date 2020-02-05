@@ -1419,6 +1419,42 @@ int Solution::search(vector<int>& nums, int target) {
 }
 
 
+//034
+vector<int> Solution::searchRange(vector<int>& nums, int target) {
+	//lambda表达式：左移
+	auto &&left_move = [nums](int &i, int val) {
+		while (i > 0 && nums[i - 1] == val) {
+			--i;
+		}
+	};
+	//lambda表达式：右移
+	auto &&right_move = [nums](int &j, int val) {
+		while (j < nums.size() - 1 && nums[j + 1] == val) {
+			++j;
+		}
+	};
+
+	int i = 0, j = nums.size() - 1, m = (i + j) / 2;
+	while (i <= m && m <= j) {
+		if (nums[m] < target) {
+			right_move(m, nums[m]);
+			i = m + 1;
+		} else if (nums[m] > target) {
+			left_move(m, nums[m]);
+			j = m - 1;
+		} else {
+			i = m;
+			left_move(i, target);
+			j = m;
+			right_move(j, target);
+			return { i,j };
+		}
+		m = (i + j) / 2;
+	}
+
+	return { -1, -1 };
+}
+
 //036
 bool Solution::isValidSudoku(vector<vector<char>>& board) {
 #if 0

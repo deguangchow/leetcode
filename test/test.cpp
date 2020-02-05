@@ -2758,7 +2758,6 @@ TEST(LeetCode, 029) {
 	EXPECT_EQ(0, s.divide(0, 3));
 	EXPECT_EQ(INT_MAX, s.divide(INT_MIN, -1));
 }
-#endif
 
 TEST(LeetCode, 033) {
 	Solution s;
@@ -2799,4 +2798,26 @@ TEST(LeetCode, 033) {
 		EXPECT_EQ(3, s.search(vctInput, 2));
 	}
 }
+#endif
 
+TEST(LeetCode, 034) {
+	Solution s;
+	{
+		vector<int> &&vctInput = { 5, 7, 7, 8, 8, 10 };
+		vector<int> &&vctOutput = s.searchRange(vctInput, 8);
+		vector<int> &&vctExp = { 3, 4 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 5, 7, 7, 8, 8, 10 };
+		vector<int> &&vctOutput = s.searchRange(vctInput, 6);
+		vector<int> &&vctExp = { -1, -1 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 1 };
+		vector<int> &&vctOutput = s.searchRange(vctInput, 1);
+		vector<int> &&vctExp = { 0, 0 };
+		EXPECT_VECTOR_VAL_EQ(vctExp, vctOutput);
+	}
+}
