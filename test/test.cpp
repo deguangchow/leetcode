@@ -2820,7 +2820,6 @@ TEST(LeetCode, 034) {
 		EXPECT_VECTOR_VAL_EQ(vctExp, vctOutput);
 	}
 }
-#endif
 
 
 TEST(LeetCode, 035) {
@@ -2833,3 +2832,46 @@ TEST(LeetCode, 035) {
 	EXPECT_EQ(4, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 7));
 	EXPECT_EQ(0, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 0));
 }
+#endif
+
+
+TEST(LeetCode, 039) {
+	Solution s;
+	{
+		vector<int> &&vctInput = { 7, 3, 2 };
+		auto &&vctOutput = s.combinationSum(vctInput, 18);
+		vector<vector<int>> &&vctExp = { { 2,2,7,7 },{ 2,3,3,3,7 },{ 2,2,2,2,3,7 },{ 3,3,3,3,3,3 },{ 2,2,2,3,3,3,3 },{ 2,2,2,2,2,2,3,3 },{ 2,2,2,2,2,2,2,2,2 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 1, 2 };
+		auto &&vctOutput = s.combinationSum(vctInput, 4);
+		vector<vector<int>> &&vctExp = { { 2, 2 }, { 1, 1, 2}, { 1, 1, 1, 1 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 1, 2 };
+		auto &&vctOutput = s.combinationSum(vctInput, 1);
+		vector<vector<int>> &&vctExp = { { 1 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 2, 3, 6, 7 };
+		auto &&vctOutput = s.combinationSum(vctInput, 7);
+		vector<vector<int>> &&vctExp = { {7}, {2, 2, 3} };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 2, 3, 5 };
+		auto &&vctOutput = s.combinationSum(vctInput, 8);
+		vector<vector<int>> &&vctExp = { { 3, 5 }, { 2, 3, 3 }, {2, 2, 2, 2} };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 2, 3, 5, 7 };
+		auto &&vctOutput = s.combinationSum(vctInput, 7);
+		vector<vector<int>> &&vctExp = { { 7 }, { 2, 5 },{ 2, 2, 3 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+}
+

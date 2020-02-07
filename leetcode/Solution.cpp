@@ -1723,6 +1723,152 @@ string Solution::countAndSay(int n) {
 }
 
 
+//039
+#if 0
+//回溯法
+vector<vector<int>> Solution::combinationSum(vector<int>& candidates, int target) {
+	std::sort(candidates.begin(), candidates.end());
+	int j = candidates.size() - 1;
+	int i = j;
+	int k = j;
+	int sum = 0;
+	stack<int> stkCache;
+	vector<vector<int>> vctRet;
+	while (j >= 0) {
+		if (i < 0) {
+			sum = 0;
+			--j;
+			i = j;
+			k = j;
+			while (!stkCache.empty()) {
+				stkCache.pop();
+			}
+			continue;
+		}
+		auto &&tmp = sum + candidates[i];
+		if (tmp < target) {
+			sum += candidates[i];
+			stkCache.push(candidates[i]);
+		} else if (tmp > target) {
+			if (i == j && stkCache.empty()) {
+				--j;
+				i = j;
+				k = j;
+				continue;
+			}
+			--i;
+			if (i < 0) {
+				while (!stkCache.empty()) {
+					auto &&top = stkCache.top();
+					if (top == candidates[k]) {
+						sum -= top;
+						stkCache.pop();
+					}
+					else {
+						sum -= top;
+						stkCache.pop();
+						break;
+					}
+				}
+				if (!stkCache.empty()) {
+					i = --k;
+				}
+			}
+		} else {
+			vector<int> vctTmp;
+			vctTmp.push_back(candidates[i]);
+			stack<int> stkTmp(stkCache);
+			while (!stkTmp.empty()) {
+				vctTmp.push_back(stkTmp.top());
+				stkTmp.pop();
+			}
+			vctRet.push_back(vctTmp);
+			if (i == j && stkCache.empty()) {
+				--j;
+				i = j;
+				k = j;
+				continue;
+			}
+			--i;
+			k = i - 1;
+		}
+	}
+	return vctRet;
+}
+#elif 0
+vector<vector<int>> m_vctRet;
+void doCombinationSum(vector<int> const &candidates, int const &target, int const &sum, int j, vector<int> &nums) {
+	if (sum > target) {
+		return;
+	}
+	if (sum == target) {
+		m_vctRet.push_back(nums);
+		return;
+	}
+	for (auto i = j; i < candidates.size(); ++i) {
+		nums.push_back(candidates[i]);
+		doCombinationSum(candidates, target, sum + candidates[i], i, nums);
+		nums.pop_back();
+	}
+}
+vector<vector<int>> Solution::combinationSum(vector<int>& candidates, int target) {
+	vector<int> nums;
+	doCombinationSum(candidates, target, 0, 0, nums);
+	return m_vctRet;
+}
+#else
+vector<vector<int>> Solution::combinationSum(vector<int>& candidates, int target) {
+	vector<vector<int>> vctRet;
+	map<int, int> mapCache;
+	for (auto &&posLast : candidates) {
+		mapCache[posLast] = 0;
+	}
+
+	int sum = 0;
+	auto posLast = mapCache.rbegin();
+	auto posI = posLast;
+	auto posJ = posLast;
+	bool bLoop = true;
+
+	while (bLoop) {
+		if (posI == mapCache.rend()) {
+			while (posJ->second == 0) {
+				if (posJ == posLast) {
+					bLoop = false;
+					break;
+				}
+				--posJ;
+			}
+			posI = posJ;
+			++posI;
+			sum -= posJ->first;
+			posJ->second--;
+			continue;
+		}
+		auto &&tmp = posI->first + sum;
+		if (tmp < target) {
+			sum = tmp;
+			++posI->second;
+			posJ = posI;
+		} else if (tmp > target) {
+			++posI;
+		} else {
+			vector<int> vctTmp;
+			vctTmp.push_back(posI->first);
+			posJ = posI;
+			++posI;
+			for (auto posTmp = mapCache.begin(); posTmp != mapCache.end(); ++posTmp) {
+				for (auto i = 0U; i < posTmp->second; ++i) {
+					vctTmp.push_back(posTmp->first);
+				}
+			}
+			vctRet.push_back(vctTmp);
+		}
+	}
+	return vctRet;
+}
+#endif
+
 //043
 string Solution::multiply(string num1, string num2) {
 	if (num1 == "0" || num2 == "0") {
