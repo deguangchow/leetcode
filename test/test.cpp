@@ -2832,7 +2832,6 @@ TEST(LeetCode, 035) {
 	EXPECT_EQ(4, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 7));
 	EXPECT_EQ(0, s.searchInsert(vector<int>{ 1, 3, 5, 6 }, 0));
 }
-#endif
 
 
 TEST(LeetCode, 039) {
@@ -2874,4 +2873,21 @@ TEST(LeetCode, 039) {
 		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
 	}
 }
+#endif
 
+
+TEST(LeetCode, 040) {
+	Solution s;
+	{
+		vector<int> &&vctInput = { 10, 1, 2, 7, 6, 1, 5 };
+		auto &&vctOutput = s.combinationSum2(vctInput, 8);
+		vector<vector<int>> &&vctExp = { { 1, 1, 6 }, { 1, 2, 5 }, { 1, 7 }, {2, 6} };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+	{
+		vector<int> &&vctInput = { 2, 5, 2, 1, 2 };
+		auto &&vctOutput = s.combinationSum2(vctInput, 5);
+		vector<vector<int>> &&vctExp = { { 1, 2, 2 }, { 5 } };
+		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
+	}
+}

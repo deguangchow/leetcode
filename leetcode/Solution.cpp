@@ -1869,6 +1869,34 @@ vector<vector<int>> Solution::combinationSum(vector<int>& candidates, int target
 }
 #endif
 
+
+//040
+vector<vector<int>> m_vctRet;
+void docombinationSum2(vector<int>& candidates, int target, int sum, int k, vector<int> &nums) {
+	if (sum > target) {
+		return;
+	}
+	if (sum == target) {
+		m_vctRet.push_back(nums);
+		return;
+	}
+	for (int i = k; i < candidates.size(); ++i) {
+		if (i > k && candidates[i] == candidates[i - 1]) {
+			continue;
+		}
+		nums.push_back(candidates[i]);
+		docombinationSum2(candidates, target, sum + candidates[i], i + 1, nums);
+		nums.pop_back();
+	}
+}
+vector<vector<int>> Solution::combinationSum2(vector<int>& candidates, int target) {
+	vector<int> nums;
+	std::sort(candidates.begin(), candidates.end());
+	docombinationSum2(candidates, target, 0, 0, nums);
+	return m_vctRet;
+}
+
+
 //043
 string Solution::multiply(string num1, string num2) {
 	if (num1 == "0" || num2 == "0") {
