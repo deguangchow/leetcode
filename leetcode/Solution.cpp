@@ -1871,6 +1871,7 @@ vector<vector<int>> Solution::combinationSum(vector<int>& candidates, int target
 
 
 //040
+#if 0
 vector<vector<int>> m_vctRet;
 void docombinationSum2(vector<int>& candidates, int target, int sum, int k, vector<int> &nums) {
 	if (sum > target) {
@@ -1894,6 +1895,87 @@ vector<vector<int>> Solution::combinationSum2(vector<int>& candidates, int targe
 	std::sort(candidates.begin(), candidates.end());
 	docombinationSum2(candidates, target, 0, 0, nums);
 	return m_vctRet;
+}
+#else
+struct sum_info {
+	int cnt;
+	int total;
+};
+vector<vector<int>> Solution::combinationSum2(vector<int>& candidates, int target) {
+	vector<vector<int>> vctRet;
+	map<int, sum_info> mapCache;
+	for (auto &&posLast : candidates) {
+		(mapCache[posLast]).cnt = 0;
+		++(mapCache[posLast].total);
+	}
+
+	int sum = 0;
+	auto posLast = mapCache.rbegin();
+	auto posI = posLast;
+	auto posJ = posLast;
+	bool bLoop = true;
+
+	while (bLoop) {
+		if (posI == mapCache.rend()) {
+			while (posJ->second.cnt == 0) {
+				if (posJ == posLast) {
+					bLoop = false;
+					break;
+				}
+				--posJ;
+			}
+			posI = posJ;
+			++posI;
+			sum -= posJ->first;
+			posJ->second.cnt--;
+			continue;
+		}
+		if (posI->second.cnt >= posI->second.total) {
+			++posI;
+			continue;
+		}
+		auto &&tmp = posI->first + sum;
+		if (tmp < target) {
+			sum = tmp;
+			++posI->second.cnt;
+			posJ = posI;
+		} else if (tmp > target) {
+			++posI;
+		} else {
+			vector<int> vctTmp;
+			vctTmp.push_back(posI->first);
+			posJ = posI;
+			++posI;
+			for (auto posTmp = mapCache.begin(); posTmp != mapCache.end(); ++posTmp) {
+				for (auto i = 0U; i < posTmp->second.cnt; ++i) {
+					vctTmp.push_back(posTmp->first);
+				}
+			}
+			vctRet.push_back(vctTmp);
+		}
+	}
+	return vctRet;
+}
+#endif
+
+
+//041
+int Solution::firstMissingPositive(vector<int>& nums) {
+	set<int> setCache;
+	for (auto &&num : nums) {
+		setCache.insert(num);
+	}
+	int i = 1;
+	for (auto pos = setCache.begin(); pos != setCache.end(); ++pos) {
+		if (*pos < 1) {
+			continue;
+		}
+		if (i != *pos) {
+			return i;
+		}
+		++i;
+	}
+	return i;
 }
 
 

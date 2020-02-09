@@ -2873,7 +2873,6 @@ TEST(LeetCode, 039) {
 		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
 	}
 }
-#endif
 
 
 TEST(LeetCode, 040) {
@@ -2891,3 +2890,12 @@ TEST(LeetCode, 040) {
 		EXPECT_VECTORS_VAL_EQ(vctExp, vctOutput);
 	}
 }
+#endif
+
+TEST(LeetCode, 041) {
+	Solution s;
+	EXPECT_EQ(3, s.firstMissingPositive(vector<int>{ 1, 2, 0 }));
+	EXPECT_EQ(2, s.firstMissingPositive(vector<int>{ 3, 4, -1, 1 }));
+	EXPECT_EQ(1, s.firstMissingPositive(vector<int>{ 7, 8, 9, 11, 12 }));
+}
+

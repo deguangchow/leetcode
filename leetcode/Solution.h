@@ -947,6 +947,24 @@ public:
 	vector<vector<int>> combinationSum2(vector<int>& candidates, int target);
 
 
+	/*041
+	41. 缺失的第一个正数
+	给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
+
+	示例 1:
+	输入: [1,2,0]
+	输出: 3
+
+	示例 2:
+	输入: [3,4,-1,1]
+	输出: 2
+
+	示例 3:
+	输入: [7,8,9,11,12]
+	输出: 1
+	*/
+	int firstMissingPositive(vector<int>& nums);
+
 	/*043
 	43. 字符串相乘
 	给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
